@@ -1,0 +1,71 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  npm registry search, PyPI, the github.com/ercot organization, and the ERCOT developer portal
+  code examples.
+description: >-
+  ERCOT ships no client SDK for the Public Data API in any package registry. The developer portal
+  documents the API with raw cURL / JavaScript fetch / Java HttpClient / Python requests snippets
+  rather than a library, and the only first-party client code in the ERCOT GitHub organization is a
+  Java SAMPLE client for the SOAP Web Services estate. Everything else that installs is
+  third-party. Recorded here honestly: no `official: true` package exists in any registry, so no
+  SDK count is claimed for ERCOT.
+official_sdks: 0
+packages: []
+first_party_source:
+- name: ews-client
+  language: java
+  registry: github
+  url: https://github.com/ercot/ews-client
+  description: Sample ERCOT Web Services client, published by the ERCOT GitHub organization.
+  official: true
+  published_package: false
+  note: >-
+    Source-only sample for the certificate-authenticated SOAP estate — not a published Maven
+    artifact and not a client for the Public Data API. Not counted as an SDK.
+- name: api-specs
+  language: n/a
+  registry: github
+  url: https://github.com/ercot/api-specs
+  description: The canonical ERCOT specification repository — the Public Data API OpenAPI, plus EWS/MarkeTrak/Retail WSDLs and the XSD estate.
+  official: true
+  published_package: false
+third_party:
+- language: python
+  registry: pypi
+  name: gridstatus
+  url: https://pypi.org/project/gridstatus/
+  install: pip install gridstatus
+  official: false
+  note: Widely used multi-ISO grid data library (ERCOT, CAISO, MISO, PJM, SPP, ISO-NE, NYISO). Community maintained.
+- language: python
+  registry: pypi
+  name: ercot
+  url: https://pypi.org/project/ercot/
+  install: pip install ercot
+  official: false
+  note: >-
+    Third-party convenience wrapper (v0.1.2). Project URLs still point at a placeholder GitHub
+    account; unaffiliated with ERCOT despite the name.
+- language: javascript
+  registry: npm
+  name: '@missionsquad/mcp-ercot'
+  url: https://www.npmjs.com/package/@missionsquad/mcp-ercot
+  install: npm install @missionsquad/mcp-ercot
+  official: false
+  note: >-
+    MCP server for the ERCOT Public Data API's DAM/RTM endpoints, built on a TypeScript client
+    generated from ERCOT's own OpenAPI. See mcp/ercot-mcp.yml.
+documented_languages:
+- language: curl
+  docs: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+- language: javascript
+  docs: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+- language: java
+  docs: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+- language: python
+  docs: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+- language: postman
+  docs: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  note: Step-by-step Postman instructions are documented, but no public Postman collection or workspace is published.
+registries_probed: [npm, pypi, github]

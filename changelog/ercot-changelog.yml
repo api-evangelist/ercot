@@ -1,0 +1,80 @@
+generated: '2026-07-27'
+method: searched
+source: https://developer.ercot.com/applications/pubapi/relnotes/
+description: >-
+  ERCOT's Public Data API release notes are a dated, public changelog organised by release train
+  (YYYY-Rn). Entries are additive almost without exception — new EMIL data products and new report
+  artifacts — with retirements handled separately on the Deprecation Notices page. The December 2025
+  release (2025-R11) is the largest in the API's history: the production implementation of Real-Time
+  Co-optimization Plus Batteries (RTC+B) added 32 new data products and 13 new artifacts in one go.
+url: https://developer.ercot.com/applications/pubapi/relnotes/
+scheme: release train (YYYY-Rn), tied to ERCOT market implementations
+current_version: '1.0'
+current_release: 2025-R11
+entries:
+- version: 2025-R11
+  date: '2025-12-05'
+  breaking: true
+  highlights:
+  - Production implementation of Real-Time Co-optimization Plus Batteries (RTC+B).
+  - 32 new data products released, including NP6-323-CD/NP6-324-CD/NP6-325-CD real-time price adders, NP6-331-CD/NP6-332-CD real-time capacity clearing prices, NP4-212-CD DAM and SCED ancillary service demand curves, and NP4-791-CD day-ahead and real-time system-wide offer caps.
+  - 13 new artifacts on existing products, notably the np3-911-er 2d_agg_dam_as_offers_* family that replaces the retired 2d_agg_as_offers_* endpoints.
+  - 5 further products released as historic file download only, including EIA-930-ER Daily Balancing Authority Operations Report.
+  - Same release retires a set of pre-RTC+B endpoints — see lifecycle/ercot-lifecycle.yml.
+- version: 2025-R5
+  date: '2025-05-29'
+  breaking: false
+  highlights:
+  - Initial launch of the ESR (Energy Storage Resource) Public Data API.
+  - New endpoint GET /rptesr-m/4_sec_esr_charging_mw returning four-second ESR charging telemetry.
+- version: 2025-R4
+  date: '2025-04-24'
+  breaking: false
+  highlights:
+  - Five products added as historic file download only, including NP6-792-ER and NP6-793-ER historical real-time price adders, NP3-108 monthly demand response from load resources, NP1-346-ER unplanned resource outages and NP4-765-ER ESR integration report.
+- version: 2025-R2
+  date: '2025-02-27'
+  breaking: false
+  highlights:
+  - Support for historic file-only product capabilities added.
+  - NP4-494-ER Exceptional Fuel Cost Submission Report released as historic file download.
+- version: 2024-R11
+  date: '2024-12-11'
+  breaking: false
+  highlights:
+  - Monthly archives now available for products with a daily or higher generation frequency.
+- version: 2024-R9
+  date: '2024-09-26'
+  breaking: false
+  highlights:
+  - NP4-442-CD Hourly System-wide and Regional Wind Forecasts by Model released.
+  - Artifact structure updated across the wind and solar production products (NP4-732/733/737/738/742/743/745/746-CD) as part of PR373-01 Forecast Presentation Platform.
+- version: 2024-R8
+  date: '2024-08-22'
+  breaking: false
+  highlights:
+  - NP1-301 60-Day COP Adjustment Period Snapshot released.
+- version: 2024-R7
+  date: '2024-07-25'
+  breaking: false
+  highlights:
+  - NP3-765-CD Approved DC Tie Schedules released.
+- version: 2024-R4
+  date: '2024-04-25'
+  breaking: false
+  highlights:
+  - defaultFilter added to the base query on the "View Data" web UI page.
+- version: 2024 GA Release
+  date: '2024-02-16'
+  breaking: false
+  highlights:
+  - General availability launch of the Public Data API.
+  - Data access for public data products, plus historic file access spanning at least seven years.
+- version: 2023 Beta Release
+  date: '2023-12-11'
+  breaking: false
+  highlights:
+  - Initial PUBAPI beta with 30 EMIL data products covering outage capacity, load forecasts, wind and solar production, DAM and RTM prices, 60-day disclosures and settlement point prices.
+related:
+  deprecations: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  lifecycle: lifecycle/ercot-lifecycle.yml

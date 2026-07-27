@@ -1,0 +1,39 @@
+generated: '2026-07-27'
+method: generated
+source: >-
+  Generated from openapi/ercot-public-data-api-openapi.json and the ERCOT developer portal. ERCOT
+  publishes no AGENTS.md, skills or agent guidance of its own — developer.ercot.com/llms.txt returns
+  404 and there is no agent section in the docs — so these are API Evangelist packaged skills, every
+  step grounded in an operationId verified against ERCOT's published spec.
+api: openapi/ercot-public-data-api-openapi.json
+skills:
+- file: ercot-authenticate-and-discover.md
+  name: Authenticate to the ERCOT Public Data API and discover data products
+  description: Mint the subscription key and hourly B2C ID token, then walk the EMIL product catalog.
+  api: openapi/ercot-public-data-api-openapi.json
+  operations: [getListForProducts, getProduct, getVersion]
+  prerequisite_for: all
+- file: ercot-query-market-prices.md
+  name: Query ERCOT day-ahead and real-time market prices
+  description: Settlement point prices, LMPs, shadow prices and system lambda across DAM and RTM, with corrections and DST handling.
+  api: openapi/ercot-public-data-api-openapi.json
+  operations: [getData, getData_1, getData_2, getData_3, getData_4, getData_7, getData_16, getData_27, getData_28, getData_29, getData_30]
+- file: ercot-track-load-and-renewables.md
+  name: Track ERCOT system load, wind and solar production, and outage capacity
+  description: Actual and forecast load, wind and solar actuals and forecasts system-wide and by region, hourly resource outage capacity.
+  api: openapi/ercot-public-data-api-openapi.json
+  operations: [getData_5, getData_6, getData_8, getData_9, getData_10, getData_11, getData_12, getData_13, getData_14, getData_15, getData_99, getData_100, getData_101]
+- file: ercot-harvest-60-day-disclosures.md
+  name: Harvest ERCOT 60-day SCED and DAM disclosure reports and historic archives
+  description: Resource-level SCED and DAM offers, bids, awards and telemetry, plus backfill through the archive endpoint.
+  api: openapi/ercot-public-data-api-openapi.json
+  operations: [getData_33, getData_38, getData_41, getData_43, getData_45, getData_46, getData_47, getData_49, getData_51, getData_53, getData_55, getProductHistory]
+shared_rules:
+- Two credentials on every call — Ocp-Apim-Subscription-Key plus Authorization Bearer ID token.
+- ID tokens last one hour and cannot be refreshed.
+- 30 requests per minute; 429 returns {"error_key":"throttled"} with no Retry-After.
+- Requests from outside the United States are blocked at the edge.
+- All 106 operations are GET; there is no write surface and no idempotency contract.
+- Errors are a flat Exception envelope, not RFC 9457 problem+json.
+- Column semantics come from the runtime fields[] dictionary, not the spec.
+- Market time is America/Chicago; key time series on DSTFlag and repeatHourFlag.

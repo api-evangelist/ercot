@@ -1,0 +1,65 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  https://raw.githubusercontent.com/ercot/api-specs/main/ews/wsdls/Notification.wsdl and the
+  ERCOT Web Services documentation at https://developer.ercot.com/applications/ews/Introduction/
+spec_type: null
+description: >-
+  ERCOT publishes no AsyncAPI document and no modern HTTP webhook surface. It does operate a real
+  push/event channel, but only inside the certificate-gated market-participant estate: ERCOT Web
+  Services ships an ERCOT-specific revision of the OASIS WS-BaseNotification contract in which the
+  MARKET PARTICIPANT hosts a NotificationConsumer endpoint and ERCOT calls Notify against it — the
+  SOAP-era equivalent of a webhook receiver. This artifact captures that surface honestly rather
+  than inventing an event catalog: the public Public Data API is strictly request/response polling,
+  and the notification contract itself is a transport envelope, with the actual event topics
+  governed by ERCOT Nodal Protocols and the participant's subscriptions rather than enumerated in
+  the WSDL.
+event_surface:
+  public_api: none
+  public_api_note: >-
+    The Public Data API (api.ercot.com) exposes 106 GET operations and no subscription, callback,
+    webhook or streaming endpoint. Consumers poll, subject to a 30 requests-per-minute ceiling.
+  market_participant_api: ws-notification
+  audience: registered ERCOT Market Participants holding an ERCOT digital certificate
+contracts:
+- name: ERCOT WS-BaseNotification
+  file: https://raw.githubusercontent.com/ercot/api-specs/main/ews/wsdls/Notification.wsdl
+  schema: https://raw.githubusercontent.com/ercot/api-specs/main/ews/xsds/Notification.xsd
+  target_namespace: http://www.ercot.com/wsdl/2007-06/nodal/notification
+  based_on: OASIS WS-BaseNotification (2004-2006), revised by ERCOT
+  ercot_revisions:
+  - Reduced complexity by eliminating unused interfaces and references to external XSDs.
+  - Improved reliability by adding a positive acknowledgement message after receipt of a notification.
+  port_types:
+  - name: NotificationConsumer
+    implemented_by: market participant
+    operations:
+    - name: Notify
+      direction: ERCOT -> participant
+      input: wsnt:Notify
+      output: wsnt:Acknowledge
+      fault: wsnt:Fault
+      payload_shape: NotificationMessage (SubscriptionReference, TopicExpression, ProducerReference, Message)*
+      note: >-
+        Topic expressions and message bodies are governed by the ERCOT event/notification XSDs
+        (ErcotEvents.xsd, ErcotEventTypes.xsd, ErcotGetNotifications.xsd) and the participant's
+        subscriptions; the WSDL itself enumerates no topics.
+  related_schemas:
+  - https://raw.githubusercontent.com/ercot/api-specs/main/ews/xsds/ErcotEvents.xsd
+  - https://raw.githubusercontent.com/ercot/api-specs/main/ews/xsds/ErcotEventTypes.xsd
+  - https://raw.githubusercontent.com/ercot/api-specs/main/ews/xsds/ErcotGetNotifications.xsd
+  - https://raw.githubusercontent.com/ercot/api-specs/main/ews/xsds/Notification.xsd
+  security: WS-Security (WSS 2004/01) with an ERCOT-issued digital certificate; XML Digital Signature schemas shipped alongside.
+  transport: SOAP 1.1 over HTTPS
+  delivery_semantics: at-least-once with positive acknowledgement; participant returns Acknowledge or Fault.
+asyncapi_document: null
+asyncapi_note: >-
+  No AsyncAPI 2.x/3.x document is published by ERCOT for this or any other surface, and none is
+  generated here — the topic set is not publicly enumerated, so an AsyncAPI would be fabrication.
+alternatives_for_public_consumers:
+- name: Polling the Public Data API
+  detail: Each EMIL product publishes a generationFrequency (e.g. "Chron - Hourly") and lastPostDatetime, so consumers can align polling to the posting cadence.
+- name: MIS notifications
+  detail: The ERCOT Market Information System notification channel is available to market participants, not to anonymous public consumers.
+- name: ERCOT Market Notices
+  detail: Email market notices (e.g. PR447_RTC+B) are the human channel through which endpoint and product changes are announced.

@@ -1,0 +1,49 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: ERCOT
+providerId: ercot
+generated: '2026-07-27'
+method: searched
+created: '2026-07-27'
+modified: '2026-07-27'
+tags:
+- Rate Limiting
+- Energy Markets
+- Open Data
+description: >-
+  ERCOT publishes a single flat throttle for the Public Data API — 30 requests per minute, roughly
+  one request every two seconds — applied regardless of subscription or product. There are no tiers
+  and no documented way to raise it. Two further hard limits sit alongside it: historic file
+  downloads are capped at 1,000 files per download, and traffic originating outside the United
+  States is blocked at the edge for all *.ercot.com properties.
+sources:
+- https://developer.ercot.com/applications/pubapi/known-limits/
+- https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+responseCodes:
+  throttled: 429
+errorBody:
+  error_key: throttled
+  error_message: Too Many Requests
+headers:
+  rateLimit: null
+  retryAfter: null
+  note: No RateLimit-* or Retry-After headers are documented.
+limits:
+- name: Public Data API requests
+  scope: subscription
+  metric: requests_per_minute
+  limit: 30
+  timeFrame: minute
+  applies_to: https://api.ercot.com/api/public-reports
+- name: Historic file download batch
+  scope: request
+  metric: files_per_download
+  limit: 1000
+  timeFrame: request
+  applies_to: API and Web UI historic file downloads
+restrictions:
+- type: geographic
+  detail: Regions outside the United States of America are restricted from accessing *.ercot.com sites.
+  source: https://developer.ercot.com/applications/pubapi/known-limits/
+tiers: []
+upgrade_path: null

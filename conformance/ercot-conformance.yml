@@ -1,0 +1,95 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  openapi/ercot-public-data-api-openapi.json, well-known/ercot-openid-configuration.json,
+  the ERCOT developer portal, and the WSDL/XSD contracts in https://github.com/ercot/api-specs
+description: >-
+  Which cross-cutting and industry standards the ERCOT API estate actually conforms to. Two very
+  different halves: a modern-ish REST public data API on Azure API Management using OpenAPI 3.0.1,
+  OIDC/OAuth 2.0 (a legacy ROPC grant) and HAL-flavoured hypermedia; and a WS-* SOAP estate for
+  market participants built on OASIS WS-Notification, WS-Security and Texas Standard Electronic
+  Transactions. ERCOT publishes no security certifications, so no compliance-program claim is made
+  here. Energy-sector data standards that do NOT apply are recorded explicitly — ERCOT implements
+  no Green Button/ESPI surface and no CIM/IEC 61968 API.
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi/ercot-public-data-api-openapi.json declares openapi 3.0.1 with 106 documented GET operations, 14 component schemas and declared securitySchemes.
+- id: oauth2
+  conforms: true
+  evidence: Azure AD B2C token endpoint with grant_type=password (Resource Owner Password Credentials); grant_types_supported [password] in the discovery document.
+  note: ROPC is a legacy grant discouraged by OAuth 2.0 Security BCP; no authorization-code or PKCE flow is offered for the Public Data API.
+- id: oidc
+  conforms: true
+  evidence: well-known/ercot-openid-configuration.json — issuer, authorization/token endpoints, jwks_uri, RS256, pairwise subject types, standard claims.
+- id: oidc-discovery
+  conforms: true
+  evidence: /.well-known/openid-configuration served at the B2C user-flow host (200).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors use a bespoke Exception object (timestamp/code/status/message/data) as application/json; no application/problem+json anywhere in the spec.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on api.ercot.com, developer.ercot.com and www.ercot.com.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: deprecation notices are published as a human-readable timetable page; no Sunset or Deprecation response headers are documented, and no operation carries deprecated true.
+- id: rfc9111-http-caching
+  conforms: false
+  evidence: no cache-control or conditional-request semantics documented for the API.
+- id: hal-hypermedia
+  conforms: true
+  evidence: product responses embed _embedded.products and _links (self/parent/archive); artifacts carry _links.endpoint.href; Link schema follows the web-linking attribute set (rel, href, hreflang, media, title, type, deprecation, profile, name).
+- id: pagination
+  conforms: true
+  evidence: uniform page/size/sort/dir query parameters on 102 of 106 operations with _meta totalRecords/pageSize/totalPages/currentPage in the response.
+- id: idempotency
+  conforms: false
+  evidence: read-only API — all 106 operations are GET; no Idempotency-Key contract exists or is needed.
+- id: json-schema
+  conforms: partial
+  evidence: OpenAPI 3.0.1 schema objects (JSON Schema draft-04 flavoured subset); report row payloads are typed at runtime through the fields[] dictionary rather than in the spec, so data[] is declared only as a generic object.
+- id: soap-1.1
+  conforms: true
+  evidence: ews/wsdls/Nodal.wsdl, marketrak/MarkeTrakAPI_rc5_v14.wsdl and retail/RetailAPIConcreteWSDL-External.wsdl in github.com/ercot/api-specs.
+- id: ws-notification
+  conforms: true
+  evidence: ews/wsdls/Notification.wsdl declares an ERCOT revision of the OASIS WS-BaseNotification NotificationConsumer portType (Notify -> Acknowledge, with Fault), with positive acknowledgement added for reliability.
+- id: ws-security
+  conforms: true
+  evidence: ews/xsds/WSS200401wssecurity-secext-10.xsd and WSS200401wssecurity-utility-10.xsd shipped with the EWS contracts; access requires an ERCOT digital certificate.
+- id: xml-dsig
+  conforms: true
+  evidence: ews/xsds/xmldsig-core-schema.xsd shipped with the EWS contracts.
+- id: xml-schema
+  conforms: true
+  evidence: XSD contracts published for Current Day Reports, CRR, MarkeTrak, Retail, Settlements and Billing, and Market Data Transparency in github.com/ercot/api-specs.
+- id: tx-set
+  conforms: true
+  evidence: the ERCOT Retail API implements Texas Standard Electronic Transactions between ERCOT, TDSPs and REPs (https://developer.ercot.com/api_specifications/retail/retail/).
+- id: naesb
+  conforms: true
+  evidence: the developer portal publishes a NAESB section (TDTMS Working Group Implementation Guide) alongside the API specifications.
+- id: green-button-espi
+  conforms: false
+  evidence: ERCOT operates no consumer usage API; Texas residential interval data is served by Smart Meter Texas, run by the joint TDUs under PUCT oversight, not by ERCOT.
+- id: iec-61968-cim
+  conforms: false
+  evidence: no CIM/CIM-XML profile is published for any ERCOT API; the report payloads are ERCOT EMIL-native.
+- id: fapi
+  conforms: false
+  evidence: no FAPI security profile; the Public Data API uses subscription keys plus a ROPC ID token.
+- id: graphql
+  conforms: false
+  evidence: no GraphQL endpoint discovered on api.ercot.com or developer.ercot.com.
+- id: asyncapi
+  conforms: false
+  evidence: no AsyncAPI document published; the only push surface is the SOAP WS-Notification callback in EWS (see asyncapi/ercot-ews-notifications.yml).
+compliance_program:
+  published: false
+  certifications: []
+  note: >-
+    ERCOT publishes no SOC 2 / ISO 27001 / FedRAMP style trust center. It is a NERC-registered
+    Balancing Authority and Reliability Coordinator regulated by the PUCT and Texas Legislature —
+    reliability-standards compliance, not an API-security certification, and no public artifact
+    attests to it at the API layer. No `Compliance` pointer is emitted.

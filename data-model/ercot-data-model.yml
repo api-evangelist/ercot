@@ -1,0 +1,154 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/ercot-public-data-api-openapi.json (components.schemas $ref graph + path structure)
+description: >-
+  The ERCOT Public Data API has a deliberately small, generic object model — 14 schemas that wrap a
+  very large catalog of data. The domain richness is not in the schemas but in the EMIL catalog:
+  106 report endpoints across 36 EMIL products, each returning the SAME Report envelope with a
+  self-describing fields[] dictionary and an untyped data[] payload. That is the defining modelling
+  decision of this API: the row shape of a settlement-point-price report and a wind-forecast report
+  are indistinguishable at the schema level and only discoverable at runtime.
+root: Product
+entities:
+- name: Product
+  description: An EMIL (ERCOT Market Information List) data product, keyed by emilId (e.g. NP4-190-CD).
+  identifier: emilId
+  key_fields: [emilId, name, description, status, reportTypeId, audience, generationFrequency, securityClassification, lastUpdated, firstRun, channel, postingType, market, xsdName, certificateRole, fileType, misDisplayDuration, archiveDuration, protocolRules]
+  operations: [getListForProducts, getProduct]
+- name: Artifact
+  description: A single report within an EMIL product; the thing that actually has an HTTP endpoint.
+  identifier: reportTypeId
+  key_fields: [reportTypeId, displayName, endpoint]
+  operations: [getProduct]
+- name: Report
+  description: The envelope every report query returns — result metadata, report metadata, the field dictionary, and the data rows.
+  key_fields: [_meta, report, fields, data, links]
+  operations: [getData, 'getData_1 … getData_101']
+- name: ReportMetadata
+  description: Identity of the report a result set came from.
+  key_fields: [reportName, reportDisplayName, reportId, reportEMIL]
+- name: Field
+  description: One column in the report's self-describing field dictionary, including its filterability.
+  key_fields: [name, label, cardinality, dataType, searchable, sortable, hasRange]
+  enums:
+    dataType: [BOOLEAN, VARCHAR, INTEGER, LONG, DOUBLE, DATE, DATETIME, TIME]
+- name: ResultMetadata
+  description: Paging and query summary for a result set.
+  key_fields: [totalRecords, pageSize, totalPages, currentPage, query]
+- name: QueryMetadata
+  description: Summary of the query parameters applied to a result set.
+  key_fields: [parameterCount, parameters, sortedBy]
+- name: ProductHistory
+  description: The archive listing for an EMIL product — the historic-file surface, retained at least seven years.
+  key_fields: [_meta, product, archives, links]
+  operations: [getProductHistory]
+- name: ProductHistoryMetadata
+  description: Paging and query summary for an archive listing (same shape as ResultMetadata).
+  key_fields: [totalRecords, pageSize, totalPages, currentPage, query]
+- name: Archive
+  description: A single archived report file (zip) for an EMIL product.
+  identifier: docId
+  key_fields: [docId, friendlyName, postDatetime, links]
+- name: Link
+  description: Web-linking style hypermedia link used across product, report and archive responses.
+  key_fields: [rel, href, hreflang, media, title, type, deprecation, profile, name]
+- name: Version
+  description: Runtime version descriptor for the Public Data API system.
+  key_fields: [info, openapi]
+  operations: [getVersion]
+- name: Info
+  description: Title, description, version and build of the running API.
+  key_fields: [title, description, version, build]
+- name: Exception
+  description: The error envelope returned for 400, 403 and 404 responses.
+  key_fields: [timestamp, code, status, message, data]
+relationships:
+- from: Product
+  to: Artifact
+  type: has_many
+  via: artifacts
+- from: Product
+  to: Link
+  type: has_many
+  via: links
+- from: Product
+  to: ProductHistory
+  type: has_one
+  via: _links.archive
+  note: hypermedia relation, not a schema $ref
+- from: Artifact
+  to: Report
+  type: has_one
+  via: _links.endpoint.href
+  note: the artifact endpoint is the operation that returns a Report
+- from: Artifact
+  to: Link
+  type: has_many
+  via: links
+- from: Report
+  to: ResultMetadata
+  type: has_one
+  via: _meta
+- from: Report
+  to: ReportMetadata
+  type: has_one
+  via: report
+- from: Report
+  to: Field
+  type: has_many
+  via: fields
+- from: Report
+  to: Link
+  type: has_many
+  via: links
+- from: ResultMetadata
+  to: QueryMetadata
+  type: has_one
+  via: query
+- from: ProductHistory
+  to: ProductHistoryMetadata
+  type: has_one
+  via: product
+- from: ProductHistory
+  to: Archive
+  type: has_many
+  via: archives
+- from: ProductHistory
+  to: ResultMetadata
+  type: has_one
+  via: _meta
+- from: Archive
+  to: Link
+  type: has_many
+  via: links
+- from: ProductHistoryMetadata
+  to: QueryMetadata
+  type: has_one
+  via: query
+- from: Version
+  to: Info
+  type: has_one
+  via: info
+identifiers:
+  emilId: >-
+    EMIL product id of the form NP<section>-<number>-<suffix>, e.g. NP4-190-CD. Section digit maps to
+    the ERCOT Nodal Protocol section (NP3 outages/disclosures, NP4 day-ahead market, NP6 real-time
+    market). Suffix: CD = current day, ER = extract/report, EX = extract, M = manual/corrections.
+    Lower-cased in URL paths (np4-190-cd).
+  reportTypeId: numeric ERCOT report type identifier, stable across the MIS and the API.
+  docId: numeric archive document id.
+catalog_scale:
+  emil_products_in_spec: 35
+  report_data_endpoints: 102
+  catalog_endpoints: 3
+  version_endpoint: 1
+  total_operations: 106
+  note: >-
+    102 getData* report endpoints, plus getListForProducts (GET /), getProduct (GET /{emilId}),
+    getProductHistory (GET /archive/{emilId}) and getVersion (GET /version).
+untyped_payload:
+  field: Report.data
+  declared_type: object
+  note: >-
+    Row data is returned positionally aligned to fields[]; the spec does not model the row shape for
+    any of the 102 report endpoints. Clients must read fields[] to interpret data[].

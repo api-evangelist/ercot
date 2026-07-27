@@ -1,0 +1,56 @@
+generated: '2026-07-27'
+method: searched
+source: live probes of the ERCOT API, developer-portal, corporate and Azure AD B2C hosts
+description: >-
+  ERCOT publishes no /.well-known/ discovery surface on its own hosts — api.ercot.com,
+  developer.ercot.com and www.ercot.com all return 404 for security.txt, api-catalog,
+  openid-configuration and oauth-authorization-server. The one real discovery document in
+  the ERCOT estate is the Azure AD B2C OpenID Connect configuration for the
+  B2C_1_PUBAPI-ROPC-FLOW user flow that issues the ID token every Public Data API call
+  requires; it is anonymous, returns 200, and is saved here verbatim.
+hosts:
+- host: https://api.ercot.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /openapi.json
+    status: 404
+    note: The OpenAPI is published in GitHub (ercot/api-specs), not served from the API host.
+  - path: /swagger.json
+    status: 404
+- host: https://developer.ercot.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 404
+- host: https://www.ercot.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /robots.txt
+    status: 200
+    note: Served, but carries no API discovery information.
+- host: https://ercotb2c.b2clogin.com
+  documents:
+  - path: /ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+    status: 200
+    file: ercot-openid-configuration.json
+    note: >-
+      OIDC discovery for the Public Data API user flow. issuer
+      https://ercotb2c.b2clogin.com/6df17afa-1b36-499a-83f7-56779ad0b9a6/v2.0/,
+      grant_types_supported [password] (ROPC), scopes_supported [openid], RS256.
+security_txt: false
+api_catalog: false

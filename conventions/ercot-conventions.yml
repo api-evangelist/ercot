@@ -1,0 +1,141 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://developer.ercot.com/applications/pubapi/user-guide/using-api/ and
+  https://developer.ercot.com/applications/pubapi/known-limits/, cross-derived from
+  openapi/ercot-public-data-api-openapi.json (106 operations, all GET).
+description: >-
+  Cross-cutting request/response semantics of the ERCOT Public Data API — the runtime behaviour
+  that applies to every EMIL data-product endpoint rather than any single one. This is a
+  read-only, HAL-flavoured JSON API fronted by Azure API Management: uniform page/size/sort/dir
+  paging, a per-report field dictionary returned alongside the rows, a flat Exception error
+  envelope, and a hard 30-requests-per-minute throttle. There is no write surface, therefore no
+  idempotency contract.
+base_url: https://api.ercot.com/api/public-reports
+api_style: >-
+  REST over HTTPS, JSON responses, HAL-style _links/_embedded on product resources; column-oriented
+  fields[] + data[] payloads on report queries. Gateway is Azure API Management.
+
+authentication:
+  scheme: >-
+    Azure APIM subscription key (Ocp-Apim-Subscription-Key header) PLUS Azure AD B2C ID token
+    (Authorization: Bearer)
+  both_required: true
+  token_lifetime: 1 hour, no refresh — re-POST the ROPC token endpoint
+  docs: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  detail: authentication/ercot-authentication.yml
+
+idempotency:
+  supported: false
+  reason: >-
+    The Public Data API exposes 106 operations, all of them GET. There is no POST/PUT/PATCH/DELETE
+    surface, no Idempotency-Key header, and no documented idempotency contract. Every operation is
+    inherently idempotent by HTTP method; ERCOT publishes no replay/dedup semantics.
+
+pagination:
+  style: page-number
+  request_params:
+    page: Page number of returned values in the collection (integer)
+    size: Number of returned items per page (integer)
+    sort: Field by which to sort the returned resource values
+    dir: Sort order, applied against the primary business key of the resource
+  applies_to: 102 of the 106 operations (every EMIL report query and the archive listing)
+  response_fields:
+    _meta.totalRecords: total matching records
+    _meta.pageSize: records per page
+    _meta.totalPages: total page count
+    _meta.currentPage: current page number
+    _meta.query.parameterCount: number of query parameters applied
+    _meta.query.sortedBy: field the result set was sorted on
+  source: openapi/ercot-public-data-api-openapi.json
+
+filtering:
+  style: typed range and equality query parameters, one set per data product
+  common_params:
+    deliveryDateFrom / deliveryDateTo: delivery-date range (63 operations)
+    hourEndingFrom / hourEndingTo: hour-ending range (48 operations)
+    SCEDTimestampFrom / SCEDTimestampTo: SCED interval timestamp range (29 operations)
+    postedDatetimeFrom / postedDatetimeTo: posting timestamp range (13 operations)
+    DSTFlag: daylight-saving flag for the duplicated fall-back hour (30 operations)
+    repeatHourFlag: repeated-hour flag (25 operations)
+    qseName / resourceName / settlementPointName: entity filters
+  convention: >-
+    Range filters follow a <field>From / <field>To suffix convention throughout; scalar filters use
+    the bare field name. Field-level capability (searchable, sortable, hasRange, dataType) is
+    returned in the fields[] block of every report response, making the filter surface
+    self-describing at runtime.
+
+field_dictionary:
+  supported: true
+  mechanism: >-
+    Every report response carries a fields[] array (name, label, cardinality, dataType, searchable,
+    sortable, hasRange) describing the columns in data[]. dataType is one of BOOLEAN, VARCHAR,
+    INTEGER, LONG, DOUBLE, DATE, DATETIME, TIME.
+
+hypermedia:
+  supported: true
+  style: HAL-ish
+  detail: >-
+    Product resources embed _links with self / parent / archive relations and _embedded.products;
+    each artifact carries an _links.endpoint.href pointing at the live report endpoint. Report and
+    archive responses carry a links[] array using the Link shape (rel, href, hreflang, media, title,
+    type, deprecation, profile, name) — note the standard `deprecation` link attribute is present in
+    the schema.
+
+metadata:
+  supported: false
+  note: No customer-supplied metadata surface; this is a read-only public data API.
+
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation header is documented. Azure API Management may emit its own
+    diagnostic headers, but ERCOT publishes none as contract.
+
+versioning:
+  scheme: single unversioned base path with a runtime version endpoint
+  current: '1.0'
+  version_endpoint: GET /version (operationId getVersion) returns info.title/description/version/build plus the openapi version
+  in_url: false
+  detail: lifecycle/ercot-lifecycle.yml
+
+error_envelope:
+  shape: flat JSON object (schema Exception)
+  fields:
+    timestamp: date-time the error occurred
+    code: integer error code
+    status: status string
+    message: human-readable message
+    data: free-form object
+  problem_json: false
+  documented_codes: [400, 403, 404]
+  gateway_codes: [401, 429]
+  gateway_envelope:
+    error_key: string (e.g. "throttled")
+    error_message: string (e.g. "Too Many Requests")
+  note: >-
+    Two different envelopes are in play: the application Exception shape for 400/403/404 declared in
+    the OpenAPI, and an Azure APIM error_key/error_message shape for gateway-level rejections such
+    as 429 throttling.
+  detail: errors/ercot-problem-types.yml
+
+rate_limiting:
+  limit: 30 requests per minute (approximately 1 request every 2 seconds)
+  throttled_status: 429
+  throttled_body: '{"error_key": "throttled", "error_message": "Too Many Requests"}'
+  headers: none documented (no RateLimit / Retry-After contract published)
+  download_limit: 1,000 historic files per download, via API or Web UI
+  geographic_restriction: requests originating outside the United States are blocked on *.ercot.com
+  docs: https://developer.ercot.com/applications/pubapi/known-limits/
+  detail: rate-limits/ercot-rate-limits.yml
+
+data_retention:
+  api_window: from each product's activation date in the Public Data API system forward
+  historic_files: at least 7 years, retrieved as archive downloads
+  docs: https://developer.ercot.com/applications/pubapi/known-limits/
+
+timezone:
+  market_time: America/Chicago (Central Prevailing Time)
+  dst_handling: >-
+    DSTFlag and repeatHourFlag query parameters and response columns disambiguate the repeated hour
+    at the fall-back DST transition — a domain-specific convention worth honouring in any client.

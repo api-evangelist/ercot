@@ -1,0 +1,497 @@
+generated: '2026-07-27'
+method: derived
+source: https://www.npmjs.com/package/@missionsquad/mcp-ercot (published tool list) bound to openapi/ercot-public-data-api-openapi.json
+description: 'Binds every tool exposed by the only known ERCOT MCP server — the third-party @missionsquad/mcp-ercot
+  — to the ERCOT Public Data API operation that backs it, so each tool inherits a real inputSchema (that
+  operation''s query parameters) instead of a guessed one. The server is not ERCOT-published; ERCOT operates
+  no MCP surface of its own. The picture the crosswalk exposes is a narrow agent surface over a wide API:
+  34 of 106 operations have a tool, all of them Day-Ahead / Real-Time market prices, ancillary services
+  and 60-day disclosures. The entire renewables, load, outage and real-time grid-condition half of the
+  catalog — wind and solar production, actual system load, seven-day load forecasts, hourly resource outage
+  capacity, SCED shadow prices — has no tool at all, and neither does the product catalog itself.'
+surfaces:
+  openapi:
+    file: openapi/ercot-public-data-api-openapi.json
+    operations: 106
+    gated: false
+    note: Spec is public on GitHub; the API itself requires a subscription key plus a B2C ID token.
+  graphql: null
+  mcp:
+    server: '@missionsquad/mcp-ercot'
+    official: false
+    transport: stdio
+    tools_list_probe: not applicable — stdio server, no hosted endpoint to introspect anonymously
+    source: tool names and descriptions taken verbatim from the published package README
+crosswalk:
+- tool: get_rtd_indicative_lmps
+  category: real-time prices
+  description: Real-Time Dispatch Indicative LMPs (NP6-970-CD)
+  rest:
+  - getData
+  path: /np6-970-cd/rtd_lmp_node_zone_hub
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_spp_node_zone_hub
+  category: real-time prices
+  description: Real-Time Settlement Point Prices (NP6-905-CD)
+  rest:
+  - getData_1
+  path: /np6-905-cd/spp_node_zone_hub
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_settlement_point_prices
+  category: day-ahead prices
+  description: DAM Settlement Point Prices (NP4-190-CD)
+  rest:
+  - getData_28
+  path: /np4-190-cd/dam_stlmnt_pnt_prices
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_clearing_prices_for_capacity
+  category: day-ahead prices
+  description: DAM Clearing Prices for Capacity (NP4-188-CD)
+  rest:
+  - getData_29
+  path: /np4-188-cd/dam_clear_price_for_cap
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_hourly_lmps
+  category: day-ahead prices
+  description: DAM Hourly LMPs (NP4-183-CD)
+  rest:
+  - getData_30
+  path: /np4-183-cd/dam_hourly_lmp
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_system_lambda
+  category: day-ahead prices
+  description: DAM System Lambda (NP4-523-CD)
+  rest:
+  - getData_16
+  path: /np4-523-cd/dam_system_lambda
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_shadow_prices
+  category: day-ahead prices
+  description: DAM Shadow Prices (NP4-191-CD)
+  rest:
+  - getData_27
+  path: /np4-191-cd/dam_shadow_prices
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_ancillary_service_plan
+  category: ancillary services
+  description: DAM Ancillary Service Plan (NP4-33-CD)
+  rest:
+  - getData_17
+  path: /np4-33-cd/dam_as_plan
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_price_corrections_spp
+  category: price corrections
+  description: DAM Price Corrections for SPP (NP4-196-M)
+  rest:
+  - getData_24
+  path: /np4-196-m/dam_price_corrections_spp
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_price_corrections_eblmp
+  category: price corrections
+  description: DAM Price Corrections for EBLMP (NP4-196-M)
+  rest:
+  - getData_26
+  path: /np4-196-m/dam_price_corrections_eblmp
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_rtm_price_corrections_spp
+  category: price corrections
+  description: RTM Price Corrections for SPP (NP4-197-M)
+  rest:
+  - getData_18
+  path: /np4-197-m/rtm_price_corrections_spp
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_rtm_price_corrections_settlement_point_lmp
+  category: price corrections
+  description: RTM Price Corrections for SP LMP (NP4-197-M)
+  rest:
+  - getData_19
+  path: /np4-197-m/rtm_price_corrections_splmp
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_rtm_price_corrections_sog_price
+  category: price corrections
+  description: RTM Price Corrections for SOG Price (NP4-197-M)
+  rest:
+  - getData_20
+  path: /np4-197-m/rtm_price_corrections_sogprice
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_rtm_price_corrections_sog_lmp
+  category: price corrections
+  description: RTM Price Corrections for SOG LMP (NP4-197-M)
+  rest:
+  - getData_21
+  path: /np4-197-m/rtm_price_corrections_soglmp
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_rtm_price_corrections_shadow_prices
+  category: price corrections
+  description: RTM Price Corrections for Shadow Prices (NP4-197-M)
+  rest:
+  - getData_22
+  path: /np4-197-m/rtm_price_corrections_shadow
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_rtm_price_corrections_eblmp
+  category: price corrections
+  description: RTM Price Corrections for EB LMP (NP4-197-M)
+  rest:
+  - getData_23
+  path: /np4-197-m/rtm_price_corrections_eblmp
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_cleared_ancillary_service_ecrsm
+  category: ancillary services
+  description: 2-Day Cleared DAM AS ECRSM (NP3-911-ER)
+  rest:
+  - getData_73
+  path: /np3-911-er/2d_cleared_dam_as_ecrsm
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_cleared_ancillary_service_ecrss
+  category: ancillary services
+  description: 2-Day Cleared DAM AS ECRSS (NP3-911-ER)
+  rest:
+  - getData_72
+  path: /np3-911-er/2d_cleared_dam_as_ecrss
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_cleared_ancillary_service_regdn
+  category: ancillary services
+  description: 2-Day Cleared DAM AS REGDN (NP3-911-ER)
+  rest:
+  - getData_70
+  path: /np3-911-er/2d_cleared_dam_as_regdn
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_cleared_ancillary_service_regup
+  category: ancillary services
+  description: 2-Day Cleared DAM AS REGUP (NP3-911-ER)
+  rest:
+  - getData_69
+  path: /np3-911-er/2d_cleared_dam_as_regup
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_cleared_ancillary_service_nspin
+  category: ancillary services
+  description: 2-Day Cleared DAM AS NSPIN (NP3-911-ER)
+  rest:
+  - getData_71
+  path: /np3-911-er/2d_cleared_dam_as_nspin
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_cleared_ancillary_service_rrspfr
+  category: ancillary services
+  description: 2-Day Cleared DAM AS RRSPFR (NP3-911-ER)
+  rest:
+  - getData_67
+  path: /np3-911-er/2d_cleared_dam_as_rrspfr
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_dam_cleared_ancillary_service_rrsufr
+  category: ancillary services
+  description: 2-Day Cleared DAM AS RRSUFR (NP3-911-ER)
+  rest:
+  - getData_66
+  path: /np3-911-er/2d_cleared_dam_as_rrsufr
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_energy_bids
+  category: 60-day disclosure
+  description: 60 Day DAM Energy Bids (NP3-966-ER)
+  rest:
+  - getData_49
+  path: /np3-966-er/60_dam_energy_bids
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_energy_only_offers
+  category: 60-day disclosure
+  description: 60 Day DAM Energy Only Offers (NP3-966-ER)
+  rest:
+  - getData_47
+  path: /np3-966-er/60_dam_energy_only_offers
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_energy_only_offer_awards
+  category: 60-day disclosure
+  description: 60 Day DAM Energy Offer Only Awards (NP3-966-ER)
+  rest:
+  - getData_48
+  path: /np3-966-er/60_dam_energy_only_offer_awards
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_generation_resource_data
+  category: 60-day disclosure
+  description: 60 Day DAM Generation Resource Data (NP3-966-ER)
+  rest:
+  - getData_45
+  path: /np3-966-er/60_dam_gen_res_data
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_generation_resource_as_offers
+  category: 60-day disclosure
+  description: 60 Day DAM Generation Resources AS Offers (NP3-966-ER)
+  rest:
+  - getData_46
+  path: /np3-966-er/60_dam_gen_res_as_offers
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_load_resource_data
+  category: 60-day disclosure
+  description: 60 Day DAM Load Resource Data (NP3-966-ER)
+  rest:
+  - getData_43
+  path: /np3-966-er/60_dam_load_res_data
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_ptp_obligation_bids
+  category: 60-day disclosure
+  description: 60 Day DAM PTP Obligation Bids (NP3-966-ER)
+  rest:
+  - getData_41
+  path: /np3-966-er/60_dam_ptp_obl_bids
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_ptp_obligation_bid_awards
+  category: 60-day disclosure
+  description: 60 Day DAM PTP Obligation Bid Awards (NP3-966-ER)
+  rest:
+  - getData_42
+  path: /np3-966-er/60_dam_ptp_obl_bid_awards
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_ptp_obligation_option_offers
+  category: 60-day disclosure
+  description: 60 Day DAM PTP Obligation Option (NP3-966-ER)
+  rest:
+  - getData_40
+  path: /np3-966-er/60_dam_ptp_obl_opt
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_ptp_obligation_option_awards
+  category: 60-day disclosure
+  description: 60 Day DAM PTP Obligation Option Awards (NP3-966-ER)
+  rest:
+  - getData_39
+  path: /np3-966-er/60_dam_ptp_obl_opt_awards
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+- tool: get_60_day_dam_qse_self_arranged_as_quantities
+  category: 60-day disclosure
+  description: 60 Day DAM QSE Self Arranged AS (NP3-966-ER)
+  rest:
+  - getData_38
+  path: /np3-966-er/60_dam_qse_self_as
+  binding: rest
+  confidence: high
+  note: Tool name and report id in the published tool list resolve to exactly one OpenAPI path.
+mcp_only: []
+rest_only:
+- capability: EMIL Products
+  operations:
+  - getListForProducts
+  - getProduct
+  - getProductHistory
+  count: 3
+- capability: NP3-233-CD
+  operations:
+  - getData_101
+  count: 1
+- capability: NP3-565-CD
+  operations:
+  - getData_100
+  count: 1
+- capability: NP3-566-CD
+  operations:
+  - getData_99
+  count: 1
+- capability: NP3-910-ER
+  operations:
+  - getData_83
+  - getData_84
+  - getData_85
+  - getData_86
+  - getData_87
+  - getData_88
+  - getData_89
+  - getData_90
+  - getData_91
+  - getData_92
+  - getData_93
+  - getData_94
+  - getData_95
+  - getData_96
+  - getData_97
+  - getData_98
+  count: 16
+- capability: NP3-911-ER
+  operations:
+  - getData_57
+  - getData_58
+  - getData_59
+  - getData_60
+  - getData_61
+  - getData_62
+  - getData_63
+  - getData_64
+  - getData_65
+  - getData_68
+  - getData_74
+  - getData_75
+  - getData_76
+  - getData_77
+  - getData_78
+  - getData_79
+  - getData_80
+  - getData_81
+  - getData_82
+  count: 19
+- capability: NP3-965-ER
+  operations:
+  - getData_51
+  - getData_52
+  - getData_53
+  - getData_54
+  - getData_55
+  - getData_56
+  count: 6
+- capability: NP3-966-ER
+  operations:
+  - getData_44
+  - getData_50
+  count: 2
+- capability: NP3-990-EX
+  operations:
+  - getData_34
+  - getData_35
+  - getData_36
+  - getData_37
+  count: 4
+- capability: NP3-991-EX
+  operations:
+  - getData_33
+  count: 1
+- capability: NP4-159-CD
+  operations:
+  - getData_32
+  count: 1
+- capability: NP4-179-CD
+  operations:
+  - getData_31
+  count: 1
+- capability: NP4-196-M
+  operations:
+  - getData_25
+  count: 1
+- capability: NP4-732-CD
+  operations:
+  - getData_15
+  count: 1
+- capability: NP4-733-CD
+  operations:
+  - getData_14
+  count: 1
+- capability: NP4-737-CD
+  operations:
+  - getData_13
+  count: 1
+- capability: NP4-738-CD
+  operations:
+  - getData_12
+  count: 1
+- capability: NP4-742-CD
+  operations:
+  - getData_11
+  count: 1
+- capability: NP4-743-CD
+  operations:
+  - getData_10
+  count: 1
+- capability: NP4-745-CD
+  operations:
+  - getData_9
+  count: 1
+- capability: NP4-746-CD
+  operations:
+  - getData_8
+  count: 1
+- capability: NP6-322-CD
+  operations:
+  - getData_7
+  count: 1
+- capability: NP6-345-CD
+  operations:
+  - getData_6
+  count: 1
+- capability: NP6-346-CD
+  operations:
+  - getData_5
+  count: 1
+- capability: NP6-787-CD
+  operations:
+  - getData_4
+  count: 1
+- capability: NP6-788-CD
+  operations:
+  - getData_3
+  count: 1
+- capability: NP6-86-CD
+  operations:
+  - getData_2
+  count: 1
+- capability: Versioning
+  operations:
+  - getVersion
+  count: 1
+coverage:
+  tools_named: 34
+  tools_bound: 34
+  mcp_only: 0
+  rest_operations_total: 106
+  rest_operations_with_tool: 34
+  rest_operations_without_tool: 72
+  tool_coverage_pct: 32.1

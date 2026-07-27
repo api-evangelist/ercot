@@ -1,0 +1,91 @@
+generated: '2026-07-27'
+method: searched
+source: openapi/ercot-public-data-api-openapi.json
+docs: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+description: >-
+  Every ERCOT Public Data API call carries TWO credentials, not one: an Azure API Management
+  subscription key AND an Azure AD B2C ID token. The OpenAPI declares only the subscription-key
+  half (apiKeyHeader / apiKeyQuery); the bearer half is documented only in the developer portal,
+  so this profile is upgraded from the spec-derived baseline with the documented token flow.
+  Registration is free and self-serve at the ERCOT API Explorer (email verification, then
+  subscribe to a product to mint a subscription key). The market-participant SOAP estate
+  (EWS, MarkeTrak, Retail API) uses a completely different model — ERCOT-issued digital
+  certificates plus WS-Security — and is not reachable with these credentials.
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - header
+  - query
+  oauth2_flows:
+  - password
+schemes:
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameter: Ocp-Apim-Subscription-Key
+  required: true
+  description: Azure API Management subscription key, minted per product subscription in the API Explorer profile page.
+  sources:
+  - openapi/ercot-public-data-api-openapi.json
+  - https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: subscription-key
+  required: false
+  description: Query-string alternative to the Ocp-Apim-Subscription-Key header.
+  sources:
+  - openapi/ercot-public-data-api-openapi.json
+- name: b2cIdToken
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  required: true
+  description: >-
+    Azure AD B2C ID token passed as `Authorization: Bearer <id_token>`. Not declared in the
+    OpenAPI but mandatory — calls without it are rejected. Tokens are valid for one hour and
+    cannot be refreshed; a new POST to the token endpoint mints another.
+  sources:
+  - https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+- name: ercotB2C
+  type: oauth2
+  flow: password
+  grant_type: password
+  token_url: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/oauth2/v2.0/token
+  authorization_url: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/b2c_1_pubapi-ropc-flow/oauth2/v2.0/authorize
+  jwks_uri: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/b2c_1_pubapi-ropc-flow/discovery/v2.0/keys
+  issuer: https://ercotb2c.b2clogin.com/6df17afa-1b36-499a-83f7-56779ad0b9a6/v2.0/
+  client_id: fec253ea-0d06-4272-a5e6-b478baeecd70
+  scope: openid+fec253ea-0d06-4272-a5e6-b478baeecd70+offline_access
+  response_type: id_token
+  token_lifetime_seconds: 3600
+  description: >-
+    Azure AD B2C Resource Owner Password Credentials (ROPC) user flow. The developer's portal
+    username and password are POSTed directly to the token endpoint; the response carries
+    access_token, refresh_token and the id_token the API actually consumes. ROPC is a legacy
+    OAuth 2.0 grant — credentials are handled by the client, so they must be stored securely.
+  sources:
+  - https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - well-known/ercot-openid-configuration.json
+registration:
+  url: https://apiexplorer.ercot.com/
+  self_serve: true
+  cost: free
+  steps:
+  - Sign up on the ERCOT API Explorer with an email address and verification code.
+  - Subscribe to a product on the Products page to mint a subscription key.
+  - Copy the Primary key from the profile page (once — it is reusable).
+  - POST username/password to the B2C token endpoint for an ID token (repeat hourly).
+other_estates:
+- api: ERCOT Web Services (EWS)
+  model: ERCOT-issued digital certificate + WS-Security (WSS 2004/01) over SOAP
+  audience: registered ERCOT Market Participants only
+- api: ERCOT MarkeTrak API
+  model: ERCOT digital certificate; application must pass ERCOT certification before production access
+  audience: registered ERCOT Market Participants only
+- api: ERCOT Retail API
+  model: ERCOT digital certificate over SOAP (TX SET transactions)
+  audience: certified Market Participants only

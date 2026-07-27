@@ -1,0 +1,44 @@
+generated: '2026-07-27'
+method: searched
+source: well-known/ercot-openid-configuration.json
+docs: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+description: >-
+  The ERCOT Public Data API has no authorization-scope surface in the usual sense — there is no
+  scopes/permissions reference page and no per-resource scope. The OpenAPI declares only apiKey
+  security schemes. What ERCOT does operate is an Azure AD B2C ROPC user flow whose token request
+  carries a fixed scope string; the B2C OIDC discovery document advertises exactly one supported
+  scope (openid). Authorization is effectively all-or-nothing: any registered developer with a
+  valid subscription key and ID token sees the same public EMIL data products. Access
+  differentiation happens at the API Management product/subscription layer, not through scopes.
+schemes:
+- name: ercotB2C
+  type: oauth2
+  source: well-known/ercot-openid-configuration.json
+  flows:
+  - flow: password
+    tokenUrl: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/oauth2/v2.0/token
+    authorizationUrl: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/b2c_1_pubapi-ropc-flow/oauth2/v2.0/authorize
+scopes:
+- scope: openid
+  description: >-
+    Standard OIDC scope; the only value in scopes_supported on the ERCOT B2C discovery document.
+    Yields the id_token the Public Data API consumes.
+  flows: [password]
+  sources: [well-known/ercot-openid-configuration.json]
+- scope: fec253ea-0d06-4272-a5e6-b478baeecd70
+  description: >-
+    The Public Data API B2C application (client) id, used as a resource scope in the documented
+    token request so the issued token is audienced to the Public Data API.
+  flows: [password]
+  sources: [https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/]
+- scope: offline_access
+  description: >-
+    Requests a refresh_token alongside the id_token. Note the developer docs state ID tokens
+    cannot be refreshed and a new POST is required each hour.
+  flows: [password]
+  sources: [https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/]
+documented_scope_string: openid+fec253ea-0d06-4272-a5e6-b478baeecd70+offline_access
+per_operation_scopes: false
+notes: >-
+  The SOAP market-participant estate (EWS, MarkeTrak, Retail) authorizes by ERCOT digital
+  certificate ROLE (certificateRole appears on EMIL product metadata), not by OAuth scope.

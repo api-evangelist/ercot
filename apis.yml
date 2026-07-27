@@ -73,8 +73,22 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ercot-public-data-api-openapi.json
+  - type: Overlay
+    url: overlays/ercot-public-data-api-overlay.yaml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
   - type: Documentation
     url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
   - type: APIReference
     url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
   - type: Authentication
@@ -132,6 +146,8 @@ apis:
     url: https://raw.githubusercontent.com/ercot/api-specs/main/ews/wsdls/Nodal.wsdl
   - type: WSDL
     url: https://raw.githubusercontent.com/ercot/api-specs/main/ews/wsdls/Notification.wsdl
+  - type: Webhooks
+    url: asyncapi/ercot-ews-notifications.yml
   - type: Documentation
     url: https://developer.ercot.com/applications/ews/Introduction/
   - type: Documentation
@@ -181,18 +197,68 @@ apis:
   - type: Documentation
     url: https://developer.ercot.com/api_specifications/retail/retail/
 common:
+- type: DomainSecurity
+  url: security/ercot-domain-security.yml
+- type: Authentication
+  url: authentication/ercot-authentication.yml
+- type: OAuthScopes
+  url: scopes/ercot-scopes.yml
+- type: WellKnown
+  url: well-known/ercot-well-known.yml
+- type: OpenIDConfiguration
+  url: well-known/ercot-openid-configuration.json
+- type: Conventions
+  url: conventions/ercot-conventions.yml
+- type: ErrorCatalog
+  url: errors/ercot-problem-types.yml
+- type: RateLimits
+  url: rate-limits/ercot-rate-limits.yml
+- type: Lifecycle
+  url: lifecycle/ercot-lifecycle.yml
+- type: Deprecation
+  url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- type: ChangeLog
+  url: changelog/ercot-changelog.yml
+- type: Conformance
+  url: conformance/ercot-conformance.yml
+- type: DataModel
+  url: data-model/ercot-data-model.yml
+- type: Packages
+  url: packages/ercot-packages.yml
+- type: MCPServer
+  url: mcp/ercot-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/ercot-tool-crosswalk.yml
+- type: Webhooks
+  url: asyncapi/ercot-ews-notifications.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/ercot-llms.txt
 - type: Website
   url: https://www.ercot.com/
 - type: DeveloperPortal
   url: https://developer.ercot.com/
 - type: Documentation
   url: https://developer.ercot.com/
+- type: APIReference
+  url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+- type: GettingStarted
+  url: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
 - type: APIExplorer
   url: https://apiexplorer.ercot.com/
 - type: SignUp
   url: https://apiexplorer.ercot.com/
+- type: Support
+  url: https://developer.ercot.com/support/support/
+- type: Community
+  url: https://developer.ercot.com/discussion_forums/discussion/
 - type: Plans
   url: https://apiexplorer.ercot.com/products
+- type: TermsOfService
+  url: https://www.ercot.com/help/terms/data-portal
+- type: PrivacyPolicy
+  url: https://www.ercot.com/help/privacy
 - type: GitHubOrganization
   url: https://github.com/ercot
 - type: SourceCode

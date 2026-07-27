@@ -1,0 +1,132 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://developer.ercot.com/applications/pubapi/relnotes/,
+  https://developer.ercot.com/applications/pubapi/deprecation-notices/,
+  https://developer.ercot.com/applications/pubapi/known-limits/
+description: >-
+  ERCOT runs the Public Data API on a numbered release train (YYYY-Rn) tied to market
+  implementations rather than to semantic API versions — the API itself has been "Version 1.0"
+  since the February 2024 GA. Deprecation is real and published: a dated Deprecation Notices page
+  lists retiring endpoints with last-run dates and, where applicable, the replacement endpoint,
+  each tied back to a formal ERCOT Market Notice. What is missing is machine-readable signalling —
+  there is no Sunset or Deprecation HTTP header contract, and no operation in the OpenAPI carries
+  `deprecated: true` even for endpoints the notices page has already retired.
+versioning:
+  scheme: single unversioned path, release-train notes
+  current: '1.0'
+  release_train: YYYY-Rn (e.g. 2025-R11)
+  version_endpoint: https://api.ercot.com/api/public-reports/version
+  version_operation: openapi/ercot-public-data-api-openapi.json#getVersion
+  in_url: false
+  docs: https://developer.ercot.com/applications/pubapi/relnotes/
+  history:
+  - version: '1.0 beta'
+    release: 2023 Beta Release
+    date: '2023-12-11'
+  - version: '1.0'
+    release: 2024 GA Release
+    date: '2024-02-16'
+deprecation:
+  policy_url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  published_timetable: true
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  governance: >-
+    Endpoint retirements are announced through ERCOT Market Notices (e.g. PR447_RTC+B) and mirrored
+    on the Deprecation Notices page with a deprecation date, a last-run date and — where a successor
+    exists — the replacement endpoint.
+  note: >-
+    The response Link schema includes a standard `deprecation` attribute, so the payload shape can
+    carry a deprecation URI, but no operation in the published spec is marked deprecated.
+  deprecated_endpoints:
+  - endpoint: np3-910-er/2d_agg_dsr_loads
+    deprecation_date: '2025-12-05'
+    last_run: 'December 4, 2025 data on 2025-12-06'
+    replacement: null
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_98
+  - endpoint: np3-911-er/2d_agg_as_offers_offns
+    deprecation_date: '2025-12-05'
+    last_run: 'December 4, 2025 data on 2025-12-06'
+    replacement: null
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_80
+  - endpoint: np3-911-er/2d_agg_as_offers_ecrsm
+    deprecation_date: '2025-12-05'
+    replacement: np3-911-er/2d_agg_dam_as_offers_ecrsm
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_82
+  - endpoint: np3-911-er/2d_agg_as_offers_ecrss
+    deprecation_date: '2025-12-05'
+    replacement: np3-911-er/2d_agg_dam_as_offers_ecrss
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_81
+  - endpoint: np3-911-er/2d_agg_as_offers_regdn
+    deprecation_date: '2025-12-05'
+    replacement: np3-911-er/2d_agg_dam_as_offers_regdn
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_78
+  - endpoint: np3-911-er/2d_agg_as_offers_regup
+    deprecation_date: '2025-12-05'
+    replacement: np3-911-er/2d_agg_dam_as_offers_regup
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_77
+  - endpoint: np3-911-er/2d_agg_as_offers_rrsffr
+    deprecation_date: '2025-12-05'
+    replacement: np3-911-er/2d_agg_dam_as_offers_rrsffr
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_76
+  - endpoint: np3-911-er/2d_agg_as_offers_rrspfr
+    deprecation_date: '2025-12-05'
+    replacement: np3-911-er/2d_agg_dam_as_offers_rrspfr
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_75
+  - endpoint: np3-911-er/2d_agg_as_offers_rrsufr
+    deprecation_date: '2025-12-05'
+    replacement: np3-911-er/2d_agg_dam_as_offers_rrsufr
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_74
+  - endpoint: np3-965-er/60_sced_dsr_load_data
+    deprecation_date: '2025-12-05'
+    last_run: 'December 4, 2025 data on 2026-02-03'
+    replacement: null
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_54
+  - endpoint: np3-990-ex
+    deprecation_date: '2025-12-05'
+    last_run: 'December 4, 2025 data on 2026-02-03'
+    replacement: null
+    notice: PR447_RTC+B
+    note: whole EMIL product (60-Day SASM Disclosure Reports) — four operations
+    operations:
+    - openapi/ercot-public-data-api-openapi.json#getData_34
+    - openapi/ercot-public-data-api-openapi.json#getData_35
+    - openapi/ercot-public-data-api-openapi.json#getData_36
+    - openapi/ercot-public-data-api-openapi.json#getData_37
+  - endpoint: np4-179-cd/total_as_service_offers
+    deprecation_date: '2025-12-05'
+    last_run: 'December 5, 2025 data on 2025-12-04'
+    replacement: null
+    notice: PR447_RTC+B
+    operation: openapi/ercot-public-data-api-openapi.json#getData_31
+deprecated_operations_in_spec: []
+data_retention:
+  api_window: from each product's activation date in the Public Data API forward
+  historic_files: at least 7 years
+  archive_endpoint: openapi/ercot-public-data-api-openapi.json#getProductHistory
+  docs: https://developer.ercot.com/applications/pubapi/known-limits/
+status_page: null
+status_page_note: >-
+  ERCOT publishes grid and market condition dashboards (https://www.ercot.com/gridmktinfo/dashboards)
+  but no availability/status page for the API estate; status.ercot.com does not resolve.
+sla:
+  url: null
+  uptime_target: null
+  note: No published SLA or uptime commitment for the Public Data API.
+support:
+  docs: https://developer.ercot.com/support/support/
+  forum: https://developer.ercot.com/discussion_forums/discussion/
+  issues: https://github.com/ercot/api-specs/issues
+changelog: changelog/ercot-changelog.yml

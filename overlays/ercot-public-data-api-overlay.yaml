@@ -1,0 +1,229 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the ERCOT Public Data API
+  version: 1.0.0
+extends: openapi/ercot-public-data-api-openapi.json
+x-generated: '2026-07-27'
+x-method: generated
+x-source: >-
+  Derived from the ERCOT developer portal (registration and authentication, using the API, known
+  limitations, deprecation notices) and the artifacts in this repo. Applies our documented findings
+  to ERCOT's published spec without mutating it.
+actions:
+# ---- Provider and rating metadata -------------------------------------------------
+- target: $.info
+  update:
+    x-apievangelist-provider: ERCOT
+    x-apievangelist-slug: ercot
+    x-apievangelist-artifacts:
+      authentication: authentication/ercot-authentication.yml
+      conventions: conventions/ercot-conventions.yml
+      errors: errors/ercot-problem-types.yml
+      lifecycle: lifecycle/ercot-lifecycle.yml
+      changelog: changelog/ercot-changelog.yml
+      rate_limits: rate-limits/ercot-rate-limits.yml
+      data_model: data-model/ercot-data-model.yml
+      conformance: conformance/ercot-conformance.yml
+    contact:
+      name: ERCOT Developer Portal
+      url: https://developer.ercot.com/
+    license:
+      name: ERCOT Terms of Use
+      url: https://www.ercot.com/help/terms/data-portal
+    termsOfService: https://www.ercot.com/help/terms/data-portal
+
+# ---- The missing half of the auth contract ----------------------------------------
+# The published spec declares only the APIM subscription key. Every call also requires an
+# Azure AD B2C ID token; without it all calls are rejected.
+- target: $.components.securitySchemes
+  update:
+    b2cIdToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Azure AD B2C ID token obtained from the B2C_1_PUBAPI-ROPC-FLOW token endpoint. Valid for one
+        hour, cannot be refreshed. Documented at
+        https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+        but absent from the published specification.
+    ercotB2C:
+      type: oauth2
+      description: Azure AD B2C ROPC user flow that issues the ID token.
+      flows:
+        password:
+          tokenUrl: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/oauth2/v2.0/token
+          scopes:
+            openid: Standard OIDC scope; the only value in scopes_supported.
+            offline_access: Requests a refresh token alongside the ID token.
+
+- target: $.security
+  update:
+    - apiKeyHeader: []
+      b2cIdToken: []
+
+# ---- Rate limiting and gateway errors, documented but not specified ---------------
+- target: $.info
+  update:
+    x-rate-limit:
+      requests: 30
+      period: minute
+      status: 429
+      body: '{"error_key": "throttled", "error_message": "Too Many Requests"}'
+      docs: https://developer.ercot.com/applications/pubapi/known-limits/
+    x-geographic-restriction: Requests originating outside the United States are blocked on *.ercot.com.
+    x-download-limit:
+      files: 1000
+      scope: per historic-file download, API and Web UI
+
+- target: $.components.responses
+  update:
+    Unauthorized:
+      description: Missing or invalid credentials — both the subscription key and the ID token are required.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error_key: { type: string }
+              error_message: { type: string }
+    TooManyRequests:
+      description: Rate limit of 30 requests per minute exceeded.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error_key: { type: string }
+              error_message: { type: string }
+          example:
+            error_key: throttled
+            error_message: Too Many Requests
+
+# ---- Deprecations published on the notices page but not marked in the spec --------
+- target: $.paths['/np4-179-cd/total_as_service_offers'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      last_run: December 5, 2025 data on 2025-12-04
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-910-er/2d_agg_dsr_loads'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-965-er/60_sced_dsr_load_data'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-911-er/2d_agg_as_offers_offns'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-911-er/2d_agg_as_offers_ecrsm'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      replacement: np3-911-er/2d_agg_dam_as_offers_ecrsm
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-911-er/2d_agg_as_offers_ecrss'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      replacement: np3-911-er/2d_agg_dam_as_offers_ecrss
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-911-er/2d_agg_as_offers_regdn'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      replacement: np3-911-er/2d_agg_dam_as_offers_regdn
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-911-er/2d_agg_as_offers_regup'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      replacement: np3-911-er/2d_agg_dam_as_offers_regup
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-911-er/2d_agg_as_offers_rrsffr'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      replacement: np3-911-er/2d_agg_dam_as_offers_rrsffr
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-911-er/2d_agg_as_offers_rrspfr'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      replacement: np3-911-er/2d_agg_dam_as_offers_rrspfr
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-911-er/2d_agg_as_offers_rrsufr'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B
+      replacement: np3-911-er/2d_agg_dam_as_offers_rrsufr
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-990-ex/60_sasm_gen_res_as_offers'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B — whole NP3-990-EX product retired
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-990-ex/60_sasm_gen_res_as_offer_awards'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B — whole NP3-990-EX product retired
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-990-ex/60_sasm_load_res_as_offers'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B — whole NP3-990-EX product retired
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+- target: $.paths['/np3-990-ex/60_sasm_load_res_as_offer_awards'].get
+  update:
+    deprecated: true
+    x-deprecation:
+      date: '2025-12-05'
+      notice: PR447_RTC+B — whole NP3-990-EX product retired
+      source: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+
+# ---- Domain semantics the spec leaves implicit ------------------------------------
+- target: $.info
+  update:
+    x-market-timezone: America/Chicago
+    x-dst-convention: >-
+      DSTFlag and repeatHourFlag disambiguate the repeated hour at the fall-back DST transition;
+      clients must carry both to key rows uniquely.
+    x-response-shape: >-
+      Report responses are column-oriented — fields[] is a runtime dictionary (name, label,
+      dataType, searchable, sortable, hasRange) describing the untyped data[] payload.
+    x-emil-id-convention: >-
+      EMIL ids take the form NP<protocol-section>-<number>-<suffix> (CD current day, ER extract
+      report, EX extract, M manual corrections), lower-cased in URL paths.

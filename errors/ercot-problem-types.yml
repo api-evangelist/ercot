@@ -1,0 +1,92 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  openapi/ercot-public-data-api-openapi.json (every one of the 106 operations declares the same
+  400/403/404 set), enriched from
+  https://developer.ercot.com/applications/pubapi/known-limits/ and
+  https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+format: custom
+problem_json: false
+description: >-
+  ERCOT does not use RFC 9457 problem+json. Application errors return a flat `Exception` object
+  (timestamp, code, status, message, data) as application/json; gateway-level rejections from Azure
+  API Management return a different, smaller envelope (error_key, error_message). The OpenAPI is
+  uniform — all 106 operations declare exactly 400, 403 and 404 — so the catalog below is
+  provider-wide rather than per-operation. 401 and 429 are real and documented in prose but absent
+  from the spec, which is the single largest error-contract gap in this API.
+envelopes:
+- name: Exception
+  media_type: application/json
+  source: openapi/ercot-public-data-api-openapi.json#/components/schemas/Exception
+  fields:
+    timestamp: date-time the error occurred
+    code: integer error code
+    status: status string
+    message: human-readable message
+    data: free-form object for additional context
+  used_by: [400, 403, 404]
+- name: Azure API Management gateway error
+  media_type: application/json
+  source: https://developer.ercot.com/applications/pubapi/known-limits/
+  fields:
+    error_key: machine-readable key, e.g. throttled
+    error_message: human-readable message, e.g. Too Many Requests
+  used_by: [401, 429]
+problems:
+- status: 400
+  name: Bad Request
+  title: The request operation failed. The request and/or one or more of its parameters are invalid.
+  envelope: Exception
+  in_spec: true
+  operations: all (106 of 106)
+  remediation: >-
+    Check parameter formats — dates are yyyy-MM-dd, ranged filters use the <field>From/<field>To
+    convention, and page/size must be positive integers. The fields[] block of any successful
+    response tells you which columns are searchable, sortable and range-filterable.
+- status: 403
+  name: Forbidden
+  title: The request operation failed. You do not have access to the requested resource.
+  envelope: Exception
+  in_spec: true
+  operations: all (106 of 106)
+  remediation: >-
+    Confirm the Ocp-Apim-Subscription-Key belongs to a subscription for this product, and that the
+    Authorization bearer ID token is present and unexpired (1 hour lifetime). Also confirm the call
+    originates inside the United States — ERCOT blocks non-US regions at the edge.
+- status: 404
+  name: Not Found
+  title: The request operation failed. The requested resource does not exist.
+  envelope: Exception
+  in_spec: true
+  operations: all (106 of 106)
+  remediation: >-
+    Verify the EMIL id and artifact path segment. GET / lists every available product and each
+    artifact carries its own _links.endpoint.href. Retired endpoints are listed in the deprecation
+    notices — see lifecycle/ercot-lifecycle.yml.
+- status: 401
+  name: Unauthorized
+  title: Missing or invalid credentials.
+  envelope: Azure API Management gateway error
+  in_spec: false
+  source: >-
+    https://developer.ercot.com/applications/pubapi/user-guide/using-api/ — "Users must provide a
+    valid Subscription Key and your Authentication (ID) Token in all HTTP requests to the API.
+    Without these credentials all calls will be rejected." Confirmed live: an anonymous GET of
+    https://api.ercot.com/api/public-reports returns 401.
+  remediation: >-
+    Send both the Ocp-Apim-Subscription-Key header and the Authorization bearer ID token.
+- status: 429
+  name: Too Many Requests
+  title: Too Many Requests
+  envelope: Azure API Management gateway error
+  in_spec: false
+  body: '{"error_key": "throttled", "error_message": "Too Many Requests"}'
+  source: https://developer.ercot.com/applications/pubapi/known-limits/
+  remediation: >-
+    Stay under 30 requests per minute (~1 request every 2 seconds). No Retry-After header is
+    documented, so back off on a fixed schedule. See rate-limits/ercot-rate-limits.yml.
+gaps:
+- No RFC 9457 application/problem+json representation.
+- 401 and 429 are documented in prose but not declared on any OpenAPI operation.
+- No enumerated `code` registry — the integer code field in Exception has no published catalog.
+- No 5xx responses declared anywhere in the spec.
