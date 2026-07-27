@@ -1,0 +1,208 @@
+aid: ercot
+url: https://raw.githubusercontent.com/api-evangelist/ercot/refs/heads/main/apis.yml
+name: ERCOT
+kind: company
+description: >-
+  The Electric Reliability Council of Texas (ERCOT) is the independent system operator that
+  manages the flow of electric power to roughly 27 million Texas customers on the ERCOT
+  Interconnection, running the wholesale Day-Ahead and Real-Time energy markets, ancillary
+  services, congestion revenue rights, and retail switching for the competitive Texas market.
+  Its home market is the United States (Texas). ERCOT sits at the wholesale/system-operator
+  layer of the energy value chain, upstream of the transmission and distribution utilities
+  (Oncor, CenterPoint, AEP Texas, TNMP) and the retail electric providers that serve end
+  customers. Its API posture is a clean split: market and grid data are genuinely open —
+  ERCOT publishes a real, versioned OpenAPI 3.0 for the Public Data API covering 106 EMIL
+  data-product endpoints (locational marginal prices, settlement point prices, system load,
+  wind and solar production, ancillary services, outage capacity), and the Market Information
+  System still serves public report archives anonymously with no account at all. Consumer
+  energy data is a different story: ERCOT operates no consumer usage API and implements no
+  Green Button / ESPI surface. Texas residential interval data lives in Smart Meter Texas,
+  which is operated by the joint Transmission and Distribution Utilities under PUCT oversight,
+  not by ERCOT. The market-participant SOAP estate (ERCOT Web Services, MarkeTrak, Retail API)
+  is documented publicly on GitHub but reachable only by certified market participants.
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: true
+  label: Free · Self-serve registration
+  confidence: high
+  source:
+  - authentication
+  - documentation
+  generated: '2026-07-27'
+  method: probed
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/groq.png
+tags:
+- Energy
+- United States
+- Electricity
+- Energy Markets
+- Grid
+- System Operator
+- Texas
+- Renewables
+- Demand Response
+- Open Data
+created: '2026-07-27'
+modified: '2026-07-27'
+specificationVersion: '0.19'
+apis:
+- aid: ercot:ercot-public-data-api
+  name: ERCOT Public Data API
+  description: >-
+    RESTful access to ERCOT Market Information List (EMIL) public data products — 106
+    documented endpoints spanning real-time and day-ahead locational marginal prices,
+    settlement point prices, SCED system lambda and shadow prices, actual system load by
+    weather and forecast zone, wind and solar power production actuals and forecasts,
+    ancillary service offers and awards, hourly resource outage capacity, and 60-day
+    SCED/DAM disclosure reports, plus historic file archives retained at least seven years.
+    Data is public and free, but every call requires a free self-serve Azure API Management
+    subscription key plus an Azure AD B2C ID token. Rate limited to 30 requests per minute;
+    requests from outside the United States are blocked.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - Energy Markets
+  - Electricity
+  - Pricing
+  - Load
+  - Renewables
+  - Open Data
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-public-data-api-openapi.json
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-esr-public-data-api
+  name: ERCOT ESR Public Data API
+  description: >-
+    Energy Storage Resource public data, launched May 29, 2025 per the ERCOT Public Data API
+    release notes, beginning with four-second ESR charging MW telemetry
+    (GET /rptesr-m/4_sec_esr_charging_mw). Documented in the ERCOT API Explorer as the
+    esrapi-apim-api product. No machine-readable specification is published for this API in
+    ERCOT's public api-specs repository, and no base URL was independently confirmed, so none
+    is asserted here. Access follows the same subscription-key plus B2C ID token model as the
+    Public Data API.
+  humanURL: https://apiexplorer.ercot.com/api-details#api=esrapi-apim-api
+  tags:
+  - Energy Storage
+  - Batteries
+  - Telemetry
+  - Energy Markets
+  properties:
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=esrapi-apim-api
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Authentication
+    url: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+- aid: ercot:ercot-web-services
+  name: ERCOT Web Services (EWS)
+  description: >-
+    ERCOT's SOAP web-services estate for Nodal market participants — the Market Information
+    Service, Market Transaction Service (bid and offer submission via BidSet), Resource
+    Parameter Transaction Service, Outage Scheduling Services, Verbal Dispatch Instructions,
+    and WS-Notifications callbacks. WSDL and XSD contracts are published openly on GitHub,
+    but the runtime endpoints are reachable only by registered ERCOT Market Participants
+    holding an ERCOT digital certificate; the shipped WSDL carries a placeholder
+    soap:address of https://dummyhost:0000/ so no runtime base URL is asserted here.
+  humanURL: https://developer.ercot.com/applications/ews/Introduction/
+  tags:
+  - SOAP
+  - Market Participants
+  - Bids
+  - Outages
+  - Energy Markets
+  properties:
+  - type: WSDL
+    url: https://raw.githubusercontent.com/ercot/api-specs/main/ews/wsdls/Nodal.wsdl
+  - type: WSDL
+    url: https://raw.githubusercontent.com/ercot/api-specs/main/ews/wsdls/Notification.wsdl
+  - type: Documentation
+    url: https://developer.ercot.com/applications/ews/Introduction/
+  - type: Documentation
+    url: https://developer.ercot.com/applications/ews/Services%20Organization/
+  - type: SourceCode
+    url: https://github.com/ercot/ews-client
+- aid: ercot:ercot-marketrak-api
+  name: ERCOT MarkeTrak API
+  description: >-
+    SOAP API over MarkeTrak, ERCOT's retail-market issue tracking system, supporting
+    QueryList, QueryDetail, Update, and Submit operations against retail transaction issues.
+    Applications must pass ERCOT certification at one of three levels before they may call
+    the service in production, and access is limited to registered Market Participants.
+  humanURL: https://developer.ercot.com/applications/marketrak/MarkeTrak_API_Dev_v1_2/
+  baseURL: https://misapi.ercot.com/marketrakAPI/
+  tags:
+  - SOAP
+  - Retail
+  - Market Participants
+  - Issue Tracking
+  properties:
+  - type: WSDL
+    url: https://raw.githubusercontent.com/ercot/api-specs/main/marketrak/MarkeTrakAPI_rc5_v14.wsdl
+  - type: Schema
+    url: https://raw.githubusercontent.com/ercot/api-specs/main/marketrak/MarkeTrakAPI_rc5_v14.xsd
+  - type: Documentation
+    url: https://developer.ercot.com/applications/marketrak/MarkeTrak_API_Dev_v1_2/
+- aid: ercot:ercot-retail-api
+  name: ERCOT Retail API
+  description: >-
+    SOAP web service supporting Texas Standard Electronic Transactions (TX SET) between
+    ERCOT, Transmission and Distribution Service Providers, and Retail Electric Providers —
+    the machinery behind retail switching, enrollment, and move-in/move-out in the
+    competitive Texas market. Contracts are published openly; the service itself is
+    restricted to certified Market Participants.
+  humanURL: https://developer.ercot.com/api_specifications/retail/retail/
+  tags:
+  - SOAP
+  - Retail
+  - Switching
+  - Market Participants
+  properties:
+  - type: WSDL
+    url: https://raw.githubusercontent.com/ercot/api-specs/main/retail/RetailAPIConcreteWSDL-External.wsdl
+  - type: Schema
+    url: https://raw.githubusercontent.com/ercot/api-specs/main/retail/RetailAPIService.xsd
+  - type: Documentation
+    url: https://developer.ercot.com/api_specifications/retail/retail/
+common:
+- type: Website
+  url: https://www.ercot.com/
+- type: DeveloperPortal
+  url: https://developer.ercot.com/
+- type: Documentation
+  url: https://developer.ercot.com/
+- type: APIExplorer
+  url: https://apiexplorer.ercot.com/
+- type: SignUp
+  url: https://apiexplorer.ercot.com/
+- type: Plans
+  url: https://apiexplorer.ercot.com/products
+- type: GitHubOrganization
+  url: https://github.com/ercot
+- type: SourceCode
+  url: https://github.com/ercot/api-specs
+- type: OpenData
+  url: https://data.ercot.com/
+- type: OpenData
+  url: https://www.ercot.com/mp/data-products
+- type: Issues
+  url: https://github.com/ercot/api-specs/issues
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

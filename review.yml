@@ -1,0 +1,307 @@
+aid: ercot
+name: ERCOT
+review:
+  question: >-
+    Does ERCOT publish a real, machine-readable public API surface, and does any energy
+    consumer-data mandate (Green Button / ESPI, CDR energy) apply to it and actually run?
+  answer: true
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  tier: system-operator
+  homeMarket: United States
+energyDataPosture:
+  mandateRegime: none
+  mandateRegimeNote: >-
+    No consumer energy-data mandate applies to ERCOT itself. The United States has no federal
+    energy data-sharing mandate; Green Button / ESPI (NAESB REQ.21 / NAESB ESPI, NIST-derived)
+    is a voluntary standard except where a state regulator compels it. In Texas the compelled
+    party is not the ISO. Residential and small-commercial interval data for the roughly 7.1
+    million premises in the ERCOT competitive area is held in Smart Meter Texas
+    (smartmetertexas.com), a portal built and operated by the Joint Transmission and
+    Distribution Utilities (Oncor, CenterPoint Energy, AEP Texas, Texas-New Mexico Power,
+    Lubbock Power & Light) under Public Utility Commission of Texas dockets. Smart Meter Texas
+    — not ERCOT — is the entity that carries the Green Button Download My Data and Connect My
+    Data obligations that came out of the PUCT SMT 2.0 settlement. ERCOT is the market and
+    reliability operator upstream of that.
+  mandateStatus: not-applicable
+  mandateStatusNote: >-
+    Recorded as not-applicable to ERCOT as an organization, not as "none", because a Green
+    Button obligation demonstrably exists in Texas — it just lands on the TDUs via Smart Meter
+    Texas. Nothing on ercot.com, developer.ercot.com, or apiexplorer.ercot.com claims ERCOT
+    Green Button or ESPI conformance, and nothing was found to verify. This is a case where
+    the mandate and the implementation sit in two different organizations, and the profile
+    must not let ERCOT inherit either credit or blame for the TDUs' surface.
+  dataStandard: >-
+    No consumer-data standard reference found (no Green Button / ESPI, no CDR Consumer Data
+    Standards, no IEEE 2030.5, no OpenADR, no IEC CIM). ERCOT's public surface is a
+    proprietary shape described by a real OpenAPI 3.0.1 document keyed on ERCOT's own EMIL
+    (ERCOT Market Information List) product identifiers such as NP6-905-CD and NP4-732-CD.
+    The market-participant SOAP estate is WS-* / SOAP 1.1 with ERCOT-proprietary XSDs
+    (ErcotAwards, ErcotOutages, ErcotTransactions) plus WS-Notifications and
+    WS-Security 2004/01, and the retail layer implements Texas Standard Electronic
+    Transactions (TX SET), a Texas-specific retail transaction standard, not an open
+    consumer-data API standard.
+  consumerDataApi: false
+  consumerDataApiNote: >-
+    ERCOT exposes no API by which a third party can obtain an individual retail customer's
+    usage or billing data. The nearest thing in ERCOT's own estate is Market Data
+    Transparency (MDT), an ESI ID / usage extract defined by
+    ercot/api-specs/mdt/MarketDataTransparency.xsd and a set of PR50024_MDT_* XSLT transforms;
+    that is a bulk settlement-and-registration extract for certified Market Participants, is
+    not consent-mediated, is not consumer-facing, and is not a documented public API. Consumer
+    interval data access in Texas runs through Smart Meter Texas instead.
+  marketDataOpen: true
+  marketDataOpenNote: >-
+    Yes, and this is the strongest finding in the profile. Three genuinely anonymous surfaces
+    were confirmed live on 2026-07-27 with no account, key, or token:
+    (1) the Market Information System public report listings and downloads —
+    GET https://www.ercot.com/misapp/GetReports.do?reportTypeId=12300 returned HTTP 200
+    (1,383,192 bytes) and an individual archive fetched from
+    https://www.ercot.com/misdownload/servlets/mirDownload?mimic_duns=000000000&doclookupId=1255147007
+    returned HTTP 200 (7,475-byte ZIP);
+    (2) the ercot.com dashboard JSON feeds —
+    https://www.ercot.com/api/1/services/read/dashboards/fuel-mix.json HTTP 200 (122,111 bytes,
+    real generation-by-fuel data), daily-prc.json HTTP 200 (330,165 bytes),
+    supply-demand.json HTTP 200 (83,359 bytes), combine-wind-solar.json HTTP 200 (17,657 bytes);
+    todays-outlook.json returned HTTP 403. These dashboard feeds are undocumented internal
+    endpoints and are deliberately NOT listed as APIs in apis.yml;
+    (3) https://data.ercot.com/ (ERCOT Data Access Portal, HTTP 200), a browsable historical
+    data product archive.
+    The documented Public Data API itself is free but keyed — see accessGate. So the honest
+    reading is: the DATA is open, the documented API is free-but-registered, and the consumer
+    layer does not exist at ERCOT at all.
+  accessGate: self-serve
+  accessGateNote: >-
+    Exactly what a developer must do, per
+    https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+    (HTTP 200): (1) go to https://apiexplorer.ercot.com/ (HTTP 200) and click Sign In / Sign Up;
+    (2) enter any email address, receive and enter an emailed verification code; (3) set a
+    password, display name, first and last name, click Create — the account is live
+    immediately; (4) go to the Products page (https://apiexplorer.ercot.com/products, HTTP 200),
+    pick a product, name the subscription, click Subscribe; (5) copy the Primary key from the
+    Profile page. No ERCOT Market Participant status, no digital certificate, no application
+    form, no human review, and no data licence agreement is documented anywhere in that flow.
+    That makes the Public Data API self-serve. The SOAP estate (EWS, MarkeTrak, Retail API) is
+    a different gate entirely: registered Market Participant status plus an ERCOT digital
+    certificate, and for MarkeTrak an ERCOT application certification at one of three levels
+    (QueryList/QueryDetail; plus Update; plus Submit).
+  accessGateCaveat: >-
+    Documented geographic restriction, from
+    https://developer.ercot.com/applications/pubapi/known-limits/ (HTTP 200), quoted:
+    "For security reasons, certain regions may be blocked from accessing *.ercot.com sites.
+    Currently, regions outside the United States of America are restricted." Self-serve
+    therefore means self-serve from inside the US.
+  authModel:
+    scheme: Dual credential — Azure API Management subscription key AND Azure AD B2C ID token
+    subscriptionKey:
+      header: Ocp-Apim-Subscription-Key
+      queryParam: subscription-key
+      source: >-
+        Declared verbatim in the harvested OpenAPI as securitySchemes apiKeyHeader
+        (apiKey / header / Ocp-Apim-Subscription-Key) and apiKeyQuery
+        (apiKey / query / subscription-key), with a top-level security requirement of
+        [{apiKeyHeader: []}, {apiKeyQuery: []}].
+    oauth:
+      provider: Microsoft Azure AD B2C (tenant ercotb2c.onmicrosoft.com)
+      policy: B2C_1_PUBAPI-ROPC-FLOW
+      tokenEndpoint: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/oauth2/v2.0/token
+      grantType: password
+      grantTypeNote: >-
+        Resource Owner Password Credentials. The client sends the developer's own username and
+        password to the token endpoint. This is a deprecated OAuth 2.0 grant and it means the
+        integrating application handles the end user's ERCOT portal password directly.
+      clientId: fec253ea-0d06-4272-a5e6-b478baeecd70
+      scope: openid+fec253ea-0d06-4272-a5e6-b478baeecd70+offline_access
+      tokenUsed: 'id_token, sent as: Authorization: Bearer <id_token>'
+      tokenLifetime: 3600 seconds, no refresh path documented — re-POST for a new token
+      wellKnown:
+        url: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+        httpStatus: 200
+        fetched: '2026-07-27'
+        anonymous: true
+        issuer: https://ercotb2c.b2clogin.com/6df17afa-1b36-499a-83f7-56779ad0b9a6/v2.0/
+        scopesSupported:
+        - openid
+        grantTypesSupported:
+        - password
+        idTokenSigningAlgValuesSupported:
+        - RS256
+        tokenEndpointAuthMethodsSupported:
+        - client_secret_post
+        - client_secret_basic
+    soapEstate: >-
+      WS-Security 2004/01 (WSS200401wssecurity-secext-10.xsd is shipped in the EWS XSD set)
+      over SOAP, with ERCOT-issued digital certificates for Market Participant identity.
+    note: >-
+      Only one OAuth scope is advertised (openid) plus the client-id scope string. No
+      fine-grained API scopes exist; authorization is carried by the APIM product
+      subscription, not by scopes.
+  consumerVersusMarketSplit: >-
+    ERCOT is a clean example of the split this sector runs on. MARKET DATA: wide open —
+    anonymous MIS report archives and dashboard JSON, plus a free, self-serve, fully specified
+    OpenAPI 3.0.1 covering 106 wholesale market endpoints. CONSUMER DATA: absent — ERCOT
+    publishes no customer usage or billing API, implements no Green Button / ESPI surface, and
+    is not the regulated holder of Texas retail interval data. A reader must not treat ERCOT's
+    excellent market-data API as evidence that Texas has consumer energy-data APIs; that
+    question is answered at Smart Meter Texas and the TDUs, not here.
+findings:
+  developerPortalConfirmed: true
+  developerPortal: https://developer.ercot.com/
+  apiExplorer: https://apiexplorer.ercot.com/
+  specificationsRepository: https://github.com/ercot/api-specs
+  publicDataApi:
+    baseURL: https://api.ercot.com/api/public-reports
+    openapi: '3.0.1'
+    title: ERCOT Public API Client/Developer Documentation
+    version: '1.0'
+    paths: 106
+    operations: 106
+    savedTo: openapi/ercot-public-data-api-openapi.json
+    rateLimit: 30 requests per minute; 429 with {"error_key":"throttled","error_message":"Too Many Requests"}
+    historyRetention: historic file downloads retained at least 7 years; max 1,000 files per download
+    launched: 2024-02-16 GA (2023-12-11 beta)
+  probes:
+  - url: https://www.ercot.com/
+    httpStatus: 200
+    note: Corporate site.
+  - url: https://developer.ercot.com/
+    httpStatus: 200
+    note: >-
+      MkDocs Material developer portal. Sections — Applications, API Specifications,
+      Discussion Forum, Support.
+  - url: https://apiexplorer.ercot.com/
+    httpStatus: 200
+    note: Azure API Management developer portal. Self-serve Sign In / Sign Up.
+  - url: https://apiexplorer.ercot.com/products
+    httpStatus: 200
+    note: Product subscription page.
+  - url: https://api.ercot.com/
+    httpStatus: 404
+    note: Gateway root not served.
+  - url: https://api.ercot.com/api/public-reports
+    httpStatus: 401
+    note: Real gateway, rejects anonymous calls. Confirms the key requirement.
+  - url: https://api.ercot.com/api/public-reports/swagger.json
+    httpStatus: 401
+    note: No anonymous spec download from the gateway.
+  - url: https://api.ercot.com/api/public-reports/openapi.json
+    httpStatus: 401
+    note: No anonymous spec download from the gateway.
+  - url: https://apiexplorer.ercot.com/swagger.json
+    httpStatus: 404
+  - url: https://apiexplorer.ercot.com/openapi.json
+    httpStatus: 404
+  - url: https://www.ercot.com/.well-known/openid-configuration
+    httpStatus: 404
+  - url: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+    httpStatus: 200
+    note: Anonymous OIDC discovery document retrieved and parsed. See authModel.oauth.wellKnown.
+  - url: https://raw.githubusercontent.com/ercot/api-specs/main/pubapi/pubapi-apim-api.json
+    httpStatus: 200
+    note: 1,608,883 bytes. Parsed as OpenAPI 3.0.1. THE harvested contract.
+  - url: https://github.com/ercot/api-specs
+    httpStatus: 200
+    note: ERCOT's own public specification repository (org id 103006572). 112 tracked paths.
+  - url: https://github.com/ercot/ews-client
+    httpStatus: 200
+    note: Sample ERCOT Web Services client.
+  - url: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+    httpStatus: 200
+  - url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+    httpStatus: 200
+  - url: https://developer.ercot.com/applications/pubapi/known-limits/
+    httpStatus: 200
+  - url: https://developer.ercot.com/applications/pubapi/relnotes/
+    httpStatus: 200
+  - url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+    httpStatus: 200
+  - url: https://data.ercot.com/
+    httpStatus: 200
+    note: ERCOT Data Access Portal (React SPA), historical data product search.
+  - url: https://www.ercot.com/misapp/GetReports.do?reportTypeId=12300
+    httpStatus: 200
+    note: 1,383,192 bytes. Anonymous MIS public report listing (LMPs by resource node).
+  - url: https://www.ercot.com/misdownload/servlets/mirDownload?mimic_duns=000000000&doclookupId=1255147007
+    httpStatus: 200
+    note: 7,475-byte ZIP downloaded anonymously. Proves the open bulk surface.
+  - url: https://www.ercot.com/api/1/services/read/dashboards/fuel-mix.json
+    httpStatus: 200
+    note: 122,111 bytes of real generation-by-fuel data, anonymous. Undocumented internal feed.
+  - url: https://www.ercot.com/api/1/services/read/dashboards/daily-prc.json
+    httpStatus: 200
+    note: 330,165 bytes, anonymous. Undocumented internal feed.
+  - url: https://www.ercot.com/api/1/services/read/dashboards/supply-demand.json
+    httpStatus: 200
+    note: 83,359 bytes, anonymous. Undocumented internal feed.
+  - url: https://www.ercot.com/api/1/services/read/dashboards/combine-wind-solar.json
+    httpStatus: 200
+    note: 17,657 bytes, anonymous. Undocumented internal feed.
+  - url: https://www.ercot.com/api/1/services/read/dashboards/todays-outlook.json
+    httpStatus: 403
+    note: Blocked. Confirms these feeds are not a supported public API.
+  - url: https://api.ercot.com/api/public-reports/rptesr-m/4_sec_esr_charging_mw
+    httpStatus: 404
+    note: >-
+      Guessed ESR path against the public-reports base. 404, so the ESR API is NOT on this base
+      path. No ESR base URL is asserted in apis.yml.
+  - url: https://www.smartmetertexas.com/
+    httpStatus: 000
+    note: >-
+      Connection failed from this vantage point. Recorded for completeness only — Smart Meter
+      Texas is a TDU-operated portal, outside ERCOT's estate, and is not profiled here.
+  notListedAsApis:
+  - name: ercot.com dashboard JSON feeds
+    reason: >-
+      Anonymous and real, but undocumented internal endpoints with no published contract and
+      no stability commitment (one of five probed returns 403). Recorded as evidence for
+      marketDataOpen, deliberately excluded from apis[].
+  - name: MIS public report downloads (GetReports.do / mirDownload servlets)
+    reason: >-
+      A genuinely open bulk file-download surface, not an API with a published contract.
+      Recorded as evidence for marketDataOpen and linked under common[] as OpenData.
+  - name: Market Data Transparency (MDT) extracts
+    reason: >-
+      ercot/api-specs/mdt ships MarketDataTransparency.xsd plus 31 PR50024_MDT_* / PR80027_MDT_*
+      XSLT transforms. This is a settlement/registration extract format for certified Market
+      Participants, not a documented API, and not a consumer-data API.
+sources:
+- url: https://developer.ercot.com/
+  type: DeveloperPortal
+  note: Confirmed live. Lists EWS, MarkeTrak, Public Data API, ESR API, Retail API, NAESB guide.
+- url: https://developer.ercot.com/sitemap.xml
+  type: Sitemap
+  note: 164 URLs. Used to enumerate the documented API set.
+- url: https://developer.ercot.com/search/search_index.json
+  type: SearchIndex
+  note: 549 indexed documents. Source for verbatim auth, rate-limit, and geo-restriction wording.
+- url: https://github.com/ercot/api-specs
+  type: SourceCode
+  note: ERCOT's public contract repository — pubapi OpenAPI, EWS/MarkeTrak/Retail WSDLs and XSDs.
+- url: https://apiexplorer.ercot.com/
+  type: APIExplorer
+  note: Azure APIM portal. Self-serve signup and subscription keys.
+- url: https://www.missiondata.io/news/2018/2/2/smart-meter-texas-goes-big-settlement-calls-for-green-button-connect-api
+  type: Reference
+  note: >-
+    Corroborates that the Texas Green Button Connect obligation was settled at the PUCT and
+    lands on the Joint TDUs who operate Smart Meter Texas — not on ERCOT.
+actions:
+  openapiHarvested: true
+  specsCount: 1
+  specsPath: openapi/ercot-public-data-api-openapi.json
+  provenance:
+    sourceURL: https://raw.githubusercontent.com/ercot/api-specs/main/pubapi/pubapi-apim-api.json
+    fetchDate: '2026-07-27'
+    httpStatus: 200
+    bytes: 1608883
+    parsed: true
+    parser: python3 json
+    openapiVersion: 3.0.1
+    unmodified: true
+  apisYmlCreated: true
+  apisListed: 5
+  fabricationCheck: >-
+    No host, endpoint, scope, or specification was invented. The single saved spec is ERCOT's
+    own file byte-for-byte. Every URL in apis.yml was probed and returned 200 except the
+    apiexplorer api-details deep links, which are client-side fragments on a page that returns
+    200. The ESR API is listed without a baseURL because the only candidate path returned 404.
