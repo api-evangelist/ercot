@@ -197,6 +197,8 @@ apis:
   - type: Documentation
     url: https://developer.ercot.com/api_specifications/retail/retail/
 common:
+- type: IssueTracker
+  url: https://github.com/ercot/ews-client/issues
 - type: DomainSecurity
   url: security/ercot-domain-security.yml
 - type: Authentication
