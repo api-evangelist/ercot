@@ -55,67 +55,14 @@ created: '2026-07-27'
 modified: '2026-07-27'
 specificationVersion: '0.23'
 apis:
-- aid: ercot:ercot-public-data-api
-  name: ERCOT Public Data API
-  description: >-
-    RESTful access to ERCOT Market Information List (EMIL) public data products — 106
-    documented endpoints spanning real-time and day-ahead locational marginal prices,
-    settlement point prices, SCED system lambda and shadow prices, actual system load by
-    weather and forecast zone, wind and solar power production actuals and forecasts,
-    ancillary service offers and awards, hourly resource outage capacity, and 60-day
-    SCED/DAM disclosure reports, plus historic file archives retained at least seven years.
-    Data is public and free, but every call requires a free self-serve Azure API Management
-    subscription key plus an Azure AD B2C ID token. Rate limited to 30 requests per minute;
-    requests from outside the United States are blocked.
-  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
-  baseURL: https://api.ercot.com/api/public-reports
-  tags:
-  - Energy Markets
-  - Electricity
-  - Pricing
-  - Load
-  - Renewables
-  - Open Data
-  properties:
-  - type: OpenAPI
-    url: openapi/ercot-public-data-api-openapi.json
-  - type: Overlay
-    url: overlays/ercot-public-data-api-overlay.yaml
-  - type: Conventions
-    url: conventions/ercot-conventions.yml
-  - type: ErrorCatalog
-    url: errors/ercot-problem-types.yml
-  - type: DataModel
-    url: data-model/ercot-data-model.yml
-  - type: RateLimits
-    url: rate-limits/ercot-rate-limits.yml
-  - type: Documentation
-    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
-  - type: GettingStarted
-    url: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
-  - type: KnownLimits
-    url: https://developer.ercot.com/applications/pubapi/known-limits/
-  - type: APIReference
-    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
-  - type: Authentication
-    url: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
-  - type: RateLimits
-    url: https://developer.ercot.com/applications/pubapi/known-limits/
-  - type: ChangeLog
-    url: https://developer.ercot.com/applications/pubapi/relnotes/
-  - type: Deprecation
-    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
-  - type: OpenIDConfiguration
-    url: https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
 - aid: ercot:ercot-esr-public-data-api
   name: ERCOT ESR Public Data API
   description: >-
-    Energy Storage Resource public data, launched May 29, 2025 per the ERCOT Public Data API
-    release notes, beginning with four-second ESR charging MW telemetry
-    (GET /rptesr-m/4_sec_esr_charging_mw). Documented in the ERCOT API Explorer as the
-    esrapi-apim-api product. No machine-readable specification is published for this API in
-    ERCOT's public api-specs repository, and no base URL was independently confirmed, so none
-    is asserted here. Access follows the same subscription-key plus B2C ID token model as the
+    Energy Storage Resource public data, launched May 29, 2025 per the ERCOT Public Data API release notes,
+    beginning with four-second ESR charging MW telemetry (GET /rptesr-m/4_sec_esr_charging_mw). Documented
+    in the ERCOT API Explorer as the esrapi-apim-api product. No machine-readable specification is published
+    for this API in ERCOT's public api-specs repository, and no base URL was independently confirmed,
+    so none is asserted here. Access follows the same subscription-key plus B2C ID token model as the
     Public Data API.
   humanURL: https://apiexplorer.ercot.com/api-details#api=esrapi-apim-api
   tags:
@@ -129,16 +76,16 @@ apis:
   - type: ChangeLog
     url: https://developer.ercot.com/applications/pubapi/relnotes/
   - type: Authentication
-    url: https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
 - aid: ercot:ercot-web-services
   name: ERCOT Web Services (EWS)
   description: >-
-    ERCOT's SOAP web-services estate for Nodal market participants — the Market Information
-    Service, Market Transaction Service (bid and offer submission via BidSet), Resource
-    Parameter Transaction Service, Outage Scheduling Services, Verbal Dispatch Instructions,
-    and WS-Notifications callbacks. WSDL and XSD contracts are published openly on GitHub,
-    but the runtime endpoints are reachable only by registered ERCOT Market Participants
-    holding an ERCOT digital certificate; the shipped WSDL carries a placeholder
+    ERCOT's SOAP web-services estate for Nodal market participants — the Market Information Service, Market
+    Transaction Service (bid and offer submission via BidSet), Resource Parameter Transaction Service,
+    Outage Scheduling Services, Verbal Dispatch Instructions, and WS-Notifications callbacks. WSDL and
+    XSD contracts are published openly on GitHub, but the runtime endpoints are reachable only by registered
+    ERCOT Market Participants holding an ERCOT digital certificate; the shipped WSDL carries a placeholder
     soap:address of https://dummyhost:0000/ so no runtime base URL is asserted here.
   humanURL: https://developer.ercot.com/applications/ews/Introduction/
   tags:
@@ -163,10 +110,10 @@ apis:
 - aid: ercot:ercot-marketrak-api
   name: ERCOT MarkeTrak API
   description: >-
-    SOAP API over MarkeTrak, ERCOT's retail-market issue tracking system, supporting
-    QueryList, QueryDetail, Update, and Submit operations against retail transaction issues.
-    Applications must pass ERCOT certification at one of three levels before they may call
-    the service in production, and access is limited to registered Market Participants.
+    SOAP API over MarkeTrak, ERCOT's retail-market issue tracking system, supporting QueryList, QueryDetail,
+    Update, and Submit operations against retail transaction issues. Applications must pass ERCOT certification
+    at one of three levels before they may call the service in production, and access is limited to registered
+    Market Participants.
   humanURL: https://developer.ercot.com/applications/marketrak/MarkeTrak_API_Dev_v1_2/
   baseURL: https://misapi.ercot.com/marketrakAPI/
   tags:
@@ -176,19 +123,20 @@ apis:
   - Issue Tracking
   properties:
   - type: WSDL
-    url: https://raw.githubusercontent.com/ercot/api-specs/main/marketrak/MarkeTrakAPI_rc5_v14.wsdl
+    url: >-
+      https://raw.githubusercontent.com/ercot/api-specs/main/marketrak/MarkeTrakAPI_rc5_v14.wsdl
   - type: Schema
-    url: https://raw.githubusercontent.com/ercot/api-specs/main/marketrak/MarkeTrakAPI_rc5_v14.xsd
+    url: >-
+      https://raw.githubusercontent.com/ercot/api-specs/main/marketrak/MarkeTrakAPI_rc5_v14.xsd
   - type: Documentation
     url: https://developer.ercot.com/applications/marketrak/MarkeTrak_API_Dev_v1_2/
 - aid: ercot:ercot-retail-api
   name: ERCOT Retail API
   description: >-
-    SOAP web service supporting Texas Standard Electronic Transactions (TX SET) between
-    ERCOT, Transmission and Distribution Service Providers, and Retail Electric Providers —
-    the machinery behind retail switching, enrollment, and move-in/move-out in the
-    competitive Texas market. Contracts are published openly; the service itself is
-    restricted to certified Market Participants.
+    SOAP web service supporting Texas Standard Electronic Transactions (TX SET) between ERCOT, Transmission
+    and Distribution Service Providers, and Retail Electric Providers — the machinery behind retail switching,
+    enrollment, and move-in/move-out in the competitive Texas market. Contracts are published openly;
+    the service itself is restricted to certified Market Participants.
   humanURL: https://developer.ercot.com/api_specifications/retail/retail/
   tags:
   - SOAP
@@ -197,12 +145,1589 @@ apis:
   - Market Participants
   properties:
   - type: WSDL
-    url: https://raw.githubusercontent.com/ercot/api-specs/main/retail/RetailAPIConcreteWSDL-External.wsdl
+    url: >-
+      https://raw.githubusercontent.com/ercot/api-specs/main/retail/RetailAPIConcreteWSDL-External.wsdl
   - type: Schema
     url: https://raw.githubusercontent.com/ercot/api-specs/main/retail/RetailAPIService.xsd
   - type: Documentation
     url: https://developer.ercot.com/api_specifications/retail/retail/
+- aid: ercot:ercot-emil-products-api
+  name: ERCOT EMIL Products API
+  description: The EMIL Products API from ERCOT — 3 operation(s) for emil products.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - EMIL Products
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-emil-products-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np3-233-cd-api
+  name: ERCOT NP3 233 CD API
+  description: >-
+    <b>Hourly Resource Outage Capacity</b><br/><br/>This report includes all approved and accepted Planned,
+    Forced and Maintenance Resource outages EXCEPT Resource outages for retirement of old equipment, seasonal
+    mothballed (during the outaged season), and mothballed. The outage capacity in this report reflects
+    aggregated ACTIVE resource outaged capacity by Load Zone sourced from the Outage Scheduler (OS) for
+    the next 168 hours and is published every hour. Columns 'C\' - 'F' consists of the aggregated outaged
+    capacity of ALL the ACTIVE resource outages by Load Zone in the OS for each hour excluding the outages
+    stated above, IRR resource outages, and new equipment outages. Columns 'G' - 'J' consists of the aggregated
+    outaged capacity of ALL the ACTIVE IRR resource outages by Load Zone in the OS for each hour excluding
+    the outages stated above, outages in columns 'C' - 'F' and new equipment outages. Columns 'K' - 'N'
+    consists of the aggregated outaged capacity of ALL the ACTIVE New Equipment Energization resource
+    outages by Load Zone. Note that this report contains OS data only and does not look at telemetry.
+    It includes both entire resource outage and de-rates.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP3-233-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np3-233-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np3-565-cd-api
+  name: ERCOT NP3 565 CD API
+  description: >-
+    <b>Seven-Day Load Forecast by Model and Weather Zone</b><br/><br/>Hourly system-wide Mid-Term Load
+    Forecasts (MTLFs) for all forecast models with an indicator for which forecast was in use by ERCOT
+    at the time of publication for current day plus the next 7.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP3-565-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np3-565-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np3-566-cd-api
+  name: ERCOT NP3 566 CD API
+  description: >-
+    <b>Seven-Day Load Forecast by Model and Study Area</b><br/><br/>Forecasted hourly demands by Study
+    Area, for the current day plus the next seven days.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP3-566-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np3-566-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np3-910-er-api
+  name: ERCOT NP3 910 ER API
+  description: >-
+    <b>2-Day Real Time Gen and Load Data Reports</b><br/><br/>This report will contain all 48 Hour disclosure
+    data related to Real Time. The following individual files are included in the report:NP3-919-EX 48-hour
+    Aggregate Output Schedules; NP3-920-EX 48-hour Aggregate Generation Summary; NP3-921-EX 48-hour Aggregate
+    Load Summary; NP3-922-EX 48-hour Aggregate Dynamically Schedules Resources and Load; NP3-924-EX 48-hour
+    Aggregate Load Summary by Disclosure Areas; NP3-931-EX 48-hour Aggregate Output Schedules by Disclosure
+    Areas; NP3-935-EX 48-hour Aggregate Generation Summary by Disclosure Areas (previously 48 Hour Real
+    Time Gen and Load Data Reports).
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP3-910-ER
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np3-910-er-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np3-911-er-api
+  name: ERCOT NP3 911 ER API
+  description: >-
+    <b>2-Day Ancillary Services Reports</b><br/><br/>This report will contain all 48 Hour disclosure data
+    related to DAM. The following individual files are included in the report:NP3-959-EX 48-hour Aggregate
+    AS Offers; NP3-960-EX 48-hour Self-Arranged AS; NP3-961-EX 48-hour Cleared DAM AS (previously named
+    48 Hour Ancillary Services Reports).
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP3-911-ER
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np3-911-er-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np3-965-er-api
+  name: ERCOT NP3 965 ER API
+  description: >-
+    <b>60-Day SCED Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data
+    related to SCED. The following individual files are included in the report: NP3-967-EX 61-day QSE-specific
+    Self-Arranged AS in SCED NP3-968-EX 61-day Generation Resource data in SCED NP3-969-EX 61-day Load
+    Resource data in SCED NP3-970-EX 61-day Dynamically Scheduled Resource and Loads in SCED NP3-971-EX
+    61-day Inc/Dec Offer Curves in SCED NP3-973-EX 61-day Settlement Metered Net Energy for Generation
+    Resources and NP6-585-ER 60 Day HDL and LDL Manual Override Summary
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP3-965-ER
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np3-965-er-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np3-966-er-api
+  name: ERCOT NP3 966 ER API
+  description: >-
+    <b>60-Day DAM Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data
+    related to DAM. The following individual files are included in the report: NP3-974-EX 61-day QSE-specific
+    Self-Arranged AS in DAM NP3-975-EX 61-day Generation Resource data in DAM NP3-976-EX 61-day Generation
+    Resource AS Offers in DAM NP3-977-EX 61-day Load Resource data in DAM NP3-978-EX 61-day Load Resource
+    AS Offers in DAM NP3-979-EX 61-day Settlement Point Data in DAM- Energy Only Offers NP3-980-EX 61-day
+    Settlement Point Data in DAM- Energy Only Offer Award NP3-981-EX 61-day Settlement Point Data in DAM-
+    Energy Bids NP3-982-EX 61-day Settlement Point Data in DAM- Bids Award NP3-983-EX 61-day Settlement
+    Point Data in DAM- CRR Offers NP3-984-EX 61-day Settlement Point Data in DAM- CRR Awards NP3-985-EX
+    61-day Settlement Point Data Point-to-Point Obligation Bids NP3-986-EX 61-day Settlement Point Data
+    Point-to-Point Obligation Bid Awards
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP3-966-ER
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np3-966-er-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np3-990-ex-api
+  name: ERCOT NP3 990 EX API
+  description: >-
+    <b>60-Day SASM Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data
+    related to SASM for Generation and Load Resources. The following individual files are included in
+    the report: 60d_SASM_Generation_Resource_AS_Offers-YY-MMM-DD.csv60d_SASM_Load_Resource_AS_Offers-YY-MMM-DD.csv60d_SASM_Generation_Resource_AS_Offer
+    Awards-YY-MMM-DD.csv60d_SASM_Load_Resource_AS_Offer_Awards-YY-MMM-DD.csv
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP3-990-EX
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np3-990-ex-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np3-991-ex-api
+  name: ERCOT NP3 991 EX API
+  description: >-
+    <b>60-Day COP All Updates</b><br/><br/>This report will contain all iterative Current Operating Plan
+    (COP) submissions where a change has occurred for the operating day. Previously named 60-Day Current
+    Operating Plan.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP3-991-EX
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np3-991-ex-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-159-cd-api
+  name: ERCOT NP4 159 CD API
+  description: >-
+    <b>Load Distribution Factors</b><br/><br/>Load forecast distribution factors from which Market Participants
+    can calculate Load at the Electrical Bus level by hour for the next seven days.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-159-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-159-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-179-cd-api
+  name: ERCOT NP4 179 CD API
+  description: >-
+    <b>Total Ancillary Service Offers</b><br/><br/>The total quantity in MW of Offers per Ancillary Service
+    per hour from the Day-Ahead Market for the last thirty days on a daily basis which includes the following
+    AS types: REGDN, REGUP, RRSPFR, RRSFFR, RRSUFR, & NSPIN.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-179-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-179-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-183-cd-api
+  name: ERCOT NP4 183 CD API
+  description: >-
+    <b>DAM Hourly LMPs</b><br/><br/>The Hourly Locational Marginal Prices per electrical bus from the
+    Day-Ahead Market for the last thirty days on a daily basis.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-183-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-183-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-188-cd-api
+  name: ERCOT NP4 188 CD API
+  description: >-
+    <b>DAM Clearing Prices for Capacity</b><br/><br/>The Market Clearing Prices for Capacity for all Ancillary
+    Services from the Day-Ahead Market for the last thirty days on a daily basis.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-188-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-188-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-190-cd-api
+  name: ERCOT NP4 190 CD API
+  description: >-
+    <b>DAM Settlement Point Prices</b><br/><br/>The Settlement Point Prices for all Resource Nodes, Load
+    Zones, and Trading Hubs from the Day-Ahead Market for the last thirty days on a daily basis.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-190-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-190-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-191-cd-api
+  name: ERCOT NP4 191 CD API
+  description: >-
+    <b>DAM Shadow Prices</b><br/><br/>The active and binding constraints as well as the associated shadow
+    prices from the Day-Ahead Market for the last thirty days on a daily basis.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-191-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-191-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-196-m-api
+  name: ERCOT NP4 196 M API
+  description: <b>DAM Price Corrections</b><br/><br/>Day-Ahead Market price corrections.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-196-M
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-196-m-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-197-m-api
+  name: ERCOT NP4 197 M API
+  description: <b>RTM Price Corrections</b><br/><br/>Real-Time Market price corrections.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-197-M
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-197-m-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-33-cd-api
+  name: ERCOT NP4 33 CD API
+  description: >-
+    <b>DAM Ancillary Service Plan</b><br/><br/>Ancillary Service requirements by type and quantity for
+    each hour of the current day plus the next 6 days.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-33-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-33-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-523-cd-api
+  name: ERCOT NP4 523 CD API
+  description: <b>DAM System Lambda</b><br/><br/>System lambda of each successful DAM.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-523-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-523-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-732-cd-api
+  name: ERCOT NP4 732 CD API
+  description: >-
+    <b>Wind Power Production - Hourly Averaged Actual and Forecasted Values</b><br/><br/>This report is
+    posted every hour and includes System-wide and Regional actual hourly averaged wind power production,
+    STWPF, WGRPP and COP HSLs for On-Line WGRs for a rolling historical 48-hour period as well as the
+    System-wide and Regional STWPF, WGRPP and COP HSLs for On-Line WGRs for the rolling future 168-hour
+    period. Our forecasts attempt to predict HSL, which is uncurtailed power generation potential. Actual
+    system-wide generation, which is included in this report as "ACTUAL_SYSTEM_WIDE" or "SYSTEM_WIDE"
+    is impacted by curtailments. Because of this, the data in this report should not be used to evaluate
+    forecast performance. Steps will be taken to include Actual System-wide HSL in this report in the
+    future.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-732-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-732-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-733-cd-api
+  name: ERCOT NP4 733 CD API
+  description: >-
+    <b>Wind Power Production - Actual 5-Minute Averaged Values</b><br/><br/>This report is posted every
+    5 minutes and includes System-wide and Regional actual 5-min averaged wind power production for a
+    rolling historical 60-minute period.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-733-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-733-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-737-cd-api
+  name: ERCOT NP4 737 CD API
+  description: >-
+    <b>Solar Power Production - Hourly Averaged Actual and Forecasted Values</b><br/><br/>This report
+    includes System-wide actual hourly averaged solar power production, STPPF, PVGRPP, and COP HSLs for
+    On-Line PVGRs for a rolling historical 48-hour period as well as the System-wide STPPF, PVGRPP and
+    COP HSLs for On-Line PVGRs for the rolling future 168-hour period. Our forecasts attempt to predict
+    HSL, which is uncurtailed power generation potential. Actual system-wide generation, which is included
+    in this report as "ACTUAL_SYSTEM_WIDE" or "SYSTEM_WIDE" is impacted by curtailments. Because of this,
+    the data in this report should not be used to evaluate forecast performance. Steps will be taken to
+    include Actual System-wide HSL in this report in the future.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-737-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-737-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-738-cd-api
+  name: ERCOT NP4 738 CD API
+  description: >-
+    <b>Solar Power Production - Actual 5-Minute Averaged Values</b><br/><br/>This report is posted every
+    5 minutes and includes System-wide actual 5-minute averaged solar power production for On-Line PVGRs
+    for a rolling historical 60-minute period.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-738-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-738-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-742-cd-api
+  name: ERCOT NP4 742 CD API
+  description: >-
+    <b>Wind Power Production - Hourly Averaged Actual and Forecasted Values by Geographical Region</b><br/><br/>This
+    report is posted every hour and includes System-wide and Geographic Regional actual hourly averaged
+    wind power production, STWPF, WGRPP and COP HSLs for On-Line WGRs for a rolling historical 48-hour
+    period as well as the System-wide and Regional STWPF, WGRPP and COP HSLs for On-Line WGRs for the
+    rolling future 168-hour period. Our forecasts attempt to predict HSL, which is uncurtailed power generation
+    potential. Actual system-wide generation, which is included in this report as "ACTUAL_SYSTEM_WIDE"
+    or "SYSTEM_WIDE" is impacted by curtailments. Because of this, the data in this report should not
+    be used to evaluate forecast performance. Steps will be taken to include Actual System-wide HSL in
+    this report in the future.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-742-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-742-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-743-cd-api
+  name: ERCOT NP4 743 CD API
+  description: >-
+    <b>Wind Power Production - Actual 5-Minute Averaged Values by Geographical Region</b><br/><br/>This
+    report is posted every 5 minutes and includes System-wide and Geographic Regional actual 5-minute
+    averaged wind power production for a rolling historical 60-minute period.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-743-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-743-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-745-cd-api
+  name: ERCOT NP4 745 CD API
+  description: >-
+    <b>Solar Power Production - Hourly Averaged Actual and Forecasted Values by Geographical Region</b><br/><br/>This
+    report is posted every hour and includes System-wide and geographic regional hourly averaged solar
+    power production, STPPF, PVGRPP, and COP HSL for On-Line PVGRs for a rolling historical 48-hour period
+    as well as the system-wide and regional STPPF, PVGRPP, and COP HSL for On-Line PVGRs for the rolling
+    future 168-hour period. System-wide and regional generation, are included in this report under column
+    labels with "GEN_" prefixes. ERCOT's forecasts attempt to predict HSL, which is uncurtailed power
+    generation potential. Since generation is impacted by curtailments, the data in this report should
+    not be used to evaluate forecast performance. Steps will be taken to include HSL in this report in
+    the future.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-745-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-745-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np4-746-cd-api
+  name: ERCOT NP4 746 CD API
+  description: >-
+    <b>Solar Power Production - Actual 5-Minute Averaged Values by Geographical Region</b><br/><br/>This
+    report is posted every 5 minutes and includes system-wide and geographic regional 5-minute averaged
+    solar power production for a rolling historical 60-minute period.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP4-746-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np4-746-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np6-322-cd-api
+  name: ERCOT NP6 322 CD API
+  description: <b>SCED System Lambda</b><br/><br/>System lambda of each successful SCED.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP6-322-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np6-322-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np6-345-cd-api
+  name: ERCOT NP6 345 CD API
+  description: >-
+    <b>Actual System Load by Weather Zone</b><br/><br/>Report of Actual hourly load data by weather zone
+    and ERCOT total.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP6-345-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np6-345-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np6-346-cd-api
+  name: ERCOT NP6 346 CD API
+  description: >-
+    <b>Actual System Load by Forecast Zone</b><br/><br/>A daily report of Actual System Load by Forecast
+    Zone for each hour of the previous operating day.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP6-346-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np6-346-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np6-787-cd-api
+  name: ERCOT NP6 787 CD API
+  description: >-
+    <b>LMPs by Electrical Bus</b><br/><br/>The Locational Marginal Price for each Electrical Bus, normally
+    produced by SCED every five minutes.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP6-787-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np6-787-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np6-788-cd-api
+  name: ERCOT NP6 788 CD API
+  description: >-
+    <b>LMPs by Resource Nodes, Load Zones and Trading Hubs</b><br/><br/>The Locational Marginal Price
+    for each Settlement Point, normally produced by SCED every five minutes.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP6-788-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np6-788-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np6-86-cd-api
+  name: ERCOT NP6 86 CD API
+  description: >-
+    <b>SCED Shadow Prices and Binding Transmission Constraints</b><br/><br/>The report for Shadow Prices
+    of binding/violated constraints in SCED. The report shows the contingency name, overloaded element
+    details (element name, from/to station name and kV level), Shadow Price ( price for resolving one
+    MW of the constraint), Penalty for violating the constraint (MaxShadow Price), overloaded element
+    limit and flow (value)pairs that caused such constraint.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP6-86-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np6-86-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np6-905-cd-api
+  name: ERCOT NP6 905 CD API
+  description: >-
+    <b>Settlement Point Prices at Resource Nodes, Hubs and Load Zones</b><br/><br/>Settlement Point Price
+    for each Settlement Point, produced from SCED LMPs every 15 minutes.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP6-905-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np6-905-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-np6-970-cd-api
+  name: ERCOT NP6 970 CD API
+  description: >-
+    <b>RTD Indicative LMPs by Resource Nodes, Load Zones and Hubs</b><br/><br/>This report is posted after
+    every Look Ahead RTD run and includes indicative LMPs at Resource Nodes, Hub LMPs and Load Zone for
+    each interval in the Look Ahead SCED-RTD Study Period.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - NP6-970-CD
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-np6-970-cd-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
+- aid: ercot:ercot-versioning-api
+  name: ERCOT Versioning API
+  description: The Versioning API from ERCOT — 1 operation(s) for versioning.
+  humanURL: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  baseURL: https://api.ercot.com/api/public-reports
+  tags:
+  - Versioning
+  properties:
+  - type: OpenAPI
+    url: openapi/ercot-versioning-api-openapi.yml
+  - type: Conventions
+    url: conventions/ercot-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ercot-problem-types.yml
+  - type: DataModel
+    url: data-model/ercot-data-model.yml
+  - type: RateLimits
+    url: rate-limits/ercot-rate-limits.yml
+  - type: Documentation
+    url: https://developer.ercot.com/applications/pubapi/user-guide/using-api/
+  - type: GettingStarted
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: KnownLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: APIReference
+    url: https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api
+  - type: Authentication
+    url: >-
+      https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/
+  - type: RateLimits
+    url: https://developer.ercot.com/applications/pubapi/known-limits/
+  - type: ChangeLog
+    url: https://developer.ercot.com/applications/pubapi/relnotes/
+  - type: Deprecation
+    url: https://developer.ercot.com/applications/pubapi/deprecation-notices/
+  - type: OpenIDConfiguration
+    url: >-
+      https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
 common:
+- type: Overlay
+  url: overlays/ercot-public-data-api-overlay.yaml
 - type: IssueTracker
   url: https://github.com/ercot/ews-client/issues
 - type: DomainSecurity
