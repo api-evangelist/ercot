@@ -1,0 +1,62 @@
+slug: ercot
+provider: ERCOT
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Power & Water Utilities
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: NP3-911-ER
+  spec_file: ercot-np3-911-er-api-openapi.yml
+  capability_id: BC-3830.40
+  capability_id_l1: BC-3830
+  capability_name: Reserves & Ancillary Services
+  confidence: 0.78
+  evidence: '"2 Day Self Arranged Ancillary Service REGUP"; "2 Day Cleared DAM Ancillary Service RRSUFR"'
+  reason: Every operation publishes self-arranged and DAM-cleared ancillary service quantities (regulation
+    up/down, responsive reserve, non-spin), which is squarely reserves and ancillary services within the
+    system-operator function.
+- tag: NP4-179-CD
+  spec_file: ercot-np4-179-cd-api-openapi.yml
+  capability_id: BC-3830.40
+  capability_id_l1: BC-3830
+  capability_name: Reserves & Ancillary Services
+  confidence: 0.75
+  evidence: GET /np4-179-cd/total_as_service_offers  Total Ancillary Service Offers
+  reason: Publication of total ancillary service offers is part of the system operator's procurement of
+    operating reserves and ancillary services.
+- tag: NP4-33-CD
+  spec_file: ercot-np4-33-cd-api-openapi.yml
+  capability_id: BC-3830.40
+  capability_id_l1: BC-3830
+  capability_name: Reserves & Ancillary Services
+  confidence: 0.75
+  evidence: GET /np4-33-cd/dam_as_plan  DAM Ancillary Service Plan
+  reason: The DAM Ancillary Service Plan sets the system operator's ancillary-service quantity requirements
+    to be procured, which is Reserves & Ancillary Services.
+- tag: NP3-990-EX
+  spec_file: ercot-np3-990-ex-api-openapi.yml
+  capability_id: BC-3830.40
+  capability_id_l1: BC-3830
+  capability_name: Reserves & Ancillary Services
+  confidence: 0.72
+  evidence: '"60 Day SASM Generation Resource AS Offers"; "60 Day SASM Load Resource AS Offer Awards"'
+  reason: Supplemental Ancillary Services Market offers and awards for generation and load resources —
+    procurement of operating reserves and ancillary services by the system operator.
+- tag: NP4-732-CD
+  spec_file: ercot-np4-732-cd-api-openapi.yml
+  capability_id: BC-3800.50
+  capability_id_l1: BC-3800
+  capability_name: Renewable Generation Operations
+  confidence: 0.7
+  evidence: Wind Power Production - Hourly Averaged Actual and Forecasted Values
+  reason: Actual and forecast wind production data corresponds to Renewable Generation Operations, which
+    explicitly covers wind generation output and forecasting; it is a published data feed rather than
+    an operating control, hence moderate confidence.

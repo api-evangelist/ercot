@@ -1739,6 +1739,9 @@ apis:
     url: >-
       https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
 common:
+- type: CapabilityMap
+  url: capabilities/ercot-capability-edges.yml
+  name: ERCOT Business Capability Map
 - type: Overlay
   url: overlays/ercot-public-data-api-overlay.yaml
 - type: IssueTracker
