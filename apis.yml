@@ -20,6 +20,19 @@ description: >-
   which is operated by the joint Transmission and Distribution Utilities under PUCT oversight,
   not by ERCOT. The market-participant SOAP estate (ERCOT Web Services, MarkeTrak, Retail API)
   is documented publicly on GitHub but reachable only by certified market participants.
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
