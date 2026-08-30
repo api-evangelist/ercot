@@ -1,0 +1,494 @@
+openapi: 3.2.0
+info:
+  title: ERCOT Public API Client/Developer Documentation NP4 732 CD API
+  description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
+  version: '1.0'
+servers:
+- url: https://api.ercot.com/api/public-reports
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: NP4-732-CD
+  description: <b>Wind Power Production - Hourly Averaged Actual and Forecasted Values</b><br/><br/>This report is posted every hour and includes System-wide and Regional actual hourly averaged wind power production, STWPF, WGRPP and COP HSLs for On-Line WGRs for a rolling historical 48-hour period as well as the System-wide and Regional STWPF, WGRPP and COP HSLs for On-Line WGRs for the rolling future 168-hour period. Our forecasts attempt to predict HSL, which is uncurtailed power generation potential. Actual system-wide generation, which is included in this report as "ACTUAL_SYSTEM_WIDE" or "SYSTEM_WIDE" is impacted by curtailments. Because of this, the data in this report should not be used to evaluate forecast performance. Steps will be taken to include Actual System-wide HSL in this report in the future.
+paths:
+  /np4-732-cd/wpp_hrly_avrg_actl_fcast:
+    get:
+      tags:
+      - NP4-732-CD
+      summary: Wind Power Production - Hourly Averaged Actual and Forecasted Values
+      description: Wind Power Production - Hourly Averaged Actual and Forecasted Values
+      operationId: getData_15
+      parameters:
+      - name: WGRPPLoadZoneNorthFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: WGRPPLoadZoneNorthTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: DSTFlag
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: postedDatetimeFrom
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: postedDatetimeTo
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: deliveryDateFrom
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: deliveryDateTo
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: hourEndingFrom
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: hourEndingTo
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: actualSystemWideFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: actualSystemWideTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: COPHSLSystemWideFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: COPHSLSystemWideTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: STWPFSystemWideFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: STWPFSystemWideTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: WGRPPSystemWideFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: WGRPPSystemWideTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: actualLoadZoneSouthHoustonFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: actualLoadZoneSouthHoustonTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: COPHSLLoadZoneSouthHoustonFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: COPHSLLoadZoneSouthHoustonTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: STWPFLoadZoneSouthHoustonFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: STWPFLoadZoneSouthHoustonTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: WGRPPLoadZoneSouthHoustonFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: WGRPPLoadZoneSouthHoustonTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: actualLoadZoneWestFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: actualLoadZoneWestTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: COPHSLLoadZoneWestFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: COPHSLLoadZoneWestTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: STWPFLoadZoneWestFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: STWPFLoadZoneWestTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: WGRPPLoadZoneWestFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: WGRPPLoadZoneWestTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: actualLoadZoneNorthFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: actualLoadZoneNorthTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: COPHSLLoadZoneNorthFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: COPHSLLoadZoneNorthTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: STWPFLoadZoneNorthFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: STWPFLoadZoneNorthTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: page
+        in: query
+        description: 'Format - ###. Page number of returned values in the collection.'
+        schema:
+          type: integer
+          format: '###'
+      - name: size
+        in: query
+        description: 'Format - ###. Number of returned items per page.'
+        schema:
+          type: integer
+          format: '###'
+      - name: sort
+        in: query
+        description: Format - abc123. Defines field by which to sort the returned resource values.
+        schema:
+          type: string
+          format: abc123
+      - name: dir
+        in: query
+        description: Format - abc123. Defines sort order of returned values based on the primary business key of the resource.
+        schema:
+          type: string
+          format: abc123
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              example:
+                _meta:
+                  totalRecords: 0
+                  pageSize: 0
+                  totalPages: 0
+                  currentPage: 0
+                  query:
+                    parameterCount: 0
+                    parameters: {}
+                    sortedBy: string
+                report:
+                  reportName: string
+                  reportDisplayName: string
+                  reportId: string
+                  reportEMIL: string
+                fields:
+                - name: string
+                  label: string
+                  cardinality: 0
+                  dataType: BOOLEAN
+                  searchable: true
+                  sortable: true
+                  hasRange: true
+                data: {}
+                links:
+                - rel: string
+                  href: string
+                  hreflang: string
+                  media: string
+                  title: string
+                  type: string
+                  deprecation: string
+                  profile: string
+                  name: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+components:
+  schemas:
+    ReportMetadata:
+      type: object
+      properties:
+        reportName:
+          type: string
+        reportDisplayName:
+          type: string
+        reportId:
+          type: string
+        reportEMIL:
+          type: string
+      description: Represents metadata for the specified object.
+    Field:
+      type: object
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        cardinality:
+          type: integer
+          format: int32
+        dataType:
+          enum:
+          - BOOLEAN
+          - VARCHAR
+          - INTEGER
+          - LONG
+          - DOUBLE
+          - DATE
+          - DATETIME
+          - TIME
+          type: string
+        searchable:
+          type: boolean
+        sortable:
+          type: boolean
+        hasRange:
+          type: boolean
+      description: Represents report data field.
+    Exception:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        code:
+          type: integer
+          format: int32
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+      description: Represents any exception encountered while access API endpoints.
+    QueryMetadata:
+      type: object
+      properties:
+        parameterCount:
+          type: integer
+          format: int32
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        sortedBy:
+          type: string
+      description: Represents query parameter summary for the specified query results.
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Report:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        report:
+          $ref: '#/components/schemas/ReportMetadata'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        data:
+          type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents report data search results from any EMIL artifact report query.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query

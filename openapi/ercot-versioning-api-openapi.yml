@@ -1,0 +1,115 @@
+openapi: 3.2.0
+info:
+  title: ERCOT Public API Client/Developer Documentation Versioning API
+  description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
+  version: '1.0'
+servers:
+- url: https://api.ercot.com/api/public-reports
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Versioning
+paths:
+  /version:
+    get:
+      tags:
+      - Versioning
+      summary: Retrieve the current version for ERCOT Public API system.
+      description: Retrieve the current version for ERCOT Public API system.
+      operationId: getVersion
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+              example:
+                info:
+                  title: string
+                  description: string
+                  version: string
+                  build: string
+                openapi: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+components:
+  schemas:
+    Version:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/Info'
+        openapi:
+          type: string
+    Info:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        version:
+          type: string
+        build:
+          type: string
+    Exception:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        code:
+          type: integer
+          format: int32
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+      description: Represents any exception encountered while access API endpoints.
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query

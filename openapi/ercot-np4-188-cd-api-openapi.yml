@@ -1,0 +1,302 @@
+openapi: 3.2.0
+info:
+  title: ERCOT Public API Client/Developer Documentation NP4 188 CD API
+  description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
+  version: '1.0'
+servers:
+- url: https://api.ercot.com/api/public-reports
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: NP4-188-CD
+  description: <b>DAM Clearing Prices for Capacity</b><br/><br/>The Market Clearing Prices for Capacity for all Ancillary Services from the Day-Ahead Market for the last thirty days on a daily basis.
+paths:
+  /np4-188-cd/dam_clear_price_for_cap:
+    get:
+      tags:
+      - NP4-188-CD
+      summary: DAM Clearing Prices for Capacity
+      description: DAM Clearing Prices for Capacity
+      operationId: getData_29
+      parameters:
+      - name: deliveryDateFrom
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: deliveryDateTo
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: hourEnding
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: ancillaryType
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: MCPCFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: MCPCTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: DSTFlag
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: page
+        in: query
+        description: 'Format - ###. Page number of returned values in the collection.'
+        schema:
+          type: integer
+          format: '###'
+      - name: size
+        in: query
+        description: 'Format - ###. Number of returned items per page.'
+        schema:
+          type: integer
+          format: '###'
+      - name: sort
+        in: query
+        description: Format - abc123. Defines field by which to sort the returned resource values.
+        schema:
+          type: string
+          format: abc123
+      - name: dir
+        in: query
+        description: Format - abc123. Defines sort order of returned values based on the primary business key of the resource.
+        schema:
+          type: string
+          format: abc123
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              example:
+                _meta:
+                  totalRecords: 0
+                  pageSize: 0
+                  totalPages: 0
+                  currentPage: 0
+                  query:
+                    parameterCount: 0
+                    parameters: {}
+                    sortedBy: string
+                report:
+                  reportName: string
+                  reportDisplayName: string
+                  reportId: string
+                  reportEMIL: string
+                fields:
+                - name: string
+                  label: string
+                  cardinality: 0
+                  dataType: BOOLEAN
+                  searchable: true
+                  sortable: true
+                  hasRange: true
+                data: {}
+                links:
+                - rel: string
+                  href: string
+                  hreflang: string
+                  media: string
+                  title: string
+                  type: string
+                  deprecation: string
+                  profile: string
+                  name: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+components:
+  schemas:
+    ReportMetadata:
+      type: object
+      properties:
+        reportName:
+          type: string
+        reportDisplayName:
+          type: string
+        reportId:
+          type: string
+        reportEMIL:
+          type: string
+      description: Represents metadata for the specified object.
+    Field:
+      type: object
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        cardinality:
+          type: integer
+          format: int32
+        dataType:
+          enum:
+          - BOOLEAN
+          - VARCHAR
+          - INTEGER
+          - LONG
+          - DOUBLE
+          - DATE
+          - DATETIME
+          - TIME
+          type: string
+        searchable:
+          type: boolean
+        sortable:
+          type: boolean
+        hasRange:
+          type: boolean
+      description: Represents report data field.
+    Exception:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        code:
+          type: integer
+          format: int32
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+      description: Represents any exception encountered while access API endpoints.
+    QueryMetadata:
+      type: object
+      properties:
+        parameterCount:
+          type: integer
+          format: int32
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        sortedBy:
+          type: string
+      description: Represents query parameter summary for the specified query results.
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Report:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        report:
+          $ref: '#/components/schemas/ReportMetadata'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        data:
+          type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents report data search results from any EMIL artifact report query.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query

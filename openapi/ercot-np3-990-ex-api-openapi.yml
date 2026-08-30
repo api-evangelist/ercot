@@ -1,0 +1,2027 @@
+openapi: 3.2.0
+info:
+  title: ERCOT Public API Client/Developer Documentation NP3 990 EX API
+  description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
+  version: '1.0'
+servers:
+- url: https://api.ercot.com/api/public-reports
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: NP3-990-EX
+  description: '<b>60-Day SASM Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data related to SASM for Generation and Load Resources. The following individual files are included in the report: 60d_SASM_Generation_Resource_AS_Offers-YY-MMM-DD.csv60d_SASM_Load_Resource_AS_Offers-YY-MMM-DD.csv60d_SASM_Generation_Resource_AS_Offer Awards-YY-MMM-DD.csv60d_SASM_Load_Resource_AS_Offer_Awards-YY-MMM-DD.csv'
+paths:
+  /np3-990-ex/60_sasm_load_res_as_offers:
+    get:
+      tags:
+      - NP3-990-EX
+      summary: 60 Day SASM Load Resource AS Offers
+      description: 60 Day SASM Load Resource AS Offers
+      operationId: getData_34
+      parameters:
+      - name: resourceName
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: multiHourBlockFlag
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: blockIndicator1
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price1RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1REGUPFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1REGUPTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1REGDOWNFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1REGDOWNTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1OfflineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1OfflineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: quantityMW1From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW1To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: blockIndicator2
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price2RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2REGUPFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2REGUPTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2REGDOWNFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2REGDOWNTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2OfflineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2OfflineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: quantityMW2From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW2To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: blockIndicator3
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price3RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3REGUPFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3REGUPTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3REGDOWNFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3REGDOWNTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3OfflineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3OfflineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: quantityMW3From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW3To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: blockIndicator4
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price4RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4REGUPFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4REGUPTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4REGDOWNFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4REGDOWNTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4OfflineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4OfflineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: quantityMW4From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW4To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: blockIndicator5
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price5RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5REGUP
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: price5REGDOWN
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: price5OfflineNONSPIN
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: quantityMW5From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW5To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: deliveryDateFrom
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: deliveryDateTo
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: SASMIdFrom
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: SASMIdTo
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: hourEndingFrom
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: hourEndingTo
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: qseName
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: dmeName
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: page
+        in: query
+        description: 'Format - ###. Page number of returned values in the collection.'
+        schema:
+          type: integer
+          format: '###'
+      - name: size
+        in: query
+        description: 'Format - ###. Number of returned items per page.'
+        schema:
+          type: integer
+          format: '###'
+      - name: sort
+        in: query
+        description: Format - abc123. Defines field by which to sort the returned resource values.
+        schema:
+          type: string
+          format: abc123
+      - name: dir
+        in: query
+        description: Format - abc123. Defines sort order of returned values based on the primary business key of the resource.
+        schema:
+          type: string
+          format: abc123
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              example:
+                _meta:
+                  totalRecords: 0
+                  pageSize: 0
+                  totalPages: 0
+                  currentPage: 0
+                  query:
+                    parameterCount: 0
+                    parameters: {}
+                    sortedBy: string
+                report:
+                  reportName: string
+                  reportDisplayName: string
+                  reportId: string
+                  reportEMIL: string
+                fields:
+                - name: string
+                  label: string
+                  cardinality: 0
+                  dataType: BOOLEAN
+                  searchable: true
+                  sortable: true
+                  hasRange: true
+                data: {}
+                links:
+                - rel: string
+                  href: string
+                  hreflang: string
+                  media: string
+                  title: string
+                  type: string
+                  deprecation: string
+                  profile: string
+                  name: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+  /np3-990-ex/60_sasm_load_res_as_offer_awards:
+    get:
+      tags:
+      - NP3-990-EX
+      summary: 60 Day SASM Load Resource AS Offer Awards
+      description: 60 Day SASM Load Resource AS Offer Awards
+      operationId: getData_35
+      parameters:
+      - name: SASMIdFrom
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: SASMIdTo
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: deliveryDateFrom
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: deliveryDateTo
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: hourEndingFrom
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: hourEndingTo
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: resourceName
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: resourceType
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: REGUPAawardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGUPAawardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGUPMCPCFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGUPMCPCTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGDNAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGDNAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGDNMCPCFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGDNMCPCTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSPFRAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSPFRAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSFFRAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSFFRAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSUFRAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSUFRAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSMCPCFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSMCPCTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: NSPINAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: NSPINAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: NSPINMCPCFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: NSPINMCPCTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: page
+        in: query
+        description: 'Format - ###. Page number of returned values in the collection.'
+        schema:
+          type: integer
+          format: '###'
+      - name: size
+        in: query
+        description: 'Format - ###. Number of returned items per page.'
+        schema:
+          type: integer
+          format: '###'
+      - name: sort
+        in: query
+        description: Format - abc123. Defines field by which to sort the returned resource values.
+        schema:
+          type: string
+          format: abc123
+      - name: dir
+        in: query
+        description: Format - abc123. Defines sort order of returned values based on the primary business key of the resource.
+        schema:
+          type: string
+          format: abc123
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              example:
+                _meta:
+                  totalRecords: 0
+                  pageSize: 0
+                  totalPages: 0
+                  currentPage: 0
+                  query:
+                    parameterCount: 0
+                    parameters: {}
+                    sortedBy: string
+                report:
+                  reportName: string
+                  reportDisplayName: string
+                  reportId: string
+                  reportEMIL: string
+                fields:
+                - name: string
+                  label: string
+                  cardinality: 0
+                  dataType: BOOLEAN
+                  searchable: true
+                  sortable: true
+                  hasRange: true
+                data: {}
+                links:
+                - rel: string
+                  href: string
+                  hreflang: string
+                  media: string
+                  title: string
+                  type: string
+                  deprecation: string
+                  profile: string
+                  name: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+  /np3-990-ex/60_sasm_gen_res_as_offers:
+    get:
+      tags:
+      - NP3-990-EX
+      summary: 60 Day SASM Generation Resource AS Offers
+      description: 60 Day SASM Generation Resource AS Offers
+      operationId: getData_36
+      parameters:
+      - name: deliveryDateFrom
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: deliveryDateTo
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: SASMIdFrom
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: SASMIdTo
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: hourEndingFrom
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: hourEndingTo
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: qseName
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: dmeName
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: resourceName
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: multiHourBlockFlag
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: blockIndicator1
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price1RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1REGUPFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1REGUPTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1REGDOWNFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1REGDOWNTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1OfflineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price1OfflineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: quantityMW1From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW1To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: blockIndicator2
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price2RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2REGUPFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2REGUPTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2REGDOWNFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2REGDOWNTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2OfflineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price2OfflineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: quantityMW2From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW2To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: blockIndicator3
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price3RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3REGUPFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3REGUPTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3REGDOWNFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3REGDOWNTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3OfflineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price3OfflineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: quantityMW3From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW3To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: blockIndicator4
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price4RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4REGUPFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4REGUPTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4REGDOWNFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4REGDOWNTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4OfflineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price4OfflineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: quantityMW4From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW4To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: blockIndicator5
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: price5RRSPFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSPFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSFFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSFFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSUFRFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5RRSUFRTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5OnlineNONSPINFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5OnlineNONSPINTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: price5REGUP
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: price5REGDOWN
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: price5OfflineNONSPIN
+        in: query
+        description: Format - true | false.
+        schema:
+          type: boolean
+          format: true | false
+      - name: quantityMW5From
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: quantityMW5To
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: page
+        in: query
+        description: 'Format - ###. Page number of returned values in the collection.'
+        schema:
+          type: integer
+          format: '###'
+      - name: size
+        in: query
+        description: 'Format - ###. Number of returned items per page.'
+        schema:
+          type: integer
+          format: '###'
+      - name: sort
+        in: query
+        description: Format - abc123. Defines field by which to sort the returned resource values.
+        schema:
+          type: string
+          format: abc123
+      - name: dir
+        in: query
+        description: Format - abc123. Defines sort order of returned values based on the primary business key of the resource.
+        schema:
+          type: string
+          format: abc123
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              example:
+                _meta:
+                  totalRecords: 0
+                  pageSize: 0
+                  totalPages: 0
+                  currentPage: 0
+                  query:
+                    parameterCount: 0
+                    parameters: {}
+                    sortedBy: string
+                report:
+                  reportName: string
+                  reportDisplayName: string
+                  reportId: string
+                  reportEMIL: string
+                fields:
+                - name: string
+                  label: string
+                  cardinality: 0
+                  dataType: BOOLEAN
+                  searchable: true
+                  sortable: true
+                  hasRange: true
+                data: {}
+                links:
+                - rel: string
+                  href: string
+                  hreflang: string
+                  media: string
+                  title: string
+                  type: string
+                  deprecation: string
+                  profile: string
+                  name: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+  /np3-990-ex/60_sasm_gen_res_as_offer_awards:
+    get:
+      tags:
+      - NP3-990-EX
+      summary: 60 Day SASM Generation Resource AS Offer Awards
+      description: 60 Day SASM Generation Resource AS Offer Awards
+      operationId: getData_37
+      parameters:
+      - name: SASMIdFrom
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: SASMIdTo
+        in: query
+        description: Format - yyyy-MM-ddTH24:mm:ss.
+        schema:
+          type: string
+          format: yyyy-MM-ddTH24:mm:ss
+      - name: deliveryDateFrom
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: deliveryDateTo
+        in: query
+        description: Format - yyyy-MM-dd.
+        schema:
+          type: string
+          format: yyyy-MM-dd
+      - name: hourEndingFrom
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: hourEndingTo
+        in: query
+        description: 'Format - ###.'
+        schema:
+          type: integer
+          format: '###'
+      - name: resourceName
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: resourceType
+        in: query
+        description: Format - abc123.
+        schema:
+          type: string
+          format: abc123
+      - name: REGUPAawardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGUPAawardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGUPMCPCFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGUPMCPCTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGDNAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGDNAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGDNMCPCFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: REGDNMCPCTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSPFRAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSPFRAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSFFRAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSFFRAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSUFRAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSUFRAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSMCPCFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: RRSMCPCTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: NSPINAwardedFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: NSPINAwardedTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: NSPINMCPCFrom
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: NSPINMCPCTo
+        in: query
+        description: 'Format - ####.###.'
+        schema:
+          type: number
+          format: '####.###'
+      - name: page
+        in: query
+        description: 'Format - ###. Page number of returned values in the collection.'
+        schema:
+          type: integer
+          format: '###'
+      - name: size
+        in: query
+        description: 'Format - ###. Number of returned items per page.'
+        schema:
+          type: integer
+          format: '###'
+      - name: sort
+        in: query
+        description: Format - abc123. Defines field by which to sort the returned resource values.
+        schema:
+          type: string
+          format: abc123
+      - name: dir
+        in: query
+        description: Format - abc123. Defines sort order of returned values based on the primary business key of the resource.
+        schema:
+          type: string
+          format: abc123
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              example:
+                _meta:
+                  totalRecords: 0
+                  pageSize: 0
+                  totalPages: 0
+                  currentPage: 0
+                  query:
+                    parameterCount: 0
+                    parameters: {}
+                    sortedBy: string
+                report:
+                  reportName: string
+                  reportDisplayName: string
+                  reportId: string
+                  reportEMIL: string
+                fields:
+                - name: string
+                  label: string
+                  cardinality: 0
+                  dataType: BOOLEAN
+                  searchable: true
+                  sortable: true
+                  hasRange: true
+                data: {}
+                links:
+                - rel: string
+                  href: string
+                  hreflang: string
+                  media: string
+                  title: string
+                  type: string
+                  deprecation: string
+                  profile: string
+                  name: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+components:
+  schemas:
+    ReportMetadata:
+      type: object
+      properties:
+        reportName:
+          type: string
+        reportDisplayName:
+          type: string
+        reportId:
+          type: string
+        reportEMIL:
+          type: string
+      description: Represents metadata for the specified object.
+    Field:
+      type: object
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        cardinality:
+          type: integer
+          format: int32
+        dataType:
+          enum:
+          - BOOLEAN
+          - VARCHAR
+          - INTEGER
+          - LONG
+          - DOUBLE
+          - DATE
+          - DATETIME
+          - TIME
+          type: string
+        searchable:
+          type: boolean
+        sortable:
+          type: boolean
+        hasRange:
+          type: boolean
+      description: Represents report data field.
+    Exception:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        code:
+          type: integer
+          format: int32
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+      description: Represents any exception encountered while access API endpoints.
+    QueryMetadata:
+      type: object
+      properties:
+        parameterCount:
+          type: integer
+          format: int32
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        sortedBy:
+          type: string
+      description: Represents query parameter summary for the specified query results.
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Report:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        report:
+          $ref: '#/components/schemas/ReportMetadata'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        data:
+          type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents report data search results from any EMIL artifact report query.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query

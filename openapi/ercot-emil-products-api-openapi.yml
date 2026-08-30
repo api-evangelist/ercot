@@ -1,0 +1,535 @@
+openapi: 3.2.0
+info:
+  title: ERCOT Public API Client/Developer Documentation EMIL Products API
+  description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
+  version: '1.0'
+servers:
+- url: https://api.ercot.com/api/public-reports
+security:
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: EMIL Products
+paths:
+  /{emilId}:
+    get:
+      tags:
+      - EMIL Products
+      summary: Available report artifacts for a specified EMIL product.
+      description: Available report artifacts for a specified EMIL product.
+      operationId: getProduct
+      parameters:
+      - name: emilId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              example:
+                emilId: string
+                name: string
+                description: string
+                status: string
+                reportTypeId: 0
+                audience: string
+                generationFrequency: string
+                securityClassification: string
+                lastUpdated: string
+                firstRun: string
+                eceii: string
+                channel: string
+                userGuide: string
+                postingType: string
+                market: string
+                extractSubscriber: string
+                xsdName: string
+                misPostingLocation: string
+                certificateRole: string
+                fileType: string
+                ddlName: string
+                misDisplayDuration: 0
+                archiveDuration: 0
+                notificationType: string
+                protocolRules: {}
+                links:
+                - rel: string
+                  href: string
+                  hreflang: string
+                  media: string
+                  title: string
+                  type: string
+                  deprecation: string
+                  profile: string
+                  name: string
+                artifacts:
+                - reportTypeId: 0
+                  displayName: string
+                  endpoint: string
+                  links:
+                  - rel: string
+                    href: string
+                    hreflang: string
+                    media: string
+                    title: string
+                    type: string
+                    deprecation: string
+                    profile: string
+                    name: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+  /archive/{emilId}:
+    get:
+      tags:
+      - EMIL Products
+      summary: Available report archives for a specified EMIL product.
+      description: Available report archives for a specified EMIL product.
+      operationId: getProductHistory
+      parameters:
+      - name: emilId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductHistory'
+              example:
+                _meta:
+                  totalRecords: 0
+                  pageSize: 0
+                  totalPages: 0
+                  currentPage: 0
+                  query:
+                    parameterCount: 0
+                    parameters: {}
+                    sortedBy: string
+                product:
+                  totalRecords: 0
+                  pageSize: 0
+                  totalPages: 0
+                  currentPage: 0
+                  query:
+                    parameterCount: 0
+                    parameters: {}
+                    sortedBy: string
+                archives:
+                - docId: 0
+                  friendlyName: string
+                  postDatetime: string
+                  links:
+                  - rel: string
+                    href: string
+                    hreflang: string
+                    media: string
+                    title: string
+                    type: string
+                    deprecation: string
+                    profile: string
+                    name: string
+                links:
+                - rel: string
+                  href: string
+                  hreflang: string
+                  media: string
+                  title: string
+                  type: string
+                  deprecation: string
+                  profile: string
+                  name: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+  /:
+    get:
+      tags:
+      - EMIL Products
+      summary: All available EMIL Products
+      description: Retrieve all available (active) products in the current EMIL registry having public accessibility.
+      operationId: getListForProducts
+      responses:
+        '200':
+          description: OK The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              example:
+                emilId: string
+                name: string
+                description: string
+                status: string
+                reportTypeId: 0
+                audience: string
+                generationFrequency: string
+                securityClassification: string
+                lastUpdated: string
+                firstRun: string
+                eceii: string
+                channel: string
+                userGuide: string
+                postingType: string
+                market: string
+                extractSubscriber: string
+                xsdName: string
+                misPostingLocation: string
+                certificateRole: string
+                fileType: string
+                ddlName: string
+                misDisplayDuration: 0
+                archiveDuration: 0
+                notificationType: string
+                protocolRules: {}
+                links:
+                - rel: string
+                  href: string
+                  hreflang: string
+                  media: string
+                  title: string
+                  type: string
+                  deprecation: string
+                  profile: string
+                  name: string
+                artifacts:
+                - reportTypeId: 0
+                  displayName: string
+                  endpoint: string
+                  links:
+                  - rel: string
+                    href: string
+                    hreflang: string
+                    media: string
+                    title: string
+                    type: string
+                    deprecation: string
+                    profile: string
+                    name: string
+        '400':
+          description: The request operation failed. The request and/or one or more of its parameters are invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '403':
+          description: The request operation failed. You do not have access to the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+        '404':
+          description: The request operation failed. The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                timestamp: string
+                code: 0
+                status: string
+                message: string
+                data: {}
+components:
+  schemas:
+    ProductHistoryMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Artifact:
+      required:
+      - displayName
+      type: object
+      properties:
+        reportTypeId:
+          type: integer
+          format: int64
+        displayName:
+          type: string
+        endpoint:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Each artifact represents a single report for the given time period designated by the EMIL metadata.
+    Archive:
+      type: object
+      properties:
+        docId:
+          type: integer
+          format: int64
+        friendlyName:
+          type: string
+        postDatetime:
+          type: string
+          format: date-time
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents an EMIL Product archive file.
+    ProductHistory:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        product:
+          $ref: '#/components/schemas/ProductHistoryMetadata'
+        archives:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Archive'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Each archive represents a single EMIL Product archive (zip file).
+    Exception:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        code:
+          type: integer
+          format: int32
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+      description: Represents any exception encountered while access API endpoints.
+    QueryMetadata:
+      type: object
+      properties:
+        parameterCount:
+          type: integer
+          format: int32
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        sortedBy:
+          type: string
+      description: Represents query parameter summary for the specified query results.
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Product:
+      type: object
+      properties:
+        emilId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        reportTypeId:
+          type: integer
+          format: int64
+        audience:
+          type: string
+        generationFrequency:
+          type: string
+        securityClassification:
+          type: string
+        lastUpdated:
+          type: string
+          format: date-time
+        firstRun:
+          type: string
+          format: date-time
+        eceii:
+          type: string
+        channel:
+          type: string
+        userGuide:
+          type: string
+        postingType:
+          type: string
+        market:
+          type: string
+        extractSubscriber:
+          type: string
+        xsdName:
+          type: string
+        misPostingLocation:
+          type: string
+        certificateRole:
+          type: string
+        fileType:
+          type: string
+        ddlName:
+          type: string
+        misDisplayDuration:
+          type: integer
+          format: int32
+        archiveDuration:
+          type: integer
+          format: int32
+        notificationType:
+          type: string
+        protocolRules:
+          type: object
+          additionalProperties:
+            type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        artifacts:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Artifact'
+      description: Represents an EMIL Product, which includes its metadata along with all Artifact information.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
