@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: ERCOT Public API Client/Developer Documentation NP3 965 ER API
+  title: ERCOT Public API Client/Developer Documentation NP3 965 ER…
   description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
   version: '1.0'
 servers:
@@ -10,14 +10,16 @@ security:
 - apiKeyQuery: []
 tags:
 - name: NP3-965-ER
-  description: '<b>60-Day SCED Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data related to SCED. The following individual files are included in the report: NP3-967-EX 61-day QSE-specific Self-Arranged AS in SCED NP3-968-EX 61-day Generation Resource data in SCED NP3-969-EX 61-day Load Resource data in SCED NP3-970-EX 61-day Dynamically Scheduled Resource and Loads in SCED NP3-971-EX 61-day Inc/Dec Offer Curves in SCED NP3-973-EX 61-day Settlement Metered Net Energy for Generation Resources and NP6-585-ER 60 Day HDL and LDL Manual Override Summary'
+  description: '60-Day SCED Disclosure Reports
+
+
+    This report will contain all 60 day disclosure data related to SCED.'
 paths:
   /np3-965-er/60_sced_smne_gen_res:
     get:
       tags:
       - NP3-965-ER
       summary: 60 Day SCED Settlement Metered Net Energy for Generation Resources
-      description: 60 Day SCED Settlement Metered Net Energy for Generation Resources
       operationId: getData_51
       parameters:
       - name: intervalValueFrom
@@ -168,7 +170,6 @@ paths:
       tags:
       - NP3-965-ER
       summary: 60 Day QSE-specific Self-Arranged AS in SCED
-      description: 60 Day QSE-specific Self-Arranged AS in SCED
       operationId: getData_52
       parameters:
       - name: SCEDTimestampFrom
@@ -379,7 +380,6 @@ paths:
       tags:
       - NP3-965-ER
       summary: 60 Day SCED Gen Resource Data
-      description: 60 Day SCED Gen Resource Data
       operationId: getData_53
       parameters:
       - name: SCED2CurveMW9From
@@ -2684,7 +2684,6 @@ paths:
       tags:
       - NP3-965-ER
       summary: 60 Day SCED DSR Load Data
-      description: 60 Day SCED DSR Load Data
       operationId: getData_54
       parameters:
       - name: qseName
@@ -2829,7 +2828,6 @@ paths:
       tags:
       - NP3-965-ER
       summary: 60 Day Load Resource Data in SCED
-      description: 60 Day Load Resource Data in SCED
       operationId: getData_55
       parameters:
       - name: ASRespForNSPINFrom
@@ -3376,7 +3374,6 @@ paths:
       tags:
       - NP3-965-ER
       summary: 60 Day HDL and LDL Manual Override Summary
-      description: 60 Day HDL and LDL Manual Override Summary
       operationId: getData_56
       parameters:
       - name: SCEDTimestampFrom
@@ -3590,18 +3587,24 @@ paths:
                 data: {}
 components:
   schemas:
-    ReportMetadata:
+    Report:
       type: object
       properties:
-        reportName:
-          type: string
-        reportDisplayName:
-          type: string
-        reportId:
-          type: string
-        reportEMIL:
-          type: string
-      description: Represents metadata for the specified object.
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        report:
+          $ref: '#/components/schemas/ReportMetadata'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        data:
+          type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents report data search results from any EMIL artifact report query.
     Field:
       type: object
       properties:
@@ -3630,6 +3633,45 @@ components:
         hasRange:
           type: boolean
       description: Represents report data field.
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
     Exception:
       type: object
       properties:
@@ -3659,63 +3701,18 @@ components:
         sortedBy:
           type: string
       description: Represents query parameter summary for the specified query results.
-    ResultMetadata:
+    ReportMetadata:
       type: object
       properties:
-        totalRecords:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        currentPage:
-          type: integer
-          format: int32
-        query:
-          $ref: '#/components/schemas/QueryMetadata'
-      description: Represents record and paging summary for the specified query results.
-    Report:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/ResultMetadata'
-        report:
-          $ref: '#/components/schemas/ReportMetadata'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-        data:
-          type: object
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-      description: Represents report data search results from any EMIL artifact report query.
-    Link:
-      type: object
-      properties:
-        rel:
+        reportName:
           type: string
-        href:
+        reportDisplayName:
           type: string
-        hreflang:
+        reportId:
           type: string
-        media:
+        reportEMIL:
           type: string
-        title:
-          type: string
-        type:
-          type: string
-        deprecation:
-          type: string
-        profile:
-          type: string
-        name:
-          type: string
+      description: Represents metadata for the specified object.
   securitySchemes:
     apiKeyHeader:
       type: apiKey

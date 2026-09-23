@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: ERCOT Public API Client/Developer Documentation NP3 966 ER API
+  title: ERCOT Public API Client/Developer Documentation NP3 966 ER…
   description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
   version: '1.0'
 servers:
@@ -10,14 +10,16 @@ security:
 - apiKeyQuery: []
 tags:
 - name: NP3-966-ER
-  description: '<b>60-Day DAM Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data related to DAM. The following individual files are included in the report: NP3-974-EX 61-day QSE-specific Self-Arranged AS in DAM NP3-975-EX 61-day Generation Resource data in DAM NP3-976-EX 61-day Generation Resource AS Offers in DAM NP3-977-EX 61-day Load Resource data in DAM NP3-978-EX 61-day Load Resource AS Offers in DAM NP3-979-EX 61-day Settlement Point Data in DAM- Energy Only Offers NP3-980-EX 61-day Settlement Point Data in DAM- Energy Only Offer Award NP3-981-EX 61-day Settlement Point Data in DAM- Energy Bids NP3-982-EX 61-day Settlement Point Data in DAM- Bids Award NP3-983-EX 61-day Settlement Point Data in DAM- CRR Offers NP3-984-EX 61-day Settlement Point Data in DAM- CRR Awards NP3-985-EX 61-day Settlement Point Data Point-to-Point Obligation Bids NP3-986-EX 61-day Settlement Point Data Point-to-Point Obligation Bid Awards'
+  description: '60-Day DAM Disclosure Reports
+
+
+    This report will contain all 60 day disclosure data related to DAM.'
 paths:
   /np3-966-er/60_dam_qse_self_as:
     get:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM QSE Self Arranged AS
-      description: 60 Day DAM QSE Self Arranged AS
       operationId: getData_38
       parameters:
       - name: totalSelfArrangedASRRSUFRFrom
@@ -240,7 +242,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM PTP Obligation Option Awards
-      description: 60 Day DAM PTP Obligation Option Awards
       operationId: getData_39
       parameters:
       - name: deliveryDateFrom
@@ -427,7 +428,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM PTP Obligation Option
-      description: 60 Day DAM PTP Obligation Option
       operationId: getData_40
       parameters:
       - name: deliveryDateFrom
@@ -626,7 +626,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM PTP Obligation Bids
-      description: 60 Day DAM PTP Obligation Bids
       operationId: getData_41
       parameters:
       - name: deliveryDateFrom
@@ -813,7 +812,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM PTP Obligation Bid Awards
-      description: 60 Day DAM PTP Obligation Bid Awards
       operationId: getData_42
       parameters:
       - name: settlementPointSource
@@ -994,7 +992,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM Load Resource Data
-      description: 60 Day DAM Load Resource Data
       operationId: getData_43
       parameters:
       - name: REGUPMCPCFrom
@@ -1277,7 +1274,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM Load Resources AS Offers
-      description: 60 Day DAM Load Resources AS Offers
       operationId: getData_44
       parameters:
       - name: deliveryDateFrom
@@ -1950,7 +1946,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM Generation Resource Data
-      description: 60 Day DAM Generation Resource Data
       operationId: getData_45
       parameters:
       - name: deliveryDateFrom
@@ -2575,7 +2570,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM Generation Resources AS Offers
-      description: 60 Day DAM Generation Resources AS Offers
       operationId: getData_46
       parameters:
       - name: price2RRSFFRFrom
@@ -3242,7 +3236,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM Energy Only Offers
-      description: 60 Day DAM Energy Only Offers
       operationId: getData_47
       parameters:
       - name: deliveryDateFrom
@@ -3651,7 +3644,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM Energy Offer Only Awards
-      description: 60 Day DAM Energy Offer Only Awards
       operationId: getData_48
       parameters:
       - name: deliveryDateFrom
@@ -3826,7 +3818,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM Energy Bids
-      description: 60 Day DAM Energy Bids
       operationId: getData_49
       parameters:
       - name: energyOnlyBidMw1From
@@ -4235,7 +4226,6 @@ paths:
       tags:
       - NP3-966-ER
       summary: 60 Day DAM Energy Bid Awards
-      description: 60 Day DAM Energy Bid Awards
       operationId: getData_50
       parameters:
       - name: deliveryDateFrom
@@ -4407,18 +4397,24 @@ paths:
                 data: {}
 components:
   schemas:
-    ReportMetadata:
+    Report:
       type: object
       properties:
-        reportName:
-          type: string
-        reportDisplayName:
-          type: string
-        reportId:
-          type: string
-        reportEMIL:
-          type: string
-      description: Represents metadata for the specified object.
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        report:
+          $ref: '#/components/schemas/ReportMetadata'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        data:
+          type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents report data search results from any EMIL artifact report query.
     Field:
       type: object
       properties:
@@ -4447,6 +4443,45 @@ components:
         hasRange:
           type: boolean
       description: Represents report data field.
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
     Exception:
       type: object
       properties:
@@ -4476,63 +4511,18 @@ components:
         sortedBy:
           type: string
       description: Represents query parameter summary for the specified query results.
-    ResultMetadata:
+    ReportMetadata:
       type: object
       properties:
-        totalRecords:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        currentPage:
-          type: integer
-          format: int32
-        query:
-          $ref: '#/components/schemas/QueryMetadata'
-      description: Represents record and paging summary for the specified query results.
-    Report:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/ResultMetadata'
-        report:
-          $ref: '#/components/schemas/ReportMetadata'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-        data:
-          type: object
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-      description: Represents report data search results from any EMIL artifact report query.
-    Link:
-      type: object
-      properties:
-        rel:
+        reportName:
           type: string
-        href:
+        reportDisplayName:
           type: string
-        hreflang:
+        reportId:
           type: string
-        media:
+        reportEMIL:
           type: string
-        title:
-          type: string
-        type:
-          type: string
-        deprecation:
-          type: string
-        profile:
-          type: string
-        name:
-          type: string
+      description: Represents metadata for the specified object.
   securitySchemes:
     apiKeyHeader:
       type: apiKey

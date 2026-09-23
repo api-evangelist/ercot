@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: ERCOT Public API Client/Developer Documentation Versioning API
+  title: ERCOT Public API Client/Developer Documentation Versioning…
   description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
   version: '1.0'
 servers:
@@ -15,7 +15,7 @@ paths:
     get:
       tags:
       - Versioning
-      summary: Retrieve the current version for ERCOT Public API system.
+      summary: Retrieve the current version for ERCOT Public API system
       description: Retrieve the current version for ERCOT Public API system.
       operationId: getVersion
       responses:
@@ -70,13 +70,6 @@ paths:
                 data: {}
 components:
   schemas:
-    Version:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/Info'
-        openapi:
-          type: string
     Info:
       type: object
       properties:
@@ -87,6 +80,13 @@ components:
         version:
           type: string
         build:
+          type: string
+    Version:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/Info'
+        openapi:
           type: string
     Exception:
       type: object

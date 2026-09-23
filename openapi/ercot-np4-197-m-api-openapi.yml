@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: ERCOT Public API Client/Developer Documentation NP4 197 M API
+  title: ERCOT Public API Client/Developer Documentation NP4 197 M…
   description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
   version: '1.0'
 servers:
@@ -10,14 +10,16 @@ security:
 - apiKeyQuery: []
 tags:
 - name: NP4-197-M
-  description: <b>RTM Price Corrections</b><br/><br/>Real-Time Market price corrections.
+  description: 'RTM Price Corrections
+
+
+    Real-Time Market price corrections.'
 paths:
   /np4-197-m/rtm_price_corrections_spp:
     get:
       tags:
       - NP4-197-M
       summary: RTM Price Corrections for SPP
-      description: RTM Price Corrections for SPP
       operationId: getData_18
       parameters:
       - name: deliveryDateFrom
@@ -216,7 +218,6 @@ paths:
       tags:
       - NP4-197-M
       summary: RTM Price Corrections SP LMP
-      description: RTM Price Corrections SP LMP
       operationId: getData_19
       parameters:
       - name: settlementPointName
@@ -385,7 +386,6 @@ paths:
       tags:
       - NP4-197-M
       summary: RTM Price Corrections for SOG Price
-      description: RTM Price Corrections for SOG Price
       operationId: getData_20
       parameters:
       - name: deliveryDateFrom
@@ -590,7 +590,6 @@ paths:
       tags:
       - NP4-197-M
       summary: RTM Price Corrections for SOG LMP
-      description: RTM Price Corrections for SOG LMP
       operationId: getData_21
       parameters:
       - name: DSTFlag
@@ -843,7 +842,6 @@ paths:
       tags:
       - NP4-197-M
       summary: RTM Price Corrections for Shadow Prices
-      description: RTM Price Corrections for Shadow Prices
       operationId: getData_22
       parameters:
       - name: SCEDTimestampFrom
@@ -1078,7 +1076,6 @@ paths:
       tags:
       - NP4-197-M
       summary: RTM Price Corrections for EB LMP
-      description: RTM Price Corrections for EB LMP
       operationId: getData_23
       parameters:
       - name: LMPCorrectedFrom
@@ -1244,18 +1241,24 @@ paths:
                 data: {}
 components:
   schemas:
-    ReportMetadata:
+    Report:
       type: object
       properties:
-        reportName:
-          type: string
-        reportDisplayName:
-          type: string
-        reportId:
-          type: string
-        reportEMIL:
-          type: string
-      description: Represents metadata for the specified object.
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        report:
+          $ref: '#/components/schemas/ReportMetadata'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        data:
+          type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents report data search results from any EMIL artifact report query.
     Field:
       type: object
       properties:
@@ -1284,6 +1287,45 @@ components:
         hasRange:
           type: boolean
       description: Represents report data field.
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
     Exception:
       type: object
       properties:
@@ -1313,63 +1355,18 @@ components:
         sortedBy:
           type: string
       description: Represents query parameter summary for the specified query results.
-    ResultMetadata:
+    ReportMetadata:
       type: object
       properties:
-        totalRecords:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        currentPage:
-          type: integer
-          format: int32
-        query:
-          $ref: '#/components/schemas/QueryMetadata'
-      description: Represents record and paging summary for the specified query results.
-    Report:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/ResultMetadata'
-        report:
-          $ref: '#/components/schemas/ReportMetadata'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-        data:
-          type: object
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-      description: Represents report data search results from any EMIL artifact report query.
-    Link:
-      type: object
-      properties:
-        rel:
+        reportName:
           type: string
-        href:
+        reportDisplayName:
           type: string
-        hreflang:
+        reportId:
           type: string
-        media:
+        reportEMIL:
           type: string
-        title:
-          type: string
-        type:
-          type: string
-        deprecation:
-          type: string
-        profile:
-          type: string
-        name:
-          type: string
+      description: Represents metadata for the specified object.
   securitySchemes:
     apiKeyHeader:
       type: apiKey

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: ERCOT Public API Client/Developer Documentation EMIL Products API
+  title: ERCOT Public API Client/Developer Documentation EMIL…
   description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
   version: '1.0'
 servers:
@@ -15,7 +15,7 @@ paths:
     get:
       tags:
       - EMIL Products
-      summary: Available report artifacts for a specified EMIL product.
+      summary: Available report artifacts for a specified EMIL product
       description: Available report artifacts for a specified EMIL product.
       operationId: getProduct
       parameters:
@@ -121,7 +121,7 @@ paths:
     get:
       tags:
       - EMIL Products
-      summary: Available report archives for a specified EMIL product.
+      summary: Available report archives for a specified EMIL product
       description: Available report archives for a specified EMIL product.
       operationId: getProductHistory
       parameters:
@@ -318,6 +318,24 @@ paths:
                 data: {}
 components:
   schemas:
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
     ProductHistoryMetadata:
       type: object
       properties:
@@ -353,6 +371,27 @@ components:
           items:
             $ref: '#/components/schemas/Link'
       description: Each artifact represents a single report for the given time period designated by the EMIL metadata.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
     Archive:
       type: object
       properties:
@@ -402,37 +441,6 @@ components:
         data:
           type: object
       description: Represents any exception encountered while access API endpoints.
-    QueryMetadata:
-      type: object
-      properties:
-        parameterCount:
-          type: integer
-          format: int32
-        parameters:
-          type: object
-          additionalProperties:
-            type: object
-        sortedBy:
-          type: string
-      description: Represents query parameter summary for the specified query results.
-    ResultMetadata:
-      type: object
-      properties:
-        totalRecords:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        currentPage:
-          type: integer
-          format: int32
-        query:
-          $ref: '#/components/schemas/QueryMetadata'
-      description: Represents record and paging summary for the specified query results.
     Product:
       type: object
       properties:
@@ -503,27 +511,19 @@ components:
           items:
             $ref: '#/components/schemas/Artifact'
       description: Represents an EMIL Product, which includes its metadata along with all Artifact information.
-    Link:
+    QueryMetadata:
       type: object
       properties:
-        rel:
+        parameterCount:
+          type: integer
+          format: int32
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        sortedBy:
           type: string
-        href:
-          type: string
-        hreflang:
-          type: string
-        media:
-          type: string
-        title:
-          type: string
-        type:
-          type: string
-        deprecation:
-          type: string
-        profile:
-          type: string
-        name:
-          type: string
+      description: Represents query parameter summary for the specified query results.
   securitySchemes:
     apiKeyHeader:
       type: apiKey

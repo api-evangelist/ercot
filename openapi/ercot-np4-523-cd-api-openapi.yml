@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: ERCOT Public API Client/Developer Documentation NP4 523 CD API
+  title: ERCOT Public API Client/Developer Documentation NP4 523 CD…
   description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
   version: '1.0'
 servers:
@@ -10,14 +10,16 @@ security:
 - apiKeyQuery: []
 tags:
 - name: NP4-523-CD
-  description: <b>DAM System Lambda</b><br/><br/>System lambda of each successful DAM.
+  description: 'DAM System Lambda
+
+
+    System lambda of each successful DAM.'
 paths:
   /np4-523-cd/dam_system_lambda:
     get:
       tags:
       - NP4-523-CD
       summary: DAM System Lambda
-      description: DAM System Lambda
       operationId: getData_16
       parameters:
       - name: deliveryDateFrom
@@ -159,18 +161,24 @@ paths:
                 data: {}
 components:
   schemas:
-    ReportMetadata:
+    Report:
       type: object
       properties:
-        reportName:
-          type: string
-        reportDisplayName:
-          type: string
-        reportId:
-          type: string
-        reportEMIL:
-          type: string
-      description: Represents metadata for the specified object.
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        report:
+          $ref: '#/components/schemas/ReportMetadata'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        data:
+          type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents report data search results from any EMIL artifact report query.
     Field:
       type: object
       properties:
@@ -199,6 +207,45 @@ components:
         hasRange:
           type: boolean
       description: Represents report data field.
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
     Exception:
       type: object
       properties:
@@ -228,63 +275,18 @@ components:
         sortedBy:
           type: string
       description: Represents query parameter summary for the specified query results.
-    ResultMetadata:
+    ReportMetadata:
       type: object
       properties:
-        totalRecords:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        currentPage:
-          type: integer
-          format: int32
-        query:
-          $ref: '#/components/schemas/QueryMetadata'
-      description: Represents record and paging summary for the specified query results.
-    Report:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/ResultMetadata'
-        report:
-          $ref: '#/components/schemas/ReportMetadata'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-        data:
-          type: object
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-      description: Represents report data search results from any EMIL artifact report query.
-    Link:
-      type: object
-      properties:
-        rel:
+        reportName:
           type: string
-        href:
+        reportDisplayName:
           type: string
-        hreflang:
+        reportId:
           type: string
-        media:
+        reportEMIL:
           type: string
-        title:
-          type: string
-        type:
-          type: string
-        deprecation:
-          type: string
-        profile:
-          type: string
-        name:
-          type: string
+      description: Represents metadata for the specified object.
   securitySchemes:
     apiKeyHeader:
       type: apiKey

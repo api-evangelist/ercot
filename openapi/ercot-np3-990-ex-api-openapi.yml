@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: ERCOT Public API Client/Developer Documentation NP3 990 EX API
+  title: ERCOT Public API Client/Developer Documentation NP3 990 EX…
   description: Client/Developer RESTFul web services documentation for ERCOT Market Information List (EMIL) products.
   version: '1.0'
 servers:
@@ -10,14 +10,16 @@ security:
 - apiKeyQuery: []
 tags:
 - name: NP3-990-EX
-  description: '<b>60-Day SASM Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data related to SASM for Generation and Load Resources. The following individual files are included in the report: 60d_SASM_Generation_Resource_AS_Offers-YY-MMM-DD.csv60d_SASM_Load_Resource_AS_Offers-YY-MMM-DD.csv60d_SASM_Generation_Resource_AS_Offer Awards-YY-MMM-DD.csv60d_SASM_Load_Resource_AS_Offer_Awards-YY-MMM-DD.csv'
+  description: '60-Day SASM Disclosure Reports
+
+
+    This report will contain all 60 day disclosure data related to SASM for Generation and Load Resources. The following individual files are included in the report: 60d_SASM_Generation_Resource_AS_Offers-YY-MMM-DD.csv60d_SASM_Load_Resource_AS_Offers-YY-MMM-DD.csv60d_SASM_Generation_Resource_AS_Offer Awards-YY-MMM-DD.csv60d_SASM_Load_Resource_AS_Offer_Awards-YY-MMM-DD.csv'
 paths:
   /np3-990-ex/60_sasm_load_res_as_offers:
     get:
       tags:
       - NP3-990-EX
       summary: 60 Day SASM Load Resource AS Offers
-      description: 60 Day SASM Load Resource AS Offers
       operationId: getData_34
       parameters:
       - name: resourceName
@@ -678,7 +680,6 @@ paths:
       tags:
       - NP3-990-EX
       summary: 60 Day SASM Load Resource AS Offer Awards
-      description: 60 Day SASM Load Resource AS Offer Awards
       operationId: getData_35
       parameters:
       - name: SASMIdFrom
@@ -955,7 +956,6 @@ paths:
       tags:
       - NP3-990-EX
       summary: 60 Day SASM Generation Resource AS Offers
-      description: 60 Day SASM Generation Resource AS Offers
       operationId: getData_36
       parameters:
       - name: deliveryDateFrom
@@ -1616,7 +1616,6 @@ paths:
       tags:
       - NP3-990-EX
       summary: 60 Day SASM Generation Resource AS Offer Awards
-      description: 60 Day SASM Generation Resource AS Offer Awards
       operationId: getData_37
       parameters:
       - name: SASMIdFrom
@@ -1890,18 +1889,24 @@ paths:
                 data: {}
 components:
   schemas:
-    ReportMetadata:
+    Report:
       type: object
       properties:
-        reportName:
-          type: string
-        reportDisplayName:
-          type: string
-        reportId:
-          type: string
-        reportEMIL:
-          type: string
-      description: Represents metadata for the specified object.
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        report:
+          $ref: '#/components/schemas/ReportMetadata'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        data:
+          type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents report data search results from any EMIL artifact report query.
     Field:
       type: object
       properties:
@@ -1930,6 +1935,45 @@ components:
         hasRange:
           type: boolean
       description: Represents report data field.
+    ResultMetadata:
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        pageSize:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+        query:
+          $ref: '#/components/schemas/QueryMetadata'
+      description: Represents record and paging summary for the specified query results.
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
     Exception:
       type: object
       properties:
@@ -1959,63 +2003,18 @@ components:
         sortedBy:
           type: string
       description: Represents query parameter summary for the specified query results.
-    ResultMetadata:
+    ReportMetadata:
       type: object
       properties:
-        totalRecords:
-          type: integer
-          format: int64
-        pageSize:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        currentPage:
-          type: integer
-          format: int32
-        query:
-          $ref: '#/components/schemas/QueryMetadata'
-      description: Represents record and paging summary for the specified query results.
-    Report:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/ResultMetadata'
-        report:
-          $ref: '#/components/schemas/ReportMetadata'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-        data:
-          type: object
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-      description: Represents report data search results from any EMIL artifact report query.
-    Link:
-      type: object
-      properties:
-        rel:
+        reportName:
           type: string
-        href:
+        reportDisplayName:
           type: string
-        hreflang:
+        reportId:
           type: string
-        media:
+        reportEMIL:
           type: string
-        title:
-          type: string
-        type:
-          type: string
-        deprecation:
-          type: string
-        profile:
-          type: string
-        name:
-          type: string
+      description: Represents metadata for the specified object.
   securitySchemes:
     apiKeyHeader:
       type: apiKey
