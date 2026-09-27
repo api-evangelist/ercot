@@ -21,17 +21,21 @@ description: >-
   not by ERCOT. The market-participant SOAP estate (ERCOT Web Services, MarkeTrak, Retail API)
   is documented publicly on GitHub but reachable only by certified market participants.
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - ercot/api-specs
+    - ercot/ews-client
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: free

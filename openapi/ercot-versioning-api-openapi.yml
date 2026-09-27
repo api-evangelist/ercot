@@ -70,6 +70,22 @@ paths:
                 data: {}
 components:
   schemas:
+    Exception:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        code:
+          type: integer
+          format: int32
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+      description: Represents any exception encountered while access API endpoints.
     Info:
       type: object
       properties:
@@ -88,22 +104,6 @@ components:
           $ref: '#/components/schemas/Info'
         openapi:
           type: string
-    Exception:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        code:
-          type: integer
-          format: int32
-        status:
-          type: string
-        message:
-          type: string
-        data:
-          type: object
-      description: Represents any exception encountered while access API endpoints.
   securitySchemes:
     apiKeyHeader:
       type: apiKey

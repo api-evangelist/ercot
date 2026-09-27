@@ -191,24 +191,6 @@ paths:
                 data: {}
 components:
   schemas:
-    Report:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/ResultMetadata'
-        report:
-          $ref: '#/components/schemas/ReportMetadata'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-        data:
-          type: object
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-      description: Represents report data search results from any EMIL artifact report query.
     Field:
       type: object
       properties:
@@ -237,6 +219,18 @@ components:
         hasRange:
           type: boolean
       description: Represents report data field.
+    ReportMetadata:
+      type: object
+      properties:
+        reportName:
+          type: string
+        reportDisplayName:
+          type: string
+        reportId:
+          type: string
+        reportEMIL:
+          type: string
+      description: Represents metadata for the specified object.
     ResultMetadata:
       type: object
       properties:
@@ -255,27 +249,24 @@ components:
         query:
           $ref: '#/components/schemas/QueryMetadata'
       description: Represents record and paging summary for the specified query results.
-    Link:
+    Report:
       type: object
       properties:
-        rel:
-          type: string
-        href:
-          type: string
-        hreflang:
-          type: string
-        media:
-          type: string
-        title:
-          type: string
-        type:
-          type: string
-        deprecation:
-          type: string
-        profile:
-          type: string
-        name:
-          type: string
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        report:
+          $ref: '#/components/schemas/ReportMetadata'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+        data:
+          type: object
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Represents report data search results from any EMIL artifact report query.
     Exception:
       type: object
       properties:
@@ -305,18 +296,27 @@ components:
         sortedBy:
           type: string
       description: Represents query parameter summary for the specified query results.
-    ReportMetadata:
+    Link:
       type: object
       properties:
-        reportName:
+        rel:
           type: string
-        reportDisplayName:
+        href:
           type: string
-        reportId:
+        hreflang:
           type: string
-        reportEMIL:
+        media:
           type: string
-      description: Represents metadata for the specified object.
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
   securitySchemes:
     apiKeyHeader:
       type: apiKey
