@@ -1241,46 +1241,6 @@ paths:
                 data: {}
 components:
   schemas:
-    Field:
-      type: object
-      properties:
-        name:
-          type: string
-        label:
-          type: string
-        cardinality:
-          type: integer
-          format: int32
-        dataType:
-          enum:
-          - BOOLEAN
-          - VARCHAR
-          - INTEGER
-          - LONG
-          - DOUBLE
-          - DATE
-          - DATETIME
-          - TIME
-          type: string
-        searchable:
-          type: boolean
-        sortable:
-          type: boolean
-        hasRange:
-          type: boolean
-      description: Represents report data field.
-    ReportMetadata:
-      type: object
-      properties:
-        reportName:
-          type: string
-        reportDisplayName:
-          type: string
-        reportId:
-          type: string
-        reportEMIL:
-          type: string
-      description: Represents metadata for the specified object.
     ResultMetadata:
       type: object
       properties:
@@ -1317,6 +1277,34 @@ components:
           items:
             $ref: '#/components/schemas/Link'
       description: Represents report data search results from any EMIL artifact report query.
+    Field:
+      type: object
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        cardinality:
+          type: integer
+          format: int32
+        dataType:
+          enum:
+          - BOOLEAN
+          - VARCHAR
+          - INTEGER
+          - LONG
+          - DOUBLE
+          - DATE
+          - DATETIME
+          - TIME
+          type: string
+        searchable:
+          type: boolean
+        sortable:
+          type: boolean
+        hasRange:
+          type: boolean
+      description: Represents report data field.
     Exception:
       type: object
       properties:
@@ -1367,6 +1355,18 @@ components:
           type: string
         name:
           type: string
+    ReportMetadata:
+      type: object
+      properties:
+        reportName:
+          type: string
+        reportDisplayName:
+          type: string
+        reportId:
+          type: string
+        reportEMIL:
+          type: string
+      description: Represents metadata for the specified object.
   securitySchemes:
     apiKeyHeader:
       type: apiKey

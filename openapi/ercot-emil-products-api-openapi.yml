@@ -336,6 +336,23 @@ components:
         query:
           $ref: '#/components/schemas/QueryMetadata'
       description: Represents record and paging summary for the specified query results.
+    ProductHistory:
+      type: object
+      properties:
+        _meta:
+          $ref: '#/components/schemas/ResultMetadata'
+        product:
+          $ref: '#/components/schemas/ProductHistoryMetadata'
+        archives:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Archive'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      description: Each archive represents a single EMIL Product archive (zip file).
     Artifact:
       required:
       - displayName
@@ -353,19 +370,6 @@ components:
           items:
             $ref: '#/components/schemas/Link'
       description: Each artifact represents a single report for the given time period designated by the EMIL metadata.
-    QueryMetadata:
-      type: object
-      properties:
-        parameterCount:
-          type: integer
-          format: int32
-        parameters:
-          type: object
-          additionalProperties:
-            type: object
-        sortedBy:
-          type: string
-      description: Represents query parameter summary for the specified query results.
     Product:
       type: object
       properties:
@@ -436,39 +440,6 @@ components:
           items:
             $ref: '#/components/schemas/Artifact'
       description: Represents an EMIL Product, which includes its metadata along with all Artifact information.
-    Exception:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        code:
-          type: integer
-          format: int32
-        status:
-          type: string
-        message:
-          type: string
-        data:
-          type: object
-      description: Represents any exception encountered while access API endpoints.
-    ProductHistory:
-      type: object
-      properties:
-        _meta:
-          $ref: '#/components/schemas/ResultMetadata'
-        product:
-          $ref: '#/components/schemas/ProductHistoryMetadata'
-        archives:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/Archive'
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-      description: Each archive represents a single EMIL Product archive (zip file).
     ProductHistoryMetadata:
       type: object
       properties:
@@ -487,6 +458,35 @@ components:
         query:
           $ref: '#/components/schemas/QueryMetadata'
       description: Represents record and paging summary for the specified query results.
+    Exception:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        code:
+          type: integer
+          format: int32
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+      description: Represents any exception encountered while access API endpoints.
+    QueryMetadata:
+      type: object
+      properties:
+        parameterCount:
+          type: integer
+          format: int32
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        sortedBy:
+          type: string
+      description: Represents query parameter summary for the specified query results.
     Archive:
       type: object
       properties:

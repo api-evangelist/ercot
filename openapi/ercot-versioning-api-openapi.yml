@@ -70,6 +70,17 @@ paths:
                 data: {}
 components:
   schemas:
+    Info:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        version:
+          type: string
+        build:
+          type: string
     Exception:
       type: object
       properties:
@@ -86,17 +97,6 @@ components:
         data:
           type: object
       description: Represents any exception encountered while access API endpoints.
-    Info:
-      type: object
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        version:
-          type: string
-        build:
-          type: string
     Version:
       type: object
       properties:
