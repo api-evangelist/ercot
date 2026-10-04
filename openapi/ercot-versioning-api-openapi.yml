@@ -70,16 +70,12 @@ paths:
                 data: {}
 components:
   schemas:
-    Info:
+    Version:
       type: object
       properties:
-        title:
-          type: string
-        description:
-          type: string
-        version:
-          type: string
-        build:
+        info:
+          $ref: '#/components/schemas/Info'
+        openapi:
           type: string
     Exception:
       type: object
@@ -97,12 +93,16 @@ components:
         data:
           type: object
       description: Represents any exception encountered while access API endpoints.
-    Version:
+    Info:
       type: object
       properties:
-        info:
-          $ref: '#/components/schemas/Info'
-        openapi:
+        title:
+          type: string
+        description:
+          type: string
+        version:
+          type: string
+        build:
           type: string
   securitySchemes:
     apiKeyHeader:

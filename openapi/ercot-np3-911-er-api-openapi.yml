@@ -3869,6 +3869,27 @@ paths:
                 data: {}
 components:
   schemas:
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        hreflang:
+          type: string
+        media:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
     ResultMetadata:
       type: object
       properties:
@@ -3905,6 +3926,47 @@ components:
           items:
             $ref: '#/components/schemas/Link'
       description: Represents report data search results from any EMIL artifact report query.
+    QueryMetadata:
+      type: object
+      properties:
+        parameterCount:
+          type: integer
+          format: int32
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        sortedBy:
+          type: string
+      description: Represents query parameter summary for the specified query results.
+    Exception:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        code:
+          type: integer
+          format: int32
+        status:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+      description: Represents any exception encountered while access API endpoints.
+    ReportMetadata:
+      type: object
+      properties:
+        reportName:
+          type: string
+        reportDisplayName:
+          type: string
+        reportId:
+          type: string
+        reportEMIL:
+          type: string
+      description: Represents metadata for the specified object.
     Field:
       type: object
       properties:
@@ -3933,68 +3995,6 @@ components:
         hasRange:
           type: boolean
       description: Represents report data field.
-    Exception:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        code:
-          type: integer
-          format: int32
-        status:
-          type: string
-        message:
-          type: string
-        data:
-          type: object
-      description: Represents any exception encountered while access API endpoints.
-    QueryMetadata:
-      type: object
-      properties:
-        parameterCount:
-          type: integer
-          format: int32
-        parameters:
-          type: object
-          additionalProperties:
-            type: object
-        sortedBy:
-          type: string
-      description: Represents query parameter summary for the specified query results.
-    Link:
-      type: object
-      properties:
-        rel:
-          type: string
-        href:
-          type: string
-        hreflang:
-          type: string
-        media:
-          type: string
-        title:
-          type: string
-        type:
-          type: string
-        deprecation:
-          type: string
-        profile:
-          type: string
-        name:
-          type: string
-    ReportMetadata:
-      type: object
-      properties:
-        reportName:
-          type: string
-        reportDisplayName:
-          type: string
-        reportId:
-          type: string
-        reportEMIL:
-          type: string
-      description: Represents metadata for the specified object.
   securitySchemes:
     apiKeyHeader:
       type: apiKey
