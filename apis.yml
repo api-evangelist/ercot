@@ -57,6 +57,10 @@ imageNote: >-
   rather than a broken image, which is why it went unreported (roadmap#153).
   No correct icon has been sourced yet. Shipping the wrong company's mark is worse
   than shipping none; re-run the icon backfill once a real asset exists.
+x-docs-platform: mkdocs
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
+x-docs-hosting: github-pages
 tags:
 - Energy
 - United States
