@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/ercot/api-specs/HEAD/pubapi/pubapi-apim-api.json",
+ "requested_url": "https://raw.githubusercontent.com/ercot/api-specs/HEAD/pubapi/pubapi-apim-api.json",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 1608883,
+ "sha256": "108db99a2ba342888324307ae475b538cef449dfbb1496fa8cb8e6b935c36b4f",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
