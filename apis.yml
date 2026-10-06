@@ -74,7 +74,7 @@ tags:
 - Open Data
 - ERCOT
 created: '2026-07-27'
-modified: '2026-07-27'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: ercot:ercot-esr-public-data-api
@@ -1748,6 +1748,8 @@ apis:
     url: >-
       https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration
 common:
+- url: https://www.ercot.com/news
+  type: Blog
 - type: CapabilityMap
   url: capabilities/ercot-capability-edges.yml
   name: ERCOT Business Capability Map
