@@ -374,3 +374,9 @@ components:
       type: apiKey
       name: subscription-key
       in: query
+x-provenance:
+  method: harvested
+  publisher: ERCOT
+  source: https://raw.githubusercontent.com/ercot/api-specs/HEAD/pubapi/pubapi-apim-api.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
