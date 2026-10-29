@@ -1,4 +1,4 @@
-# ERCOT (ercot)
+# ERCOT
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,159 +66,169 @@
 
 The Electric Reliability Council of Texas (ERCOT) is the independent system operator that manages the flow of electric power to roughly 27 million Texas customers on the ERCOT Interconnection, running the wholesale Day-Ahead and Real-Time energy markets, ancillary services, congestion revenue rights, and retail switching for the competitive Texas market. Its home market is the United States (Texas). ERCOT sits at the wholesale/system-operator layer of the energy value chain, upstream of the transmission and distribution utilities (Oncor, CenterPoint, AEP Texas, TNMP) and the retail electric providers that serve end customers. Its API posture is a clean split: market and grid data are genuinely open — ERCOT publishes a real, versioned OpenAPI 3.0 for the Public Data API covering 106 EMIL data-product endpoints (locational marginal prices, settlement point prices, system load, wind and solar production, ancillary services, outage capacity), and the Market Information System still serves public report archives anonymously with no account at all. Consumer energy data is a different story: ERCOT operates no consumer usage API and implements no Green Button / ESPI surface. Texas residential interval data lives in Smart Meter Texas, which is operated by the joint Transmission and Distribution Utilities under PUCT oversight, not by ERCOT. The market-participant SOAP estate (ERCOT Web Services, MarkeTrak, Retail API) is documented publicly on GitHub but reachable only by certified market participants.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/ercot/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/ercot/refs/heads/main/apis.yml)
+**Areas:** Energy · United States · Electricity · Energy Markets · Grid · System Operator · Texas · Renewables · Demand Response · Open Data · ERCOT
 
-## Tags
+## ERCOT on APIs.io
 
-- Energy
-- United States
-- Electricity
-- Energy Markets
-- Grid
-- System Operator
-- Texas
-- Renewables
-- Demand Response
-- Open Data
+Everything profiled for ERCOT is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ercot/](https://apis.io/providers/ercot/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (41)
 
-- **Created:** 2026-07-27
-- **Modified:** 2026-07-27
+- [ERCOT ESR Public Data API](https://apis.io/apis/ercot/ercot-esr-public-data-api/) — Energy Storage Resource public data, launched May 29, 2025 per the ERCOT Public Data API release notes, beginning with four-second ESR charging MW telemetry…
+- [ERCOT Web Services (EWS)](https://apis.io/apis/ercot/ercot-web-services/) — ERCOT's SOAP web-services estate for Nodal market participants — the Market Information Service, Market Transaction Service (bid and offer submission via…
+- [ERCOT MarkeTrak API](https://apis.io/apis/ercot/ercot-marketrak-api/) — SOAP API over MarkeTrak, ERCOT's retail-market issue tracking system, supporting QueryList, QueryDetail, Update, and Submit operations against retail…
+- [ERCOT Retail API](https://apis.io/apis/ercot/ercot-retail-api/) — SOAP web service supporting Texas Standard Electronic Transactions (TX SET) between ERCOT, Transmission and Distribution Service Providers, and Retail…
+- [ERCOT EMIL Products API](https://apis.io/apis/ercot/ercot-emil-products-api/) — The EMIL Products API from ERCOT — 3 operation(s) for emil products.
+- [ERCOT NP3 233 CD API](https://apis.io/apis/ercot/ercot-np3-233-cd-api/) — <b>Hourly Resource Outage Capacity</b><br/><br/>This report includes all approved and accepted Planned, Forced and Maintenance Resource outages EXCEPT…
+- [ERCOT NP3 565 CD API](https://apis.io/apis/ercot/ercot-np3-565-cd-api/) — <b>Seven-Day Load Forecast by Model and Weather Zone</b><br/><br/>Hourly system-wide Mid-Term Load Forecasts (MTLFs) for all forecast models with an…
+- [ERCOT NP3 566 CD API](https://apis.io/apis/ercot/ercot-np3-566-cd-api/) — <b>Seven-Day Load Forecast by Model and Study Area</b><br/><br/>Forecasted hourly demands by Study Area, for the current day plus the next seven days.
+- [ERCOT NP3 910 ER API](https://apis.io/apis/ercot/ercot-np3-910-er-api/) — <b>2-Day Real Time Gen and Load Data Reports</b><br/><br/>This report will contain all 48 Hour disclosure data related to Real Time. The following…
+- [ERCOT NP3 911 ER API](https://apis.io/apis/ercot/ercot-np3-911-er-api/) — <b>2-Day Ancillary Services Reports</b><br/><br/>This report will contain all 48 Hour disclosure data related to DAM. The following individual files are…
+- [ERCOT NP3 965 ER API](https://apis.io/apis/ercot/ercot-np3-965-er-api/) — <b>60-Day SCED Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data related to SCED. The following individual files are…
+- [ERCOT NP3 966 ER API](https://apis.io/apis/ercot/ercot-np3-966-er-api/) — <b>60-Day DAM Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data related to DAM. The following individual files are…
+- [ERCOT NP3 990 EX API](https://apis.io/apis/ercot/ercot-np3-990-ex-api/) — <b>60-Day SASM Disclosure Reports</b><br/><br/>This report will contain all 60 day disclosure data related to SASM for Generation and Load Resources. The…
+- [ERCOT NP3 991 EX API](https://apis.io/apis/ercot/ercot-np3-991-ex-api/) — <b>60-Day COP All Updates</b><br/><br/>This report will contain all iterative Current Operating Plan (COP) submissions where a change has occurred for the…
+- [ERCOT NP4 159 CD API](https://apis.io/apis/ercot/ercot-np4-159-cd-api/) — <b>Load Distribution Factors</b><br/><br/>Load forecast distribution factors from which Market Participants can calculate Load at the Electrical Bus level…
+- [ERCOT NP4 179 CD API](https://apis.io/apis/ercot/ercot-np4-179-cd-api/) — <b>Total Ancillary Service Offers</b><br/><br/>The total quantity in MW of Offers per Ancillary Service per hour from the Day-Ahead Market for the last…
+- [ERCOT NP4 183 CD API](https://apis.io/apis/ercot/ercot-np4-183-cd-api/) — <b>DAM Hourly LMPs</b><br/><br/>The Hourly Locational Marginal Prices per electrical bus from the Day-Ahead Market for the last thirty days on a daily basis.
+- [ERCOT NP4 188 CD API](https://apis.io/apis/ercot/ercot-np4-188-cd-api/) — <b>DAM Clearing Prices for Capacity</b><br/><br/>The Market Clearing Prices for Capacity for all Ancillary Services from the Day-Ahead Market for the last…
+- [ERCOT NP4 190 CD API](https://apis.io/apis/ercot/ercot-np4-190-cd-api/) — <b>DAM Settlement Point Prices</b><br/><br/>The Settlement Point Prices for all Resource Nodes, Load Zones, and Trading Hubs from the Day-Ahead Market for…
+- [ERCOT NP4 191 CD API](https://apis.io/apis/ercot/ercot-np4-191-cd-api/) — <b>DAM Shadow Prices</b><br/><br/>The active and binding constraints as well as the associated shadow prices from the Day-Ahead Market for the last thirty…
+- [ERCOT NP4 196 M API](https://apis.io/apis/ercot/ercot-np4-196-m-api/) — <b>DAM Price Corrections</b><br/><br/>Day-Ahead Market price corrections.
+- [ERCOT NP4 197 M API](https://apis.io/apis/ercot/ercot-np4-197-m-api/) — <b>RTM Price Corrections</b><br/><br/>Real-Time Market price corrections.
+- [ERCOT NP4 33 CD API](https://apis.io/apis/ercot/ercot-np4-33-cd-api/) — <b>DAM Ancillary Service Plan</b><br/><br/>Ancillary Service requirements by type and quantity for each hour of the current day plus the next 6 days.
+- [ERCOT NP4 523 CD API](https://apis.io/apis/ercot/ercot-np4-523-cd-api/) — <b>DAM System Lambda</b><br/><br/>System lambda of each successful DAM.
+- [ERCOT NP4 732 CD API](https://apis.io/apis/ercot/ercot-np4-732-cd-api/) — <b>Wind Power Production - Hourly Averaged Actual and Forecasted Values</b><br/><br/>This report is posted every hour and includes System-wide and Regional…
+- [ERCOT NP4 733 CD API](https://apis.io/apis/ercot/ercot-np4-733-cd-api/) — <b>Wind Power Production - Actual 5-Minute Averaged Values</b><br/><br/>This report is posted every 5 minutes and includes System-wide and Regional actual…
+- [ERCOT NP4 737 CD API](https://apis.io/apis/ercot/ercot-np4-737-cd-api/) — <b>Solar Power Production - Hourly Averaged Actual and Forecasted Values</b><br/><br/>This report includes System-wide actual hourly averaged solar power…
+- [ERCOT NP4 738 CD API](https://apis.io/apis/ercot/ercot-np4-738-cd-api/) — <b>Solar Power Production - Actual 5-Minute Averaged Values</b><br/><br/>This report is posted every 5 minutes and includes System-wide actual 5-minute…
+- [ERCOT NP4 742 CD API](https://apis.io/apis/ercot/ercot-np4-742-cd-api/) — <b>Wind Power Production - Hourly Averaged Actual and Forecasted Values by Geographical Region</b><br/><br/>This report is posted every hour and includes…
+- [ERCOT NP4 743 CD API](https://apis.io/apis/ercot/ercot-np4-743-cd-api/) — <b>Wind Power Production - Actual 5-Minute Averaged Values by Geographical Region</b><br/><br/>This report is posted every 5 minutes and includes…
+- [ERCOT NP4 745 CD API](https://apis.io/apis/ercot/ercot-np4-745-cd-api/) — <b>Solar Power Production - Hourly Averaged Actual and Forecasted Values by Geographical Region</b><br/><br/>This report is posted every hour and includes…
+- [ERCOT NP4 746 CD API](https://apis.io/apis/ercot/ercot-np4-746-cd-api/) — <b>Solar Power Production - Actual 5-Minute Averaged Values by Geographical Region</b><br/><br/>This report is posted every 5 minutes and includes…
+- [ERCOT NP6 322 CD API](https://apis.io/apis/ercot/ercot-np6-322-cd-api/) — <b>SCED System Lambda</b><br/><br/>System lambda of each successful SCED.
+- [ERCOT NP6 345 CD API](https://apis.io/apis/ercot/ercot-np6-345-cd-api/) — <b>Actual System Load by Weather Zone</b><br/><br/>Report of Actual hourly load data by weather zone and ERCOT total.
+- [ERCOT NP6 346 CD API](https://apis.io/apis/ercot/ercot-np6-346-cd-api/) — <b>Actual System Load by Forecast Zone</b><br/><br/>A daily report of Actual System Load by Forecast Zone for each hour of the previous operating day.
+- [ERCOT NP6 787 CD API](https://apis.io/apis/ercot/ercot-np6-787-cd-api/) — <b>LMPs by Electrical Bus</b><br/><br/>The Locational Marginal Price for each Electrical Bus, normally produced by SCED every five minutes.
+- [ERCOT NP6 788 CD API](https://apis.io/apis/ercot/ercot-np6-788-cd-api/) — <b>LMPs by Resource Nodes, Load Zones and Trading Hubs</b><br/><br/>The Locational Marginal Price for each Settlement Point, normally produced by SCED every…
+- [ERCOT NP6 86 CD API](https://apis.io/apis/ercot/ercot-np6-86-cd-api/) — <b>SCED Shadow Prices and Binding Transmission Constraints</b><br/><br/>The report for Shadow Prices of binding/violated constraints in SCED. The report…
+- [ERCOT NP6 905 CD API](https://apis.io/apis/ercot/ercot-np6-905-cd-api/) — <b>Settlement Point Prices at Resource Nodes, Hubs and Load Zones</b><br/><br/>Settlement Point Price for each Settlement Point, produced from SCED LMPs…
+- [ERCOT NP6 970 CD API](https://apis.io/apis/ercot/ercot-np6-970-cd-api/) — <b>RTD Indicative LMPs by Resource Nodes, Load Zones and Hubs</b><br/><br/>This report is posted after every Look Ahead RTD run and includes indicative LMPs…
+- [ERCOT Versioning API](https://apis.io/apis/ercot/ercot-versioning-api/) — The Versioning API from ERCOT — 1 operation(s) for versioning.
 
-## APIs
+### Published properties
 
-### ERCOT Public Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-RESTful access to ERCOT Market Information List (EMIL) public data products — 106 documented endpoints spanning real-time and day-ahead locational marginal prices, settlement point prices, SCED system lambda and shadow prices, actual system load by weather and forecast zone, wind and solar power production actuals and forecasts, ancillary service offers and awards, hourly resource outage capacity, and 60-day SCED/DAM disclosure reports, plus historic file archives retained at least seven years. Data is public and free, but every call requires a free self-serve Azure API Management subscription key plus an Azure AD B2C ID token. Rate limited to 30 requests per minute; requests from outside the United States are blocked.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://developer.ercot.com/applications/pubapi/user-guide/using-api/](https://developer.ercot.com/applications/pubapi/user-guide/using-api/)
-- **Base URL:** `https://api.ercot.com/api/public-reports`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Ercot Ews Notifications](https://apis.io/asyncapis/ercot/ercot-ews-notifications/)
 
-- Energy Markets
-- Electricity
-- Pricing
-- Load
-- Renewables
-- Open Data
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [OpenAPI](openapi/ercot-public-data-api-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://developer.ercot.com/applications/pubapi/user-guide/using-api/)
-- [API Reference](https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api)
-- [Authentication](https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/)
-- [Rate Limits](https://developer.ercot.com/applications/pubapi/known-limits/)
-- [Change Log](https://developer.ercot.com/applications/pubapi/relnotes/)
-- [Deprecation](https://developer.ercot.com/applications/pubapi/deprecation-notices/)
-- [OpenID Configuration](https://ercotb2c.b2clogin.com/ercotb2c.onmicrosoft.com/B2C_1_PUBAPI-ROPC-FLOW/v2.0/.well-known/openid-configuration)
+- [ercot-public-data](https://apis.io/servers/ercot/ercot-public-data/)
 
-### ERCOT ESR Public Data API
+#### Collections (1)
 
-Energy Storage Resource public data, launched May 29, 2025 per the ERCOT Public Data API release notes, beginning with four-second ESR charging MW telemetry (`GET /rptesr-m/4_sec_esr_charging_mw`). Documented in the ERCOT API Explorer as the `esrapi-apim-api` product. No machine-readable specification is published for this API in ERCOT's public api-specs repository, and no base URL was independently confirmed, so none is asserted here. Access follows the same subscription-key plus B2C ID token model as the Public Data API.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://apiexplorer.ercot.com/api-details#api=esrapi-apim-api](https://apiexplorer.ercot.com/api-details#api=esrapi-apim-api)
+- [ERCOT Public API Client/Developer Documentation](https://apis.io/collections/ercot/open-ercot-public-data-api/)
 
-#### Tags
+#### Overlays (1)
 
-- Energy Storage
-- Batteries
-- Telemetry
-- Energy Markets
+OpenAPI overlays, including conversational phrasing for each operation.
 
-#### Properties
+- [Ercot Public Data Api Overlay](https://apis.io/overlays/ercot/ercot-public-data-api-overlay/)
 
-- [API Reference](https://apiexplorer.ercot.com/api-details#api=esrapi-apim-api)
-- [Change Log](https://developer.ercot.com/applications/pubapi/relnotes/)
-- [Authentication](https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/)
+#### Security (2)
 
-### ERCOT Web Services (EWS)
+Authentication, trust centre, and vulnerability disclosure.
 
-ERCOT's SOAP web-services estate for Nodal market participants — the Market Information Service, Market Transaction Service (bid and offer submission via BidSet), Resource Parameter Transaction Service, Outage Scheduling Services, Verbal Dispatch Instructions, and WS-Notifications callbacks. WSDL and XSD contracts are published openly on GitHub, but the runtime endpoints are reachable only by registered ERCOT Market Participants holding an ERCOT digital certificate; the shipped WSDL carries a placeholder `soap:address` of `https://dummyhost:0000/` so no runtime base URL is asserted here.
+- [Ercot Authentication](https://apis.io/security/ercot/ercot-authentication/)
+- [Ercot Domain Security](https://apis.io/security/ercot/ercot-domain-security/)
 
-- **Human URL:** [https://developer.ercot.com/applications/ews/Introduction/](https://developer.ercot.com/applications/ews/Introduction/)
+#### OAuth scopes (1)
 
-#### Tags
+The permissions the API asks for.
 
-- SOAP
-- Market Participants
-- Bids
-- Outages
-- Energy Markets
+- [Ercot Scopes](https://apis.io/scopes/ercot/ercot-scopes/)
 
-#### Properties
+#### Rate limits (1)
 
-- [WSDL](https://raw.githubusercontent.com/ercot/api-specs/main/ews/wsdls/Nodal.wsdl)
-- [WSDL](https://raw.githubusercontent.com/ercot/api-specs/main/ews/wsdls/Notification.wsdl)
-- [Documentation](https://developer.ercot.com/applications/ews/Introduction/)
-- [Documentation](https://developer.ercot.com/applications/ews/Services%20Organization/)
-- [Source Code](https://github.com/ercot/ews-client)
+Published request limits.
 
-### ERCOT MarkeTrak API
+- [Ercot Rate Limits](https://apis.io/rate-limits/ercot/ercot-rate-limits/)
 
-SOAP API over MarkeTrak, ERCOT's retail-market issue tracking system, supporting QueryList, QueryDetail, Update, and Submit operations against retail transaction issues. Applications must pass ERCOT certification at one of three levels before they may call the service in production, and access is limited to registered Market Participants.
+## Where to find this API
 
-- **Human URL:** [https://developer.ercot.com/applications/marketrak/MarkeTrak_API_Dev_v1_2/](https://developer.ercot.com/applications/marketrak/MarkeTrak_API_Dev_v1_2/)
-- **Base URL:** `https://misapi.ercot.com/marketrakAPI/`
-
-#### Tags
-
-- SOAP
-- Retail
-- Market Participants
-- Issue Tracking
-
-#### Properties
-
-- [WSDL](https://raw.githubusercontent.com/ercot/api-specs/main/marketrak/MarkeTrakAPI_rc5_v14.wsdl)
-- [Schema](https://raw.githubusercontent.com/ercot/api-specs/main/marketrak/MarkeTrakAPI_rc5_v14.xsd)
-- [Documentation](https://developer.ercot.com/applications/marketrak/MarkeTrak_API_Dev_v1_2/)
-
-### ERCOT Retail API
-
-SOAP web service supporting Texas Standard Electronic Transactions (TX SET) between ERCOT, Transmission and Distribution Service Providers, and Retail Electric Providers — the machinery behind retail switching, enrollment, and move-in/move-out in the competitive Texas market. Contracts are published openly; the service itself is restricted to certified Market Participants.
-
-- **Human URL:** [https://developer.ercot.com/api_specifications/retail/retail/](https://developer.ercot.com/api_specifications/retail/retail/)
-
-#### Tags
-
-- SOAP
-- Retail
-- Switching
-- Market Participants
-
-#### Properties
-
-- [WSDL](https://raw.githubusercontent.com/ercot/api-specs/main/retail/RetailAPIConcreteWSDL-External.wsdl)
-- [Schema](https://raw.githubusercontent.com/ercot/api-specs/main/retail/RetailAPIService.xsd)
-- [Documentation](https://developer.ercot.com/api_specifications/retail/retail/)
-
-## Common
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.ercot.com/)
-- [Developer Portal](https://developer.ercot.com/)
 - [Documentation](https://developer.ercot.com/)
-- [API Explorer](https://apiexplorer.ercot.com/)
-- [Sign Up](https://apiexplorer.ercot.com/)
-- [Plans](https://apiexplorer.ercot.com/products)
-- [GitHub Organization](https://github.com/ercot)
-- [Source Code](https://github.com/ercot/api-specs)
-- [Open Data](https://data.ercot.com/)
-- [Open Data](https://www.ercot.com/mp/data-products)
-- [Issues](https://github.com/ercot/api-specs/issues)
+- [Getting started](https://developer.ercot.com/applications/pubapi/user-guide/registration-and-authentication/)
+- [API reference](https://apiexplorer.ercot.com/api-details#api=pubapi-apim-api)
+- [Sign up](https://apiexplorer.ercot.com/)
+- [Support](https://developer.ercot.com/support/support/)
+- [Blog](https://www.ercot.com/news)
+- [Terms of service](https://www.ercot.com/help/terms/data-portal)
+- [Privacy policy](https://www.ercot.com/help/privacy)
+- [GitHub](https://github.com/ercot)
 
-## Energy Data Posture
+## API Evangelist rating
 
-| Dimension | Finding |
-| --- | --- |
-| Mandate regime | `none` — no consumer energy-data mandate applies to ERCOT itself |
-| Mandate status | `not-applicable` — the Texas Green Button obligation sits with the TDUs via Smart Meter Texas, not with the ISO |
-| Data standard | No consumer-data standard reference found; proprietary EMIL shape described by a real OpenAPI 3.0.1, plus SOAP/WS-* and TX SET for market participants |
-| Consumer data API | No |
-| Market data open | Yes — anonymous MIS report archives, anonymous dashboard JSON feeds, and a free self-serve OpenAPI-described REST API |
-| Access gate | `self-serve` — email verification, then subscribe on the API Explorer Products page for an immediate key (US-only network access) |
-| Auth model | `Ocp-Apim-Subscription-Key` (Azure APIM) **plus** an Azure AD B2C ID token from the `B2C_1_PUBAPI-ROPC-FLOW` policy, `grant_type=password` |
+**Kin Score 50.2** — developing · rubric 0.25.0 · scored 2026-10-23
 
-See [review.yml](review.yml) for the full evidence trail, every probed URL, and its HTTP status.
+| Facet | Score |
+|---|---|
+| Discoverability | 60.7 |
+| Contract quality | 54.3 |
+| Contract governance | 4.5 |
+| Operational transparency | 55.3 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 34.2 |
+
+**Agent readiness 41.7** — agent-native
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 41.0** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ercot/](https://apis.io/providers/ercot/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ERCOT: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ercot/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
